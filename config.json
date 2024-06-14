@@ -1,0 +1,24 @@
+{
+    "pokemons":[
+        {
+            "names":{
+                "spa":"Bulbasaur",
+                "eng":"Bulbasaur",
+                "fr":"Bulbizarre",
+                "it":"Bulbasaur",
+                "deu":"Bisasam"
+            },
+            "image_path" : "",
+            "gen": 1
+        },
+        {
+            "names":{            
+                "spa": "Ivysaur",
+                "eng": "Ivysaur",
+                "fr": "Herbizarre",
+                "it": "Ivysaur",
+                "deu": "Bisaknosp"},
+            "image_path" : "",
+            "gen": 1    
+        }]
+}
