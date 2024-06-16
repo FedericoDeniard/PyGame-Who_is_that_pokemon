@@ -16,11 +16,6 @@ class Pokemon:
         names = [self.spa_name, self.eng_name, self.fr_name, self.it_name, self.deu_name]
         return names
     
-    def get_names_dict(self):
-        names = {
-            'spa'
-        }
-
     def get_generation(self):
         return self.gen
 
