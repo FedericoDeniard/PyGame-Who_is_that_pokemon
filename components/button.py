@@ -12,6 +12,7 @@ class Button:
         self.border_colour = border_colour
         self.border_width = border_width
         self.text_colour = text_colour
+        self.hitbox = pygame.Rect(position)
 
     def draw_button(self):
         if self.border_colour and self.border_width > 0:
@@ -32,6 +33,6 @@ class Button:
             text_surface = myFont.render(self.text, True, self.text_colour)  # Text, Antialiasing, colour
             text_rect = text_surface.get_rect(center=(self.position[0] + self.position[2] // 2, self.position[1] + self.position[3] // 2))
             self.screen.blit(text_surface, text_rect)
-
+    
     def get_hitbox(self):
-        return self.hitbox
+         return self.hitbox
