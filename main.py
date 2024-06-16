@@ -33,7 +33,7 @@ backround = pygame.image.load('assets/interface/backround.jpg')
 backround = pygame.transform.scale(backround, (WINDOW_WIDTH, WINDOW_HEIGHT))
 window.blit(backround, (0,0))
 
-button = Button(window, colours['WHITE'], (500, 500, 200, 50),  text="Salir", font_size=30, border_colour=colours["BLACK"], border_width=4, border_radius=3)
+button = Button(window, (500, 500, 200, 50), background_colour=colours['WHITE'],  text="Salir", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
 button.draw_button()
 button_hitbox = button.get_hitbox()
 

@@ -1,11 +1,9 @@
 from assets.colours.main import colours
 import pygame
-import sys
-
 class Button:
-    def __init__(self, screen, colour, position: tuple, border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_colour = (0,0,0)):
+    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_colour = (0,0,0)):
         self.screen = screen
-        self.colour = colour
+        self.background_colour = background_colour
         self.position = position
         self.border_radius = border_radius
         self.text = text
@@ -25,9 +23,9 @@ class Button:
                 self.position[3] - 2 * self.border_width
             )
             border_radius = self.border_radius - self.border_width if self.border_radius > 0 and self.border_radius > self.border_width else 0
-            pygame.draw.rect(self.screen, self.colour, inner_position, border_radius=border_radius)
+            pygame.draw.rect(self.screen, self.background_colour, inner_position, border_radius=border_radius)
         else:
-            self.hitbox = pygame.draw.rect(self.screen, self.colour, self.position, border_radius = self.border_radius)
+            self.hitbox = pygame.draw.rect(self.screen, self.background_colour, self.position, border_radius = self.border_radius)
 
         if self.text:
             myFont = pygame.font.SysFont(self.font, self.font_size)
