@@ -50,7 +50,7 @@ while run_flag == True:
                 text_box.update_text(text[:-1])
             else:
                 text = text_box.get_text() + event.unicode
-                text_box.update_text(text)
+                text_box.update_text(text) 
 
     window.blit(backround, (0,0))
     
@@ -58,7 +58,7 @@ while run_flag == True:
         button.draw_button()
     if show_text:
         text_box.draw_button()
-        text_box.draw_line()
+        text_box.draw_line() # TODO This line should be draw on draw_button()
 
     
 
