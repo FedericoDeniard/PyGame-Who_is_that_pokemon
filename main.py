@@ -26,7 +26,7 @@ window = pygame.display.set_mode(WINDOW)
 backround = pygame.image.load('assets/interface/backround.jpg')
 backround = pygame.transform.scale(backround, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
-button = Button(window, (500, 500, 250, 50), background_colour=colours['WHITE'],  text="Mostrar Textbox", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
+button = Button(window, (500, 500, 250, 50), background_colour=colours['WHITE'],  text="Mostrar Textbox", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15,)
 show_start = True
 button_hitbox = button.get_hitbox()
 
@@ -58,6 +58,7 @@ while run_flag == True:
         button.draw_button()
     if show_text:
         text_box.draw_button()
+        text_box.draw_line()
 
     
 
