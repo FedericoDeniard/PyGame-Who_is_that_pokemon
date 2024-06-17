@@ -30,9 +30,10 @@ button = Button(window, (500, 500, 250, 50), background_colour=colours['WHITE'],
 show_start = True
 button_hitbox = button.get_hitbox()
 
-
-text_box = Textbox(window, (525, 425, 200, 50), background_colour=colours['WHITE'],  text="Hola", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
+placeholder_text = 'Nombre'
+text_box = Textbox(window, (525, 425, 200, 50), background_colour=colours['WHITE'],  text=placeholder_text, font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
 show_text = False
+text_box_hitbox = text_box.get_hitbox()
 
 run_flag = True
 while run_flag == True:    
@@ -42,15 +43,9 @@ while run_flag == True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if button_hitbox.collidepoint(event.pos):
                 show_text = not show_text
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN:
-                text_box.update_text('')
-            elif event.key == pygame.K_BACKSPACE:
-                text = text_box.get_text()
-                text_box.update_text(text[:-1])
-            else:
-                text = text_box.get_text() + event.unicode
-                text_box.update_text(text) 
+
+        if show_text:
+            text_box.handle_event(event)
 
     window.blit(backround, (0,0))
     

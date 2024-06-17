@@ -1,13 +1,20 @@
 import pygame
 from components.button import Button
+from assets.colours.main import colours
 
 class Textbox(Button):
 
-    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0)):
-        super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_colour, text_align='left')
+    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder=True):
+        self.placeholder_colour = colours["GRAY"]
+        passed_colour = self.placeholder_colour if placeholder else text_colour
+        super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, passed_colour, text_align='left')
         self.outside_letters = 0
+        self.placeholder = placeholder
+        self.placeholder_text = text
+        self.perm_colour = text_colour
+        self.texting = False
 
-    def update_text(self, text):
+    def update_text(self, text, placeholder):
         self.text = text
         self.show_text = text
         self.draw_button()
@@ -20,11 +27,15 @@ class Textbox(Button):
         elif self.outside_letters > 0:
             self.outside_letters -= 1
         self.show_text = self.text[self.outside_letters:]
+
+        if placeholder:
+            self.text_colour=self.placeholder_colour
+        else:
+            self.text_colour=self.perm_colour
+
         print(self.outside_letters)
         print(self.text)
         print(self.show_text)
-            
-
 
     def get_text(self):
         return self.text
@@ -35,23 +46,24 @@ class Textbox(Button):
         pygame.draw.line(self.screen, (0, 0, 0), start_pos, end_pos, width=2)
 
     
+    def handle_event(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.get_hitbox().collidepoint(event.pos):
+                self.texting = True
+                if self.get_text() == self.placeholder_text:
+                    self.update_text('', True)
+            elif not(self.get_hitbox().collidepoint(event.pos)):
+                self.texting = False
+                if self.get_text() == '':
+                    self.update_text(self.placeholder_text, True)
 
-    # def handle_event(self, event):
-    #     if event.type == pygame.MOUSEBUTTONDOWN:
-    #         # Si el usuario hace clic en la caja de texto
-    #         if self.rect.collidepoint(event.pos):
-    #             self.active = not self.active
-    #         else:
-    #             self.active = False
-    #         self.color = BLACK if self.active else GRAY
-
-    #     if event.type == pygame.KEYDOWN:
-    #         if self.active:
-    #             if event.key == pygame.K_RETURN:
-    #                 print(self.text)
-    #                 self.text = ''
-    #             elif event.key == pygame.K_BACKSPACE:
-    #                 self.text = self.text[:-1]
-    #             else:
-    #                 self.text += event.unicode
-    #             self.txt_surface = font.render(self.text, True, BLACK)
+        if self.texting:
+            if event.type == pygame.KEYDOWN and self.texting:
+                if event.key == pygame.K_RETURN:
+                    self.update_text('', False)
+                elif event.key == pygame.K_BACKSPACE:
+                    text = self.get_text()
+                    self.update_text(text[:-1], False)
+                else:
+                    text = self.get_text() + event.unicode
+                    self.update_text(text, False)
