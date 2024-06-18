@@ -69,20 +69,19 @@ while run_flag == True:
         game_continue.draw_button()
         window.blit(pokemon_image_dark,(((WINDOW_WIDTH/2) - (pokemon_image_dark.get_rect().right / 2)),0))
         timer.update()
-        # print(timer.finish)
-        # print(timer.active)
+
         if user_input in pokemon_name.get_names():
             user_input = ""
             timer.activate()
             pokemon_image_dark, pokemon_image = pokemon_image, pokemon_image_dark
 
-        print(f"is finished: {timer.is_finished()}")
-        print(f"is active: {timer.active}")
+
         if timer.is_finished() and not timer.active:
             pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
             pokemon_image = pokemon_images[0]
             pokemon_image_dark = pokemon_images[1]
             timer.reset()
+            game_text_box.update_text("")
         
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -102,7 +101,5 @@ while run_flag == True:
             if game_continue.handle_event(event) and not game_text_box.isplaceholder and not timer.active:
                 user_input = game_text_box.get_text()
                 user_input = user_input.capitalize()
-                print(pokemon_name.get_names())
-                print(user_input)
-                
+
     pygame.display.update()
