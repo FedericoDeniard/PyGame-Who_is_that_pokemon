@@ -42,11 +42,18 @@ class Pokedex:
     def get_pokemon_image(self, gen: int, window: tuple, pokemon_id):
         image_path = f"assets/pokemons/pokemons_{gen}.png"
         image = Image.open(image_path)
+        match gen:
+            case 1:
+                repetead = [4,14,22,25,31,34,35,37,39,49,51,55,57,60,62,68,70,72,74,85,87,]
+            case 2:
+                pass
+            case 3:
+                pass
+            case 4:
+                pass
 
-        axis_x, axis_y = 0, 0
-        crop_area = (256*axis_x, 256*axis_y, 256*(axis_x+1), 256*(axis_y+1))
-        axis_x += 7
-        axis_y += 7
+        axis_x = pokemon_id % 15
+        axis_y = pokemon_id // 15
         crop_area = (256*axis_x, 256*axis_y, 256*(axis_x+1), 256*(axis_y+1))
 
         cropped_image = image.crop(crop_area)
