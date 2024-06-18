@@ -4,17 +4,20 @@ from assets.colours.main import colours
 
 class Textbox(Button):
 
-    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder=True):
+    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder=''):
         self.placeholder_colour = colours["GRAY"]
-        passed_colour = self.placeholder_colour if placeholder else text_colour
-        super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, passed_colour, text_align='left')
+        super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_colour, text_align='left')
+        self.text_colour = text_colour
+
+        if placeholder != '':
+            self.isplaceholder = True
+            self.text_colour, self.placeholder_colour = self.placeholder_colour, self.text_colour
+
         self.outside_letters = 0
         self.placeholder = placeholder
-        self.placeholder_text = text
-        self.perm_colour = text_colour
         self.texting = False
 
-    def update_text(self, text, placeholder):
+    def update_text(self, text):
         self.text = text
         self.show_text = text
         self.draw_button()
@@ -28,10 +31,9 @@ class Textbox(Button):
             self.outside_letters -= 1
         self.show_text = self.text[self.outside_letters:]
 
-        if placeholder:
-            self.text_colour=self.placeholder_colour
-        else:
-            self.text_colour=self.perm_colour
+        if self.isplaceholder:
+            self.text_colour, self.placeholder_colour = self.placeholder_colour, self.text_colour
+
 
         print(self.outside_letters)
         print(self.text)
@@ -50,20 +52,23 @@ class Textbox(Button):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.get_hitbox().collidepoint(event.pos):
                 self.texting = True
-                if self.get_text() == self.placeholder_text:
-                    self.update_text('', True)
+                if self.isplaceholder:
+                    self.update_text('')
             elif not(self.get_hitbox().collidepoint(event.pos)):
                 self.texting = False
                 if self.get_text() == '':
-                    self.update_text(self.placeholder_text, True)
+                    self.update_text(self.placeholder)
+                    self.isplaceholder = True
+                    self.text_colour, self.placeholder_colour = self.placeholder_colour, self.text_colour
 
         if self.texting:
             if event.type == pygame.KEYDOWN and self.texting:
+                self.isplaceholder = False
                 if event.key == pygame.K_RETURN:
-                    self.update_text('', False)
+                    self.update_text('')
                 elif event.key == pygame.K_BACKSPACE:
                     text = self.get_text()
-                    self.update_text(text[:-1], False)
+                    self.update_text(text[:-1])
                 else:
                     text = self.get_text() + event.unicode
-                    self.update_text(text, False)
+                    self.update_text(text)

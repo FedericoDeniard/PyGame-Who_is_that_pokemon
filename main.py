@@ -31,7 +31,7 @@ show_start = True
 button_hitbox = button.get_hitbox()
 
 placeholder_text = 'Nombre'
-text_box = Textbox(window, (525, 425, 200, 50), background_colour=colours['WHITE'],  text=placeholder_text, font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
+text_box = Textbox(window, (525, 425, 200, 50), background_colour=colours['WHITE'],  text=placeholder_text, font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder=placeholder_text)
 show_text = False
 text_box_hitbox = text_box.get_hitbox()
 
