@@ -15,7 +15,7 @@ class Pokemon:
     def get_names(self):
         names = [self.spa_name, self.eng_name, self.fr_name, self.it_name, self.deu_name]
         return names
-    
+
     def get_generation(self):
         return self.gen
 
