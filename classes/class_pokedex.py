@@ -8,7 +8,7 @@ class Pokedex:
         self.pokemons = []
         if type(pokemons[0]) == dict:
             for pokemon in pokemons:
-                self.pokemons.append(Pokemon(pokemon['names'], pokemon['image_path'], pokemon['gen'], pokemon['difficulty']))
+                self.pokemons.append(Pokemon(pokemon['names'], pokemon['id'], pokemon['gen'], pokemon['difficulty']))
         elif type(pokemons[0]) == Pokemon:
             self.pokemons = pokemons
 
@@ -35,10 +35,11 @@ class Pokedex:
         rand = randint(0, len(pokemon_list)-1)
         random_pokemon = pokemon_list.pop(rand)
         generation = random_pokemon.get_generation()
-        pokemon_image = self.get_pokemon_image(generation, window)
+        pokemon_id = random_pokemon.get_id()
+        pokemon_image = self.get_pokemon_image(generation, window, pokemon_id)
         return random_pokemon, pokemon_image
     
-    def get_pokemon_image(self, gen: int, window: tuple):
+    def get_pokemon_image(self, gen: int, window: tuple, pokemon_id):
         image_path = f"assets/pokemons/pokemons_{gen}.png"
         image = Image.open(image_path)
 
