@@ -36,7 +36,7 @@ class Button:
             self.hitbox = pygame.draw.rect(self.screen, self.background_colour, self.position, border_radius = self.border_radius)
 
         if self.text != "":
-            myFont = pygame.font.SysFont(self.font, self.font_size)
+            myFont = pygame.font.Font(self.font, self.font_size)
             text_surface = myFont.render(self.show_text, True, self.text_active_colour)  # Text, Antialiasing, colour
             match self.text_align:
                 case "center":

@@ -7,6 +7,7 @@ from components.buttons import Button, Textbox
 
 config = 'config.json'
 config_data = {}
+pokemon_font = 'assets/fonts/pokemon_solid.ttf'
 
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800
@@ -24,9 +25,9 @@ window = pygame.display.set_mode(WINDOW)
 backround = pygame.image.load('assets/interface/backround.jpg')
 backround = pygame.transform.scale(backround, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
-button = Button(window, (500, 500, 250, 50), background_colour=colours['WHITE'],  text="Salir", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15,)
+button = Button(window, (500, 500, 250, 50), background_colour=colours['WHITE'],  text="Salir", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, font=pokemon_font)
 
-text_box = Textbox(window, (525, 425, 200, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
+text_box = Textbox(window, (525, 425, 200, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui", font=pokemon_font)
 
 run_flag = True
 while run_flag == True:
