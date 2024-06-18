@@ -1,11 +1,13 @@
 import pygame
 from components.button import Button
-from assets.colours.main import colours
+from assets.colours.colours import colours
 
 class Textbox(Button):
 
-    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder=''):
+    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='', active_colour = colours["LIGHT_GRAY"]):
         self.placeholder_colour = colours["GRAY"]
+        self.active_colour = active_colour
+        self.copy_background_colour = background_colour
         super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_colour, text_align='left')
         self.text_colour = text_colour
 
@@ -24,7 +26,7 @@ class Textbox(Button):
         text_right_top = text_rect.right
         button_hitbox = self.get_hitbox()
 
-        if text_right_top > button_hitbox.right - 5:
+        if text_right_top > button_hitbox.right - 29:
             self.outside_letters += 1
         elif self.outside_letters > 0:
             self.outside_letters -= 1
@@ -33,9 +35,10 @@ class Textbox(Button):
         if self.isplaceholder:
             self.text_colour, self.placeholder_colour = self.placeholder_colour, self.text_colour
 
-        print(self.outside_letters)
-        print(self.text)
-        print(self.show_text)
+
+        # print(self.outside_letters)
+        # print(self.text)
+        # print(self.show_text)
 
     def get_text(self):
         return self.text
@@ -60,6 +63,7 @@ class Textbox(Button):
                     self.text_colour, self.placeholder_colour = self.placeholder_colour, self.text_colour
 
         if self.texting:
+            self.background_colour = self.active_colour
             if event.type == pygame.KEYDOWN and self.texting:
                 self.isplaceholder = False
                 if event.key == pygame.K_RETURN:
@@ -70,3 +74,5 @@ class Textbox(Button):
                 else:
                     text = self.get_text() + event.unicode
                     self.update_text(text)
+        else:
+            self.background_colour = self.copy_background_colour    # TODO Esto estaría bueno cambiarlo por un swap, detectando el cambio de estado

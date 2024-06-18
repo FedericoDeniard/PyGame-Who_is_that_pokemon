@@ -1,4 +1,4 @@
-from assets.colours.main import colours
+from assets.colours.colours import colours
 import pygame
 class Button:
     def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_colour = (0,0,0), text_align = 'center'):

@@ -2,7 +2,7 @@ from classes.class_pokedex import Pokedex
 import pygame
 import json
 
-from assets.colours.main import colours
+from assets.colours.colours import colours
 from components.button import Button
 from components.textbox import Textbox
 
@@ -26,13 +26,13 @@ window = pygame.display.set_mode(WINDOW)
 backround = pygame.image.load('assets/interface/backround.jpg')
 backround = pygame.transform.scale(backround, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
-button = Button(window, (500, 500, 250, 50), background_colour=colours['WHITE'],  text="Mostrar Textbox", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15,)
+button = Button(window, (500, 500, 250, 50), background_colour=colours['WHITE'],  text="Salir", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15,)
 show_start = True
 button_hitbox = button.get_hitbox()
 
 placeholder_text = 'Nombre'
 text_box = Textbox(window, (525, 425, 200, 50), background_colour=colours['WHITE'],  text=placeholder_text, font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder=placeholder_text)
-show_text = False
+show_text = True
 text_box_hitbox = text_box.get_hitbox()
 
 run_flag = True
@@ -42,7 +42,7 @@ while run_flag == True:
             run_flag = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             if button_hitbox.collidepoint(event.pos):
-                show_text = not show_text
+                run_flag = False
 
         if show_text:
             text_box.handle_event(event)
