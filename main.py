@@ -25,6 +25,7 @@ with open(config, 'r') as file:
 pokedex = Pokedex(config_data['pokemons'])
 
 pygame.init()
+pygame.display.set_caption("Who's that pokemon")
 
 window = pygame.display.set_mode(WINDOW)
 
