@@ -1,9 +1,11 @@
 from assets.colours.colours import colours
 import pygame
+from typing import Literal
 
 #region Button
+
 class Button:
-    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align = 'center'):
+    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center'):
         self.screen = screen
         self.background_colour = background_colour
         self.position = position
@@ -59,7 +61,6 @@ class Button:
     
 #region Textbox
 class Textbox(Button):
-
     def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"]):
         self.placeholder_colour = colours["GRAY"]
         self.background_active_colour = background_active_colour
