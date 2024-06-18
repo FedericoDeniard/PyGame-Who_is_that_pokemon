@@ -1,12 +1,14 @@
 from classes.class_pokemon import Pokemon
 from random import randint
+from PIL import Image
+import pygame
 
 class Pokedex:
     def __init__(self, pokemons:list[dict|Pokemon]):
         self.pokemons = []
         if type(pokemons[0]) == dict:
             for pokemon in pokemons:
-                self.pokemons.append(Pokemon(pokemon['names'], pokemon['image_path'], pokemon['gen'], pokemon['difficulty']))
+                self.pokemons.append(Pokemon(pokemon['names'], pokemon['id'], pokemon['gen'], pokemon['difficulty']))
         elif type(pokemons[0]) == Pokemon:
             self.pokemons = pokemons
 
@@ -28,9 +30,51 @@ class Pokedex:
         
         return pokemons
     
-    def get_random(self, pokemons:list[Pokemon] = False) -> Pokemon:
+    def get_random(self, window: tuple, pokemons:list[Pokemon] = False):
         pokemon_list = pokemons if pokemons else self.pokemons
-        
         rand = randint(0, len(pokemon_list)-1)
         random_pokemon = pokemon_list.pop(rand)
-        return random_pokemon
+        generation = random_pokemon.get_generation()
+        pokemon_id = random_pokemon.get_id()
+        pokemon_image = self.get_pokemon_image(generation, window, pokemon_id)
+        return random_pokemon, pokemon_image
+    
+    def get_pokemon_image(self, gen: int, window: tuple, pokemon_id):
+        image_path = f"assets/pokemons/pokemons_{gen}.png"
+        image = Image.open(image_path)
+        match gen:
+            case 1:
+                repeated = [4, 14, 22, 23, 25, 26, 32, 34, 35, 37, 39, 49, 51, 55, 57, 60, 62, 68, 70, 72, 74, 86, 88, 98, 100, 102, 111, 113, 117, 119, 128, 135, 138, 145, 147, 164, 166, 171, 178, 180]
+            case 2:
+                repeated = [[4, 16, 18, 39, 41, 46, 51, 53, 57, 89, 91, 96, 98, 103, 106, 108, 111, 116, 120, 126, 130].append(i) for i in range(60, 87)]
+            case 3:
+                repeated = [[5, 7, 9, 20, 23, 27, 30, 32, 65, 67, 75, 77, 79, 85, 87, 90, 109, 11, 112, 113, 147, 165, 166, 167].append(i) for i in range(76, 84)]
+            case 4:
+                pass
+
+        for number in repeated:
+            if pokemon_id >= number:
+                pokemon_id += 1
+        
+        pokemon_id -= 1
+
+        axis_x = pokemon_id % 15
+        axis_y = pokemon_id // 15
+        crop_area = (256*axis_x, 256*axis_y, 256*(axis_x+1), 256*(axis_y+1))
+
+        cropped_image = image.crop(crop_area)
+        cropped_image.save('assets/pokemons/pokemon_temp.png')
+
+        data = cropped_image.getdata()
+        new_data = []
+        for item in data:
+            new_data.append((0,0,0, item[3]))
+        cropped_image.putdata(new_data)
+        cropped_image.save('assets/pokemons/pokemon_temp_dark.png')
+
+        cropped_image = pygame.image.load('assets/pokemons/pokemon_temp.png')
+        cropped_image = pygame.transform.scale(cropped_image, (window[0]/3, window[1]/2))
+        cropped_image_dark = pygame.image.load('assets/pokemons/pokemon_temp_dark.png')
+        cropped_image_dark = pygame.transform.scale(cropped_image_dark, (window[0]/3, window[1]/2))
+
+        return cropped_image, cropped_image_dark

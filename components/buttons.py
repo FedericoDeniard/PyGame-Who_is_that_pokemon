@@ -53,11 +53,11 @@ class Button:
          return self.hitbox
 
     def handle_event(self, event):
-        flag = True
+        clicked = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.get_hitbox().collidepoint(event.pos):
-                flag = False
-        return flag
+                clicked = True
+        return clicked
     
 #region Textbox
 class Textbox(Button):
@@ -89,7 +89,7 @@ class Textbox(Button):
             self.outside_letters -= 1
         self.show_text = self.text[self.outside_letters:]
 
-    def get_text(self):
+    def get_text(self) -> str:
         return self.text
     
     def draw_line(self):
