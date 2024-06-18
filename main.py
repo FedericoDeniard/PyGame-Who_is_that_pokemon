@@ -29,7 +29,9 @@ button = Button(window, (500, 500, 250, 50), background_colour=colours['WHITE'],
 
 text_box = Textbox(window, (525, 425, 200, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui", font=pokemon_font)
 
-pokemon_name, pokemon_image = pokedex.get_random(WINDOW)
+pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
+pokemon_image = pokemon_images[0]
+pokemon_image_dark = pokemon_images[1]
 
 run_flag = True
 while run_flag == True:
