@@ -45,6 +45,8 @@ pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
 pokemon_image = pokemon_images[0]
 pokemon_image_dark = pokemon_images[1]
 
+game = False
+
 run_flag = True
 
 while run_flag == True:
@@ -59,8 +61,7 @@ while run_flag == True:
         game_text_box.draw_button()
         game_back.draw_button()
         game_continue.draw_button()
-        window.blit(pokemon_image,(((WINDOW_WIDTH/2) - (pokemon_image.get_rect().right / 2)),0))
-
+        window.blit(pokemon_image_dark,(((WINDOW_WIDTH/2) - (pokemon_image_dark.get_rect().right / 2)),0))
         
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -80,8 +81,13 @@ while run_flag == True:
             if game_continue.handle_event(event) and not game_text_box.isplaceholder:
                 user_input = game_text_box.get_text()
                 print(pokemon_name.get_names())
+                print(pokemon_name.get_id())
+                
                 if user_input in pokemon_name.get_names():
                     print("Correcto!")
-                    pokemon_name, pokemon_image = pokedex.get_random(WINDOW)
+                    pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
+                    pokemon_image = pokemon_images[0]
+                    pokemon_image_dark = pokemon_images[1]
+                    pygame.display.update()
     
     pygame.display.update()

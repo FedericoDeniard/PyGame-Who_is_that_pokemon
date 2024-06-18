@@ -339,11 +339,11 @@
         {
             "id": 29,
             "names": {
-                "spa": "Nidoran♀",
-                "eng": "Nidoran♀",
-                "fr": "Nidoran♀",
-                "it": "Nidoran♀",
-                "deu": "Nidoran♀"
+                "spa": "Nidoran f",
+                "eng": "Nidoran f",
+                "fr": "Nidoran f",
+                "it": "Nidoran f",
+                "deu": "Nidoran f"
             },
             "gen": 1,
             "difficulty": "easy"
@@ -375,11 +375,11 @@
         {
             "id": 32,
             "names": {
-                "spa": "Nidoran♂",
-                "eng": "Nidoran♂",
-                "fr": "Nidoran♂",
-                "it": "Nidoran♂",
-                "deu": "Nidoran♂"
+                "spa": "Nidoran m",
+                "eng": "Nidoran m",
+                "fr": "Nidoran m",
+                "it": "Nidoran m",
+                "deu": "Nidoran m"
             },
             "gen": 1,
             "difficulty": "easy"
