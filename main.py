@@ -24,8 +24,8 @@ window = pygame.display.set_mode(WINDOW)
 
 #region Main Menu
 
-main_menu_quit = Button(window, (500, 500, 250, 50), background_colour=colours['WHITE'],  text="Salir", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
-main_menu_continue = Button(window, (500, 425, 250, 50), background_colour=colours['WHITE'],  text="Continuar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
+main_menu_quit = Button(window, (475, 500, 250, 50), background_colour=colours['WHITE'],  text="Salir", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
+main_menu_continue = Button(window, (475, 425, 250, 50), background_colour=colours['WHITE'],  text="Continuar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
 
 main_menu_backround = pygame.image.load('assets/interface/backround.jpg')
 main_menu_backroundbackround = pygame.transform.scale(main_menu_backround, (WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -37,9 +37,11 @@ main_menu = True
 game_background = pygame.image.load('assets/interface/background2.png')
 game_background = pygame.transform.scale(game_background, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
-game_back = Button(window,( 525,675, 250, 50), text="Atras", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
-game_continue = Button(window,( 525,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
-game_text_box = Textbox(window, (525, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
+game_back = Button(window,(475,675, 250, 50), text="Atras", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
+game_continue = Button(window,( 475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
+game_text_box = Textbox(window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
+
+pokemon_name, pokemon_image = pokedex.get_random(WINDOW)
 game = False
 
 run_flag = True
@@ -56,6 +58,8 @@ while run_flag == True:
         game_text_box.draw_button()
         game_back.draw_button()
         game_continue.draw_button()
+        window.blit(pokemon_image,(((WINDOW_WIDTH/2) - (pokemon_image.get_rect().right / 2)),0))
+
         
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
