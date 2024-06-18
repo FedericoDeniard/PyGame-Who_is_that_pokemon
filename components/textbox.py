@@ -20,7 +20,6 @@ class Textbox(Button):
     def update_text(self, text):
         self.text = text
         self.show_text = text
-        self.draw_button()
         text_rect = self.get_text_surface()
         text_right_top = text_rect.right
         button_hitbox = self.get_hitbox()
@@ -33,7 +32,6 @@ class Textbox(Button):
 
         if self.isplaceholder:
             self.text_colour, self.placeholder_colour = self.placeholder_colour, self.text_colour
-
 
         print(self.outside_letters)
         print(self.text)
