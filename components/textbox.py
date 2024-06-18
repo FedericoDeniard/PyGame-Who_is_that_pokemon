@@ -4,17 +4,16 @@ from assets.colours.colours import colours
 
 class Textbox(Button):
 
-    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='', active_colour = colours["LIGHT_GRAY"]):
+    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"]):
         self.placeholder_colour = colours["GRAY"]
-        self.active_colour = active_colour
+        self.background_active_colour = background_active_colour
         self.copy_background_colour = background_colour
-        super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_colour, text_align='left')
+        self.text_active_colour = self.placeholder_colour
+        self.placeholder = placeholder
+        self.isplaceholder = True
+
+        super().__init__(screen, position, background_colour, border_radius, placeholder, font, font_size, border_colour, border_width, self.text_active_colour, text_align='left')
         self.text_colour = text_colour
-
-        if placeholder != '':
-            self.isplaceholder = True
-            self.text_colour, self.placeholder_colour = self.placeholder_colour, self.text_colour
-
         self.outside_letters = 0
         self.placeholder = placeholder
         self.texting = False
@@ -32,14 +31,6 @@ class Textbox(Button):
             self.outside_letters -= 1
         self.show_text = self.text[self.outside_letters:]
 
-        if self.isplaceholder:
-            self.text_colour, self.placeholder_colour = self.placeholder_colour, self.text_colour
-
-
-        # print(self.outside_letters)
-        # print(self.text)
-        # print(self.show_text)
-
     def get_text(self):
         return self.text
     
@@ -55,15 +46,18 @@ class Textbox(Button):
                 self.texting = True
                 if self.isplaceholder:
                     self.update_text('')
+                    self.isplaceholder = False
+                    self.text_active_colour = self.text_colour
             elif not(self.get_hitbox().collidepoint(event.pos)):
                 self.texting = False
                 if self.get_text() == '':
                     self.update_text(self.placeholder)
                     self.isplaceholder = True
-                    self.text_colour, self.placeholder_colour = self.placeholder_colour, self.text_colour
+                    self.text_active_colour = self.placeholder_colour
 
         if self.texting:
-            self.background_colour = self.active_colour
+            self.text_active_colour = self.text_colour
+            self.background_colour = self.background_active_colour
             if event.type == pygame.KEYDOWN and self.texting:
                 self.isplaceholder = False
                 if event.key == pygame.K_RETURN:
