@@ -44,7 +44,7 @@ class Pokedex:
         image = Image.open(image_path)
         match gen:
             case 1:
-                repeated = [4, 14, 20, 22, 23, 25, 26, 32, 34, 35, 37, 39, 49, 51, 55, 57, 60, 62, 68, 70, 72, 74, 86, 88, 98, 100, 102, 111, 113, 117, 119, 128, 135, 138, 145, 147, 170]
+                repeated = [4, 14, 22, 23, 25, 26, 32, 34, 35, 37, 39, 49, 51, 55, 57, 60, 62, 68, 70, 72, 74, 86, 88, 98, 100, 102, 111, 113, 117, 119, 128, 135, 138, 145, 147, 164, 166, 171, 178, 180]
             case 2:
                 repeated = [[4, 16, 18, 39, 41, 46, 51, 53, 57, 89, 91, 96, 98, 103, 106, 108, 111, 116, 120, 126, 130].append(i) for i in range(60, 87)]
             case 3:
@@ -55,6 +55,8 @@ class Pokedex:
         for number in repeated:
             if pokemon_id >= number:
                 pokemon_id += 1
+        
+        pokemon_id -= 1
 
         axis_x = pokemon_id % 15
         axis_y = pokemon_id // 15

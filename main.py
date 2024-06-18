@@ -4,6 +4,8 @@ import json
 
 from assets.colours.colours import colours
 from components.buttons import Button, Textbox
+from components.timer import Timer
+
 
 config = 'config.json'
 config_data = {}
@@ -40,10 +42,14 @@ game_background = pygame.transform.scale(game_background, (WINDOW_WIDTH, WINDOW_
 game_back = Button(window,(475,675, 250, 50), text="Atras", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
 game_continue = Button(window,( 475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
 game_text_box = Textbox(window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
+user_input = ""
 
 pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
 pokemon_image = pokemon_images[0]
 pokemon_image_dark = pokemon_images[1]
+
+timer = Timer(2000)
+
 
 game = False
 
@@ -62,6 +68,21 @@ while run_flag == True:
         game_back.draw_button()
         game_continue.draw_button()
         window.blit(pokemon_image_dark,(((WINDOW_WIDTH/2) - (pokemon_image_dark.get_rect().right / 2)),0))
+        timer.update()
+        # print(timer.finish)
+        # print(timer.active)
+        if user_input in pokemon_name.get_names():
+            user_input = ""
+            timer.activate()
+            pokemon_image_dark, pokemon_image = pokemon_image, pokemon_image_dark
+
+        print(f"is finished: {timer.is_finished()}")
+        print(f"is active: {timer.active}")
+        if timer.is_finished() and not timer.active:
+            pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
+            pokemon_image = pokemon_images[0]
+            pokemon_image_dark = pokemon_images[1]
+            timer.reset()
         
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -78,18 +99,10 @@ while run_flag == True:
             if game_back.handle_event(event):
                 main_menu = not main_menu
                 game = not game
-            if game_continue.handle_event(event) and not game_text_box.isplaceholder:
+            if game_continue.handle_event(event) and not game_text_box.isplaceholder and not timer.active:
                 user_input = game_text_box.get_text()
                 user_input = user_input.capitalize()
                 print(pokemon_name.get_names())
-                print(pokemon_name.get_id())
+                print(user_input)
                 
-                
-                if user_input in pokemon_name.get_names():
-                    print("Correcto!")
-                    pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
-                    pokemon_image = pokemon_images[0]
-                    pokemon_image_dark = pokemon_images[1]
-                    pygame.display.update()
-    
     pygame.display.update()
