@@ -80,8 +80,10 @@ while run_flag == True:
                 game = not game
             if game_continue.handle_event(event) and not game_text_box.isplaceholder:
                 user_input = game_text_box.get_text()
+                user_input = user_input.capitalize()
                 print(pokemon_name.get_names())
                 print(pokemon_name.get_id())
+                
                 
                 if user_input in pokemon_name.get_names():
                     print("Correcto!")

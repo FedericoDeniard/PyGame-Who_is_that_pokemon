@@ -89,7 +89,7 @@ class Textbox(Button):
             self.outside_letters -= 1
         self.show_text = self.text[self.outside_letters:]
 
-    def get_text(self):
+    def get_text(self) -> str:
         return self.text
     
     def draw_line(self):

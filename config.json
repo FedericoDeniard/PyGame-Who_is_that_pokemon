@@ -339,11 +339,11 @@
         {
             "id": 29,
             "names": {
-                "spa": "Nidoran f",
-                "eng": "Nidoran f",
-                "fr": "Nidoran f",
-                "it": "Nidoran f",
-                "deu": "Nidoran f"
+                "spa": "Nidoran F",
+                "eng": "Nidoran F",
+                "fr": "Nidoran F",
+                "it": "Nidoran F",
+                "deu": "Nidoran F"
             },
             "gen": 1,
             "difficulty": "easy"
@@ -375,11 +375,11 @@
         {
             "id": 32,
             "names": {
-                "spa": "Nidoran m",
-                "eng": "Nidoran m",
-                "fr": "Nidoran m",
-                "it": "Nidoran m",
-                "deu": "Nidoran m"
+                "spa": "Nidoran M",
+                "eng": "Nidoran M",
+                "fr": "Nidoran M",
+                "it": "Nidoran M",
+                "deu": "Nidoran M"
             },
             "gen": 1,
             "difficulty": "easy"
