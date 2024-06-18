@@ -44,26 +44,35 @@ class Pokedex:
         image = Image.open(image_path)
         match gen:
             case 1:
-                repetead = [4,14,22,25,31,34,35,37,39,49,51,55,57,60,62,68,70,72,74,85,87,]
+                repeated = [4, 14, 20, 22, 23, 25, 26, 32, 34, 35, 37, 39, 49, 51, 55, 57, 60, 62, 68, 70, 72, 74, 86, 88, 98, 100, 102, 111, 113, 117, 119, 128, 135, 138, 145, 147, 170]
             case 2:
-                pass
+                repeated = [[4, 16, 18, 39, 41, 46, 51, 53, 57, 89, 91, 96, 98, 103, 106, 108, 111, 116, 120, 126, 130].append(i) for i in range(60, 87)]
             case 3:
-                pass
+                repeated = [[5, 7, 9, 20, 23, 27, 30, 32, 65, 67, 75, 77, 79, 85, 87, 90, 109, 11, 112, 113, 147, 165, 166, 167].append(i) for i in range(76, 84)]
             case 4:
                 pass
+
+        for number in repeated:
+            if pokemon_id >= number:
+                pokemon_id += 1
 
         axis_x = pokemon_id % 15
         axis_y = pokemon_id // 15
         crop_area = (256*axis_x, 256*axis_y, 256*(axis_x+1), 256*(axis_y+1))
 
         cropped_image = image.crop(crop_area)
+        cropped_image.save('assets/pokemons/pokemon_temp.png')
+
         data = cropped_image.getdata()
         new_data = []
         for item in data:
             new_data.append((0,0,0, item[3]))
         cropped_image.putdata(new_data)
-        cropped_image.save('assets/pokemons/pokemon_temp.png')
+        cropped_image.save('assets/pokemons/pokemon_temp_dark.png')
+
         cropped_image = pygame.image.load('assets/pokemons/pokemon_temp.png')
         cropped_image = pygame.transform.scale(cropped_image, (window[0]/3, window[1]/2))
+        cropped_image_dark = pygame.image.load('assets/pokemons/pokemon_temp_dark.png')
+        cropped_image_dark = pygame.transform.scale(cropped_image_dark, (window[0]/3, window[1]/2))
 
-        return cropped_image
+        return cropped_image, cropped_image_dark

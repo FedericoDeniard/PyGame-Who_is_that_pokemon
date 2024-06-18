@@ -41,8 +41,9 @@ game_back = Button(window,(475,675, 250, 50), text="Atras", font_size=30, border
 game_continue = Button(window,( 475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
 game_text_box = Textbox(window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
 
-pokemon_name, pokemon_image = pokedex.get_random(WINDOW)
-game = False
+pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
+pokemon_image = pokemon_images[0]
+pokemon_image_dark = pokemon_images[1]
 
 run_flag = True
 
