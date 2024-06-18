@@ -7,6 +7,7 @@ from components.buttons import Button, Textbox
 
 config = 'config.json'
 config_data = {}
+pokemon_font = 'console'
 
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800
