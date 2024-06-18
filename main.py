@@ -7,7 +7,7 @@ from components.buttons import Button, Textbox
 
 config = 'config.json'
 config_data = {}
-pokemon_font = 'assets/fonts/pokemon_solid.ttf'
+pokemon_font = 'console'
 
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800
@@ -37,6 +37,7 @@ while run_flag == True:
 
         run_flag = button.handle_event(event) if run_flag == True else False
         text_box.handle_event(event)
+        print(text_box.get_text())
 
     window.blit(backround, (0,0))
 
