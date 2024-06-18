@@ -29,17 +29,21 @@ button = Button(window, (500, 500, 250, 50), background_colour=colours['WHITE'],
 
 text_box = Textbox(window, (525, 425, 200, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui", font=pokemon_font)
 
+pokemon_name, pokemon_image = pokedex.get_random(WINDOW)
+
 run_flag = True
 while run_flag == True:
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run_flag = False
 
         run_flag = button.handle_event(event) if run_flag == True else False
         text_box.handle_event(event)
-        print(text_box.get_text())
 
     window.blit(backround, (0,0))
+    window.blit(pokemon_image,(0,0))
+
 
     button.draw_button()
     text_box.draw_button()

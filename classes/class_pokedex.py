@@ -1,5 +1,7 @@
 from classes.class_pokemon import Pokemon
 from random import randint
+from PIL import Image
+import pygame
 
 class Pokedex:
     def __init__(self, pokemons:list[dict|Pokemon]):
@@ -28,9 +30,32 @@ class Pokedex:
         
         return pokemons
     
-    def get_random(self, pokemons:list[Pokemon] = False) -> Pokemon:
+    def get_random(self, window: tuple, pokemons:list[Pokemon] = False):
         pokemon_list = pokemons if pokemons else self.pokemons
-        
         rand = randint(0, len(pokemon_list)-1)
         random_pokemon = pokemon_list.pop(rand)
-        return random_pokemon
+        generation = random_pokemon.get_generation()
+        pokemon_image = self.get_pokemon_image(generation, window)
+        return random_pokemon, pokemon_image
+    
+    def get_pokemon_image(self, gen: int, window: tuple):
+        image_path = f"assets/pokemons/pokemons_{gen}.png"
+        image = Image.open(image_path)
+
+        axis_x, axis_y = 0, 0
+        crop_area = (256*axis_x, 256*axis_y, 256*(axis_x+1), 256*(axis_y+1))
+        axis_x += 7
+        axis_y += 7
+        crop_area = (256*axis_x, 256*axis_y, 256*(axis_x+1), 256*(axis_y+1))
+
+        cropped_image = image.crop(crop_area)
+        data = cropped_image.getdata()
+        new_data = []
+        for item in data:
+            new_data.append((0,0,0, item[3]))
+        cropped_image.putdata(new_data)
+        cropped_image.save('assets/pokemons/pokemon_temp.png')
+        cropped_image = pygame.image.load('assets/pokemons/pokemon_temp.png')
+        cropped_image = pygame.transform.scale(cropped_image, (window[0]/3, window[1]/2))
+
+        return cropped_image
