@@ -26,6 +26,8 @@ pokedex = Pokedex(config_data['pokemons'])
 
 pygame.init()
 pygame.display.set_caption("Who's that pokemon")
+icon = pygame.image.load('assets/icon.png')
+pygame.display.set_icon(icon)
 
 window = pygame.display.set_mode(WINDOW)
 
@@ -103,7 +105,7 @@ while run_flag == True:
             if game_back.handle_event(event):
                 main_menu = not main_menu
                 game = not game
-            
+                
             if game_text_box.get_text().capitalize() in pokemon_name.get_names():
                 game_continue.change_sound(sounds["beep_sounds"][0])
             else:
