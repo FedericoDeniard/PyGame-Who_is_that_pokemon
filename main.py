@@ -77,6 +77,10 @@ while run_flag == True:
                 main_menu = not main_menu
                 game = not game
             if game_continue.handle_event(event) and not game_text_box.isplaceholder:
-                print(game_text_box.get_text())
+                user_input = game_text_box.get_text()
+                print(pokemon_name.get_names())
+                if user_input in pokemon_name.get_names():
+                    print("Correcto!")
+                    pokemon_name, pokemon_image = pokedex.get_random(WINDOW)
     
     pygame.display.update()
