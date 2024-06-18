@@ -17,12 +17,16 @@ WINDOW_HEIGHT = 800
 WINDOW = (WINDOW_WIDTH, WINDOW_HEIGHT)
 
 soundtrack = ["assets/music/Ending.mp3","assets/music/Gym.mp3","assets/music/Opening.mp3","assets/music/Pallet_Town.mp3","assets/music/Pokemon_Center.mp3"]
+last_music = None
 
 
 def play_random_music(soundtrack):
     if not pygame.mixer.music.get_busy():
+        random_number = randint(0,len(soundtrack) - 1)
+        while last_music == random_number:
+            random_number = randint(0,len(soundtrack) - 1)
         pygame.mixer.init()
-        pygame.mixer.music.load(soundtrack[randint(0, len(soundtrack) - 1)])
+        pygame.mixer.music.load(soundtrack[random_number])
         pygame.mixer.music.set_volume(.2)
         pygame.mixer.music.play()
 
