@@ -2,7 +2,7 @@ from classes.class_pokedex import Pokedex
 import pygame
 import json
 from random import randint
-from classes.sounds import Play_random_music
+from classes.sounds import Sounds, sounds
 
 from assets.colours.colours import colours
 from components.buttons import Button, Textbox
@@ -17,7 +17,7 @@ WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800
 WINDOW = (WINDOW_WIDTH, WINDOW_HEIGHT)
 
-music = Play_random_music()
+music = Sounds()
 
 with open(config, 'r') as file:
     config_data = json.load(file)
@@ -30,8 +30,8 @@ window = pygame.display.set_mode(WINDOW)
 
 #region Main Menu
 
-main_menu_quit = Button(window, (475, 500, 250, 50), background_colour=colours['WHITE'],  text="Salir", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
-main_menu_continue = Button(window, (475, 425, 250, 50), background_colour=colours['WHITE'],  text="Continuar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
+main_menu_quit = Button(window, (475, 500, 250, 50), background_colour=colours['WHITE'],  text="Salir", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][1])
+main_menu_continue = Button(window, (475, 425, 250, 50), background_colour=colours['WHITE'],  text="Continuar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][0])
 
 main_menu_backround = pygame.image.load('assets/interface/backround.jpg')
 main_menu_backroundbackround = pygame.transform.scale(main_menu_backround, (WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -43,8 +43,8 @@ main_menu = True
 game_background = pygame.image.load('assets/interface/background2.png')
 game_background = pygame.transform.scale(game_background, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
-game_back = Button(window,(475,675, 250, 50), text="Atras", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
-game_continue = Button(window,( 475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
+game_back = Button(window,(475,675, 250, 50), text="Atras", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][1])
+game_continue = Button(window,( 475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0])
 game_text_box = Textbox(window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
 user_input = ""
 
@@ -80,7 +80,6 @@ while run_flag == True:
             timer.activate()
             pokemon_image_dark, pokemon_image = pokemon_image, pokemon_image_dark
 
-
         if timer.is_finished() and not timer.active:
             pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
             pokemon_image = pokemon_images[0]
@@ -103,8 +102,14 @@ while run_flag == True:
             if game_back.handle_event(event):
                 main_menu = not main_menu
                 game = not game
+            
+            if game_text_box.get_text().capitalize() in pokemon_name.get_names():
+                game_continue.change_sound(sounds["beep_sounds"][0])
+            else:
+                game_continue.change_sound(sounds["no_sounds"][0])
+            
             if game_continue.handle_event(event) and not game_text_box.isplaceholder and not timer.active:
                 user_input = game_text_box.get_text()
-                user_input = user_input.capitalize()
+                user_input = user_input.capitalize()                
 
     pygame.display.update()

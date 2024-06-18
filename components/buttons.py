@@ -1,11 +1,12 @@
 from assets.colours.colours import colours
 import pygame
 from typing import Literal
+from classes.sounds import Sounds
 
 #region Button
 
 class Button:
-    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center'):
+    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
         self.screen = screen
         self.background_colour = background_colour
         self.position = position
@@ -20,6 +21,9 @@ class Button:
         self.text_align = text_align
         self.text_rect = None
         self.show_text = self.text
+        self.sound = sound
+        self.sounds = Sounds()
+            
 
     def draw_button(self):
         if self.border_colour and self.border_width > 0:
@@ -57,8 +61,16 @@ class Button:
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.get_hitbox().collidepoint(event.pos):
                 clicked = True
+                if self.sound is not None:
+                    self.sounds.play_sound(self.sound)
         return clicked
     
+    def change_sound(self, sound):
+        self.sound = sound
+    
+    def reproduce_sound(self):
+        self.sounds.play_sound(self.sound)
+
 #region Textbox
 class Textbox(Button):
     def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"]):
