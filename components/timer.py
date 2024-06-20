@@ -13,6 +13,14 @@ class Timer:
         self.finish = False
         self.start_time = get_ticks()
 
+    def pause(self):
+        pass
+    # funcion para pausar el timer
+
+    def continue_(self):
+        pass
+    # funcion para continuar una vez pausado
+
     def deactivate(self):
         self.active = False
         self.finish = True

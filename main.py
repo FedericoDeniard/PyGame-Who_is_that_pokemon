@@ -40,7 +40,7 @@ game_background = pygame.image.load('assets/interface/background2.png')
 game_background = pygame.transform.scale(game_background, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
 game_back = Button(window,(475,675, 250, 50), text="Atras", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
-game_continue = Button(window,( 475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
+game_continue = Button(window,(475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15)
 game_text_box = Textbox(window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
 user_input = ""
 
@@ -52,7 +52,8 @@ timer = Timer(2000)
 
 
 game = False
-
+guessed = False
+pause = False
 run_flag = True
 
 while run_flag == True:
@@ -61,8 +62,10 @@ while run_flag == True:
         window.blit(main_menu_backround, (0,0))
         main_menu_quit.draw_button()
         main_menu_continue.draw_button()
+
     #region Draw Game
     elif game:
+        timer.activate()
         window.blit(game_background, (0,0))
         game_text_box.draw_button()
         game_back.draw_button()
@@ -72,16 +75,29 @@ while run_flag == True:
 
         if user_input in pokemon_name.get_names():
             user_input = ""
-            timer.activate()
             pokemon_image_dark, pokemon_image = pokemon_image, pokemon_image_dark
+            timer.deactivate()
+            guessed = True
 
+        elif user_input != '':
+            print(user_input)
+            print(pokemon_name.get_names())
 
-        if timer.is_finished() and not timer.active:
+        if guessed and pause and game_continue.handle_event(event):
+            print('event')
             pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
             pokemon_image = pokemon_images[0]
             pokemon_image_dark = pokemon_images[1]
-            timer.reset()
             game_text_box.update_text("")
+            guessed = False
+            pause = False
+            game_continue.move((475, 600, 250, 50))
+            game_continue.change_text('Enviar')
+        elif guessed and not pause:
+            game_text_box.update_text('Correcto!')
+            pause = True
+            game_continue.move((475, 400, 250, 50))
+            game_continue.change_text('Continuar')
         
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -98,7 +114,7 @@ while run_flag == True:
             if game_back.handle_event(event):
                 main_menu = not main_menu
                 game = not game
-            if game_continue.handle_event(event) and not game_text_box.isplaceholder and not timer.active:
+            if game_continue.handle_event(event) and not game_text_box.isplaceholder:
                 user_input = game_text_box.get_text()
                 user_input = user_input.capitalize()
 

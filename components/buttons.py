@@ -59,6 +59,12 @@ class Button:
                 clicked = True
         return clicked
     
+    def move(self, position:tuple):
+        self.position = position
+
+    def change_text(self, text):
+        self.show_text = text
+    
 #region Textbox
 class Textbox(Button):
     def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"]):
