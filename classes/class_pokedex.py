@@ -37,6 +37,7 @@ class Pokedex:
         generation = random_pokemon.get_generation()
         pokemon_id = random_pokemon.get_id()
         pokemon_image = self.get_pokemon_image(generation, window, pokemon_id)
+        print(random_pokemon.get_names())
         return random_pokemon, pokemon_image
     
     def get_pokemon_image(self, gen: int, window: tuple, pokemon_id):
@@ -44,7 +45,7 @@ class Pokedex:
         image = Image.open(image_path)
         match gen:
             case 1:
-                repeated = [4, 14, 22, 23, 25, 26, 32, 34, 35, 37, 39, 49, 51, 55, 57, 60, 62, 68, 70, 72, 74, 86, 88, 98, 100, 102, 111, 113, 117, 119, 128, 135, 138, 145, 147, 164, 166, 171, 178, 180]
+                repeated = [4, 14, 22, 23, 25, 26, 32, 34, 35, 37, 39, 49, 51, 55, 57, 60, 62, 68, 70, 72, 74, 86, 88, 98, 100, 102, 111, 113, 117, 119, 128, 135, 138, 145, 147, 154, 156, 161, 168, 170]
             case 2:
                 repeated = [[4, 16, 18, 39, 41, 46, 51, 53, 57, 89, 91, 96, 98, 103, 106, 108, 111, 116, 120, 126, 130].append(i) for i in range(60, 87)]
             case 3:
