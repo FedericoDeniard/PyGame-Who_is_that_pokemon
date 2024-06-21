@@ -106,7 +106,7 @@ while run_flag == True:
                 main_menu = not main_menu
                 game = not game
                 
-            if game_text_box.get_text().capitalize() in pokemon_name.get_names():
+            if game_text_box.get_text().title() in pokemon_name.get_names():
                 game_continue.change_sound(sounds["beep_sounds"][0])
             else:
                 game_continue.change_sound(sounds["no_sounds"][0])
