@@ -58,8 +58,8 @@ class Button:
 
     def handle_event(self, event):
         clicked = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.get_hitbox().collidepoint(event.pos):
+        if event == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONDOWN:
+            if event == pygame.MOUSEBUTTONDOWN or self.get_hitbox().collidepoint(event.pos):
                 clicked = True
                 if self.sound is not None:
                     self.sounds.play_sound(self.sound)

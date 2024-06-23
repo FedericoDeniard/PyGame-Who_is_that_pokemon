@@ -117,7 +117,7 @@ while run_flag == True:
             
             if (game_continue.handle_event(event) or (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and game_text_box.texting)):
                 if (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and game_text_box.texting):
-                    pass
+                    game_continue.handle_event(pygame.MOUSEBUTTONDOWN)
                 if lives == 0:
                     lives = 3
                     game_continue.change_text('Enviar')
