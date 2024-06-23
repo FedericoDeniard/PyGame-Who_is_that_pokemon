@@ -54,7 +54,7 @@ class Button:
         return self.text_rect
     
     def get_hitbox(self):
-         return self.hitbox
+        return self.hitbox
 
     def handle_event(self, event):
         clicked = False
@@ -68,6 +68,9 @@ class Button:
     def change_sound(self, sound):
         self.sound = sound
     
+    def change_text(self, text):
+        self.show_text = text
+
     def reproduce_sound(self):
         self.sounds.play_sound(self.sound)
 
@@ -134,7 +137,7 @@ class Textbox(Button):
             if event.type == pygame.KEYDOWN and self.texting:
                 self.isplaceholder = False
                 if event.key == pygame.K_RETURN:
-                    self.update_text('')
+                    pass
                 elif event.key == pygame.K_BACKSPACE:
                     text = self.get_text()
                     self.update_text(text[:-1])

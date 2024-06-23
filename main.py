@@ -76,12 +76,10 @@ while run_flag == True:
         game_back.draw_button()
         game_continue.draw_button()
         window.blit(pokemon_image_dark,(((WINDOW_WIDTH/2) - (pokemon_image_dark.get_rect().right / 2)),0))
+        lives_image = pygame.image.load(f'assets/interface/lives_{lives}.png')
+        lives_image = pygame.transform.scale(lives_image, (WINDOW_WIDTH/3.5, WINDOW_HEIGHT/8))
+        window.blit(lives_image, (0,0))
         timer.update()
-
-        if user_input in pokemon_name.get_names():
-            user_input = ""
-            timer.activate()
-            pokemon_image_dark, pokemon_image = pokemon_image, pokemon_image_dark
 
         if timer.is_finished() and not timer.active:
             pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
@@ -99,20 +97,47 @@ while run_flag == True:
             if main_menu_continue.handle_event(event):
                 main_menu = not main_menu
                 game = not game
+                lives = 3
+                strike = 0
     #region Events Game 
         elif game:
             game_text_box.handle_event(event)
             if game_back.handle_event(event):
                 main_menu = not main_menu
                 game = not game
-                
+            
+            if lives == 0:
+                pass
+
             if game_text_box.get_text().title() in pokemon_name.get_names():
                 game_continue.change_sound(sounds["beep_sounds"][0])
+                # TODO al tocar enter no suena nada
             else:
                 game_continue.change_sound(sounds["no_sounds"][0])
             
-            if game_continue.handle_event(event) and not game_text_box.isplaceholder and not timer.active:
-                user_input = game_text_box.get_text()
-                user_input = user_input.capitalize()                
+            if (game_continue.handle_event(event) or (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and game_text_box.texting)):
+                if (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and game_text_box.texting):
+                    pass
+                if lives == 0:
+                    lives = 3
+                    game_continue.change_text('Enviar')
+                elif not game_text_box.isplaceholder and not timer.active:
+                    user_input = game_text_box.get_text()
+                    user_input = user_input.capitalize()
+
+                    if user_input in pokemon_name.get_names():
+                        user_input = ""
+                        timer.activate()
+                        pokemon_image_dark, pokemon_image = pokemon_image, pokemon_image_dark
+                        strike += 1
+                        print(strike)
+                    else:
+                        lives -= 1
+                        if lives == 0:
+                            game_continue.change_text('Jugar de nuevo?')
+                        pokemon_image = pokemon_images[0]
+                        pokemon_image_dark = pokemon_images[1]
+                        timer.reset()
+                        game_text_box.update_text("")
 
     pygame.display.update()
