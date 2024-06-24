@@ -6,7 +6,7 @@ from classes.sounds import Sounds
 #region Button
 
 class Button:
-    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
+    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None, sticky = False):
         self.screen = screen
         self.background_colour = background_colour
         self.position = position
@@ -23,7 +23,8 @@ class Button:
         self.show_text = self.text
         self.sound = sound
         self.sounds = Sounds()
-            
+        self.sticky = sticky
+        self.sticky_pressed = False
 
     def draw_button(self):
         if self.border_colour and self.border_width > 0:
@@ -40,7 +41,10 @@ class Button:
             self.hitbox = pygame.draw.rect(self.screen, self.background_colour, self.position, border_radius = self.border_radius)
 
         if self.text != "":
-            myFont = pygame.font.SysFont(self.font, self.font_size)
+            if self.sticky_pressed:
+                myFont = pygame.font.SysFont(self.font, self.font_size, bold = True)
+            else:
+                myFont = pygame.font.SysFont(self.font, self.font_size, bold = False)
             text_surface = myFont.render(self.show_text, True, self.text_active_colour)  # Text, Antialiasing, colour
             match self.text_align:
                 case "center":
@@ -63,6 +67,9 @@ class Button:
                 clicked = True
                 if self.sound is not None:
                     self.sounds.play_sound(self.sound)
+                if self.sticky:
+                    self.sticky_pressed = not self.sticky_pressed
+
         return clicked
     
     def change_sound(self, sound):
@@ -73,6 +80,9 @@ class Button:
 
     def reproduce_sound(self):
         self.sounds.play_sound(self.sound)
+
+    def is_active(self):
+        return self.sticky_pressed
 
 #region Textbox
 class Textbox(Button):

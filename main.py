@@ -46,9 +46,11 @@ game_background = pygame.image.load('assets/interface/background2.png')
 game_background = pygame.transform.scale(game_background, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
 game_back = Button(window,(475,675, 250, 50), text="Atras", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][1])
-game_continue = Button(window,( 475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0])
+game_continue = Button(window,(475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0])
 game_text_box = Textbox(window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
 user_input = ""
+
+difficulty = Button(window,(275,400, 250, 50), text="Facil", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0], sticky = True)
 
 pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
 pokemon_image = pokemon_images[0]
@@ -74,6 +76,7 @@ while run_flag == True:
         game_text_box.draw_button()
         game_back.draw_button()
         game_continue.draw_button()
+        difficulty.draw_button()
         window.blit(pokemon_image_dark,(((WINDOW_WIDTH/2) - (pokemon_image_dark.get_rect().right / 2)),0))
         timer.update()
 
@@ -97,6 +100,7 @@ while run_flag == True:
     #region Events Game 
         elif game:
             game_text_box.handle_event(event)
+            difficulty.handle_event(event)
             if game_back.handle_event(event):
                 main_menu = not main_menu
                 game = not game
