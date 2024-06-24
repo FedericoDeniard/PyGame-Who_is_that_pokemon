@@ -60,14 +60,14 @@ class Button:
     def get_hitbox(self):
         return self.hitbox
 
-    def handle_event(self, event):
+    def handle_event(self, event, activate = False):
         clicked = False
         if event == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONDOWN:
             if event == pygame.MOUSEBUTTONDOWN or self.get_hitbox().collidepoint(event.pos):
                 clicked = True
                 if self.sound is not None:
                     self.sounds.play_sound(self.sound)
-                if self.sticky:
+                if self.sticky and activate:
                     self.sticky_pressed = not self.sticky_pressed
 
         return clicked
@@ -156,5 +156,27 @@ class Textbox(Button):
                     self.update_text(text)
         else:
             self.background_colour = self.copy_background_colour    # TODO Esto estaría bueno cambiarlo por un swap, detectando el cambio de estado
+
+# endregion
+
+# region Sticky_menu
+class Sticky_menu():
+    def __init__(self, button_list:list[Button]):
+        self.buttons = button_list
+
+    def draw_menu(self):
+        for button in self.buttons:
+            button.draw_button()
+
+    def handle_event(self, event, activate:bool = False):
+        the_button = None
+        for button in self.buttons:
+            if button.handle_event(event) and not button.is_active():
+                button.handle_event(event, activate)
+                the_button = button
+        if the_button:
+            for button in self.buttons:
+                if button.is_active() and button != the_button:
+                    button.handle_event(pygame.MOUSEBUTTONDOWN, activate)
 
 # endregion

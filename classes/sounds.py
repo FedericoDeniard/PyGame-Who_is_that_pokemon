@@ -26,10 +26,11 @@ class Sounds():
                 random_number = randint(0,len(self.soundtrack) - 1)
             pygame.mixer.init()
             pygame.mixer.music.load(self.soundtrack[random_number])
-            pygame.mixer.music.set_volume(.2)
+            pygame.mixer.music.set_volume(.1)
             pygame.mixer.music.play()
             self.last_music = random_number
     
     def play_sound(self, sound_path):
         sound = pygame.mixer.Sound(sound_path)
+        sound.set_volume(.1)
         sound.play()

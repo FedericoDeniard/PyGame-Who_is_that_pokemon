@@ -5,7 +5,7 @@ from random import randint
 from classes.sounds import Sounds, sounds
 
 from assets.colours.colours import colours
-from components.buttons import Button, Textbox
+from components.buttons import Button, Textbox, Sticky_menu
 from components.timer import Timer
 
 config = 'config.json'
@@ -50,13 +50,15 @@ game_continue = Button(window,(475,600, 250, 50), text="Enviar", font_size=30, b
 game_text_box = Textbox(window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
 user_input = ""
 
-difficulty_labels = ['facil', 'intermedio', 'dificil']
-difficulties = {}
+difficulty_labels = ['easy', 'medium', 'hard']
+difficulties = []
 
 for difficulty in difficulty_labels:
-    difficulties[difficulty] = Button(window,(50,100+(80*difficulty_labels.index(difficulty)), 250, 50), text=difficulty.capitalize(), font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["beep_sounds"][1], sticky = True)
+    difficulties.append(Button(window,(50,100+(80*difficulty_labels.index(difficulty)), 250, 50), text=difficulty.capitalize(), font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["beep_sounds"][1], sticky = True))
 
-pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
+difficulties = Sticky_menu(difficulties)
+
+pokemon_name, pokemon_images = pokedex.get_random(WINDOW, 'easy', [1])
 pokemon_image = pokemon_images[0]
 pokemon_image_dark = pokemon_images[1]
 
@@ -79,13 +81,12 @@ while run_flag == True:
         game_text_box.draw_button()
         game_back.draw_button()
         game_continue.draw_button()
-        for difficulty in difficulties:
-            difficulties[difficulty].draw_button()
+        difficulties.draw_menu()
         window.blit(pokemon_image_dark,(((WINDOW_WIDTH/2) - (pokemon_image_dark.get_rect().right / 2)),0))
         timer.update()
 
         if timer.is_finished() and not timer.active:
-            pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
+            pokemon_name, pokemon_images = pokedex.get_random(WINDOW, 'easy', [1])
             pokemon_image = pokemon_images[0]
             pokemon_image_dark = pokemon_images[1]
             timer.reset()
@@ -104,8 +105,7 @@ while run_flag == True:
     #region Events Game 
         elif game:
             game_text_box.handle_event(event)
-            for difficulty in difficulties:
-                difficulties[difficulty].handle_event(event)
+            difficulties.handle_event(event, activate=True)
             if game_back.handle_event(event):
                 main_menu = not main_menu
                 game = not game
