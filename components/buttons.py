@@ -185,7 +185,7 @@ class Sticky_menu():
         self.copy_pokedex = copy_pokedex
 
         self.difficulty = None
-        self.generation = None
+        self.generation = []
 
     def draw_menu(self):
         for button in self.buttons:
@@ -198,25 +198,27 @@ class Sticky_menu():
                 activated_button = button
                 if button.get_text().isalpha():
                     self.difficulty = button.get_text()
-                elif button.get_text().isdigit():
-                    self.generation = int(button.get_text())
-                self.filter_pokedex()
+                elif button.is_active():
+                    self.generation.append(int(button.get_text()))
+                    print(self.generation)
         if activated_button:
             for button in self.buttons:
-                if button != activated_button:
-                    button.deactivate()
-                if button.get_text().isalpha() and not activated_button.is_active():
+                if button.get_text().isalpha() and activated_button.get_text().isalpha():
+                    if button != activated_button:
+                        button.deactivate()
                     self.difficulty = None
-                elif button.get_text().isdigit() and not activated_button.is_active():
-                    self.generation = None
-                self.filter_pokedex()
+                elif button == activated_button and not activated_button.is_active() and button.get_text().isdigit():
+                    print(button.get_text())
+                    print(self.generation)
+                    self.generation.remove(int(button.get_text()))
+        self.filter_pokedex()
             
     def filter_pokedex(self):
         new_pokedex = []
         print(f"dificultad: {self.difficulty}")
         print(f"generacion: {self.generation}")
         difficulty = ["easy", "medium","hard"] if self.difficulty == None else [self.difficulty.lower()]
-        generations = [1,2,3,4] if self.generation == None else [self.generation]
+        generations = [1,2,3,4] if self.generation == [] else self.generation
 
         print(f"dificultad filtrada: {difficulty}")
         print(f"generacion filtrada: {generations}")
@@ -226,7 +228,5 @@ class Sticky_menu():
         
         print(f"len pokedex: {len(new_pokedex)}")
         self.copy_pokedex = new_pokedex
-        
-                
 
 # endregion

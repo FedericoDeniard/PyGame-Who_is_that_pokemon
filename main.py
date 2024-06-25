@@ -52,12 +52,11 @@ game_continue = Button(window,(475,600, 250, 50), text="Enviar", font_size=30, b
 game_text_box = Textbox(window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
 user_input = ""
 
-difficulty_labels = ['easy', 'medium', 'hard','1','2','3','4']
+difficulty_labels = ['easy','medium','hard','1','2','3','4']
 difficulties = []
 
 for difficulty in difficulty_labels:
     difficulties.append(Sticky(window,(50,100+(80*difficulty_labels.index(difficulty)), 150, 50), text=difficulty, font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["beep_sounds"][1]))
-
 
 difficulties = Sticky_menu(difficulties, pokedex, pokedex_copy)
 
