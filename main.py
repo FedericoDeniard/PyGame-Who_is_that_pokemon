@@ -60,10 +60,6 @@ for difficulty in difficulty_labels:
 
 difficulties = Sticky_menu(difficulties, pokedex, pokedex_copy)
 
-pokemon_name, pokemon_images = pokedex_copy.get_random(WINDOW)
-pokemon_image = pokemon_images[0]
-pokemon_image_dark = pokemon_images[1]
-
 timer = Timer(2000)
 
 game = False
@@ -104,7 +100,11 @@ while run_flag == True:
         if main_menu:
             run_flag = not main_menu_quit.handle_event(event) if run_flag == True else False
             difficulties.handle_event(event)
+            
             if main_menu_continue.handle_event(event):
+                pokemon_name, pokemon_images = pokedex_copy.get_random(WINDOW)
+                pokemon_image = pokemon_images[0]
+                pokemon_image_dark = pokemon_images[1]
                 main_menu = not main_menu
                 game = not game
                 strike = 0

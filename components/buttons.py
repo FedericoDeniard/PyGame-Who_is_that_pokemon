@@ -201,6 +201,7 @@ class Sticky_menu():
                 elif button.is_active():
                     self.generation.append(int(button.get_text()))
                     print(self.generation)
+
         if activated_button:
             for button in self.buttons:
                 if button.get_text().isalpha() and activated_button.get_text().isalpha():
@@ -212,8 +213,9 @@ class Sticky_menu():
                     print(button.get_text())
                     print(self.generation)
                     self.generation.remove(int(button.get_text()))
+
         self.filter_pokedex()
-            
+
     def filter_pokedex(self):
         new_pokedex = []
         print(f"dificultad: {self.difficulty}")
