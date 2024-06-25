@@ -58,7 +58,7 @@ for difficulty in difficulty_labels:
 
 difficulties = Sticky_menu(difficulties)
 
-pokemon_name, pokemon_images = pokedex.get_random(WINDOW, 'easy', [1])
+pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
 pokemon_image = pokemon_images[0]
 pokemon_image_dark = pokemon_images[1]
 
