@@ -58,6 +58,9 @@ for difficulty in difficulty_labels:
 
 difficulties = Sticky_menu(difficulties)
 
+pokedex_copy = Pokedex(pokedex.get_pokemons())
+pokedex_copy.filter_pokedex(generations=[2])
+
 pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
 pokemon_image = pokemon_images[0]
 pokemon_image_dark = pokemon_images[1]
@@ -68,8 +71,6 @@ game = False
 
 run_flag = True
 
-pokedex_copy = Pokedex(pokedex.get_pokemons())
-pokedex_copy.filter_pokedex(generations=[1])
 
 
 while run_flag == True:
