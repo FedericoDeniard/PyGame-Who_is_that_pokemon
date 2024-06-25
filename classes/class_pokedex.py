@@ -30,6 +30,17 @@ class Pokedex:
         
         return pokemons
 
+    def filter_pokedex(self, difficulty:str = None, generations:list[int] = None) -> list[Pokemon]:
+        new_pokedex = []
+        difficulty = ["easy", "medium","hard"] if difficulty == None else difficulty
+        generations = [1,2,3,4] if generations == None else generations
+        for pokemon in self.pokemons:
+            if pokemon.get_difficulty() in difficulty and pokemon.get_generation() in generations:
+                new_pokedex.append(pokemon)
+        
+        self.pokemons = new_pokedex
+        
+
     def get_random(self, window:tuple, pokemons:list[Pokemon] = False):
         pokemon_list = pokemons if pokemons else self.pokemons
         rand = randint(0, len(pokemon_list)-1)
@@ -47,11 +58,15 @@ class Pokedex:
             case 1:
                 repeated = [4, 14, 22, 23, 25, 26, 32, 34, 35, 37, 39, 49, 51, 55, 57, 60, 62, 68, 70, 72, 74, 86, 88, 98, 100, 102, 111, 113, 117, 119, 128, 135, 138, 145, 147, 154, 156, 161, 168, 170]
             case 2:
-                repeated = [[4, 16, 18, 39, 41, 46, 51, 53, 57, 89, 91, 96, 98, 103, 106, 108, 111, 116, 120, 126, 130].append(i) for i in range(60, 87)]
+                repeated = [4, 16, 18, 39, 41, 46, 51, 53, 57, 89, 91, 96, 98, 103, 106, 108, 111, 116, 120, 126, 130]
+                for i in range(60,87):
+                    repeated.append(i)
             case 3:
-                repeated = [[5, 7, 9, 20, 23, 27, 30, 32, 65, 67, 75, 77, 79, 85, 87, 90, 109, 11, 112, 113, 147, 165, 166, 167].append(i) for i in range(76, 84)]
+                repeated = [5, 7, 9, 20, 23, 27, 30, 32, 65, 67, 75, 77, 79, 85, 87, 90, 109, 11, 112, 113, 147, 165, 166, 167]
+                for i in range(76, 84):
+                    repeated.append(i)
             case 4:
-                pass
+                repeated = [1, 2, 3]
 
         for number in repeated:
             if pokemon_id >= number:

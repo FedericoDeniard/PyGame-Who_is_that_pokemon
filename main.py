@@ -54,7 +54,7 @@ difficulty_labels = ['easy', 'medium', 'hard']
 difficulties = []
 
 for difficulty in difficulty_labels:
-    difficulties.append(Sticky(window,(50,100+(80*difficulty_labels.index(difficulty)), 250, 50), text=difficulty.capitalize(), font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["beep_sounds"][1]))
+    difficulties.append(Sticky(window,(50,100+(80*difficulty_labels.index(difficulty)), 150, 50), text=difficulty.capitalize(), font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["beep_sounds"][1]))
 
 difficulties = Sticky_menu(difficulties)
 
@@ -67,6 +67,10 @@ timer = Timer(2000)
 game = False
 
 run_flag = True
+
+pokedex_copy = Pokedex(pokedex.get_pokemons())
+pokedex_copy.filter_pokedex(generations=[1])
+
 
 while run_flag == True:
     music.play_random()
@@ -86,7 +90,7 @@ while run_flag == True:
         timer.update()
 
         if timer.is_finished() and not timer.active:
-            pokemon_name, pokemon_images = pokedex.get_random(WINDOW, 'easy', [1])
+            pokemon_name, pokemon_images = pokedex_copy.get_random(WINDOW)
             pokemon_image = pokemon_images[0]
             pokemon_image_dark = pokemon_images[1]
             timer.reset()
@@ -128,7 +132,7 @@ while run_flag == True:
                         timer.activate()
                         pokemon_image_dark, pokemon_image = pokemon_image, pokemon_image_dark
                         strike += 1
-                        print(strike)
+                        # TODO print(strike)
                     else:
                         main_menu = not main_menu
                         game = not game
