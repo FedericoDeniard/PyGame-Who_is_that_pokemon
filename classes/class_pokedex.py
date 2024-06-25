@@ -52,7 +52,7 @@ class Pokedex:
         print(random_pokemon.get_names())
         return random_pokemon, pokemon_image
     
-    def get_pokemon_image(self, gen: int, window: tuple, pokemon_id):
+    def get_pokemon_image(self, gen:int, window:tuple, pokemon_id):
         image_path = f"assets/pokemons/pokemons_{gen}.png"
         image = Image.open(image_path)
         match gen:
@@ -68,7 +68,7 @@ class Pokedex:
                 for i in range(77, 84):
                     repeated.append(i)
             case 4:
-                repeated = [1, 2, 3]
+                repeated = [11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 32, 38, 39, 41, 42, 45, 48, 50, 52, 55, 57, 59, 61, 81, 83, 85, 90, 92, 96, 98, 101, 103, 106, 108, 110, 114, 116, 125, 132, 133, 134, 135, 136]
         
         repeated.sort()
         for number in repeated:
