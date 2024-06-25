@@ -206,7 +206,8 @@ class Sticky_menu():
                 if button.get_text().isalpha() and activated_button.get_text().isalpha():
                     if button != activated_button:
                         button.deactivate()
-                    self.difficulty = None
+                    if not activated_button.is_active():
+                        self.difficulty = None
                 elif button == activated_button and not activated_button.is_active() and button.get_text().isdigit():
                     print(button.get_text())
                     print(self.generation)
