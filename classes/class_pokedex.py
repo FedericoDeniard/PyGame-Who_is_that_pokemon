@@ -30,13 +30,8 @@ class Pokedex:
         
         return pokemons
 
-    def get_random(self, window:tuple, difficulty:str, generations:list):
-        # pokemons:list[Pokemon] = False
-        # pokemon_list = pokemons if pokemons else self.pokemons
-        pokemon_list = []
-        for pokemon in self.pokemons:
-            if pokemon.get_difficulty()== difficulty and pokemon.get_generation() in generations:
-                pokemon_list.append(pokemon)
+    def get_random(self, window:tuple, pokemons:list[Pokemon] = False):
+        pokemon_list = pokemons if pokemons else self.pokemons
         rand = randint(0, len(pokemon_list)-1)
         random_pokemon = pokemon_list.pop(rand)
         generation = random_pokemon.get_generation()

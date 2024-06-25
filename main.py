@@ -5,7 +5,7 @@ from random import randint
 from classes.sounds import Sounds, sounds
 
 from assets.colours.colours import colours
-from components.buttons import Button, Textbox, Sticky_menu
+from components.buttons import Button, Sticky, Textbox, Sticky_menu
 from components.timer import Timer
 
 config = 'config.json'
@@ -54,7 +54,7 @@ difficulty_labels = ['easy', 'medium', 'hard']
 difficulties = []
 
 for difficulty in difficulty_labels:
-    difficulties.append(Button(window,(50,100+(80*difficulty_labels.index(difficulty)), 250, 50), text=difficulty.capitalize(), font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["beep_sounds"][1], sticky = True))
+    difficulties.append(Sticky(window,(50,100+(80*difficulty_labels.index(difficulty)), 250, 50), text=difficulty.capitalize(), font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["beep_sounds"][1]))
 
 difficulties = Sticky_menu(difficulties)
 
@@ -105,7 +105,7 @@ while run_flag == True:
     #region Events Game 
         elif game:
             game_text_box.handle_event(event)
-            difficulties.handle_event(event, activate=True)
+            difficulties.handle_event(event)
             if game_back.handle_event(event):
                 main_menu = not main_menu
                 game = not game

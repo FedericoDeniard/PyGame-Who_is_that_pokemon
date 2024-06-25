@@ -6,7 +6,7 @@ from classes.sounds import Sounds
 #region Button
 
 class Button:
-    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None, sticky = False):
+    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
         self.screen = screen
         self.background_colour = background_colour
         self.position = position
@@ -23,8 +23,6 @@ class Button:
         self.show_text = self.text
         self.sound = sound
         self.sounds = Sounds()
-        self.sticky = sticky
-        self.sticky_pressed = False
 
     def draw_button(self):
         if self.border_colour and self.border_width > 0:
@@ -41,10 +39,7 @@ class Button:
             self.hitbox = pygame.draw.rect(self.screen, self.background_colour, self.position, border_radius = self.border_radius)
 
         if self.text != "":
-            if self.sticky_pressed:
-                myFont = pygame.font.SysFont(self.font, self.font_size, bold = True)
-            else:
-                myFont = pygame.font.SysFont(self.font, self.font_size, bold = False)
+            myFont = pygame.font.SysFont(self.font, self.font_size)
             text_surface = myFont.render(self.show_text, True, self.text_active_colour)  # Text, Antialiasing, colour
             match self.text_align:
                 case "center":
@@ -60,15 +55,13 @@ class Button:
     def get_hitbox(self):
         return self.hitbox
 
-    def handle_event(self, event, activate = False):
+    def handle_event(self, event):
         clicked = False
         if event == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONDOWN:
             if event == pygame.MOUSEBUTTONDOWN or self.get_hitbox().collidepoint(event.pos):
                 clicked = True
                 if self.sound is not None:
                     self.sounds.play_sound(self.sound)
-                if self.sticky and activate:
-                    self.sticky_pressed = not self.sticky_pressed
 
         return clicked
     
@@ -80,9 +73,6 @@ class Button:
 
     def reproduce_sound(self):
         self.sounds.play_sound(self.sound)
-
-    def is_active(self):
-        return self.sticky_pressed
 
 #region Textbox
 class Textbox(Button):
@@ -159,24 +149,54 @@ class Textbox(Button):
 
 # endregion
 
+#region Sticky
+
+class Sticky(Button):
+    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
+        super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_active_colour, text_align, sound)
+        self.sticky_pressed = False
+
+        self.active_background = (180,180,180)
+
+    def is_active(self):
+        return self.sticky_pressed
+
+    def handle_event_sticky(self, event):
+        clicked = self.handle_event(event)
+        if clicked:
+            self.background_colour, self.active_background = self.active_background, self.background_colour
+            self.sticky_pressed = not self.sticky_pressed
+        return clicked
+
+    def deactivate(self):
+        if self.is_active():
+            self.background_colour, self.active_background = self.active_background, self.background_colour
+            self.sticky_pressed = not self.sticky_pressed
+
+#endregion
+
 # region Sticky_menu
 class Sticky_menu():
-    def __init__(self, button_list:list[Button]):
+    def __init__(self, button_list:list[Sticky]):
         self.buttons = button_list
 
     def draw_menu(self):
         for button in self.buttons:
             button.draw_button()
 
-    def handle_event(self, event, activate:bool = False):
-        the_button = None
+    def handle_event(self, event):
+        activated_button = None
         for button in self.buttons:
-            if button.handle_event(event) and not button.is_active():
-                button.handle_event(event, activate)
-                the_button = button
-        if the_button:
+            if button.handle_event_sticky(event):
+                activated_button = button
+        if activated_button:
             for button in self.buttons:
-                if button.is_active() and button != the_button:
-                    button.handle_event(pygame.MOUSEBUTTONDOWN, activate)
+                if button != activated_button:
+                    button.deactivate()
+
+    def get_filter(self):
+        for i in range(len(self.buttons)):
+            if self.buttons[i].is_active():
+                return i
 
 # endregion
