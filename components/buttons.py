@@ -230,6 +230,6 @@ class Sticky_menu():
                 new_pokedex.append(pokemon)
         
         print(f"len pokedex: {len(new_pokedex)}")
-        self.copy_pokedex = new_pokedex
+        self.copy_pokedex.set_pokemons(new_pokedex)
 
 # endregion

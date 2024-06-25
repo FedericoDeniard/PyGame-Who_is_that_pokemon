@@ -141,5 +141,6 @@ while run_flag == True:
                         pokemon_image_dark = pokemon_images[1]
                         timer.reset()
                         game_text_box.update_text("")
+                        pokedex_copy = Pokedex(pokedex.get_pokemons())
 
     pygame.display.update()
