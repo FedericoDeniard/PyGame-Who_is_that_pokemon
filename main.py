@@ -22,6 +22,8 @@ with open(config, 'r') as file:
     config_data = json.load(file)
 
 pokedex = Pokedex(config_data['pokemons'])
+pokedex_copy = Pokedex(pokedex.get_pokemons())
+# pokedex_copy.filter_pokedex(generations=[2])
 
 pygame.init()
 pygame.display.set_caption("Who's that pokemon")
@@ -50,18 +52,16 @@ game_continue = Button(window,(475,600, 250, 50), text="Enviar", font_size=30, b
 game_text_box = Textbox(window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
 user_input = ""
 
-difficulty_labels = ['easy', 'medium', 'hard']
+difficulty_labels = ['easy', 'medium', 'hard','1','2','3','4']
 difficulties = []
 
 for difficulty in difficulty_labels:
-    difficulties.append(Sticky(window,(50,100+(80*difficulty_labels.index(difficulty)), 150, 50), text=difficulty.capitalize(), font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["beep_sounds"][1]))
+    difficulties.append(Sticky(window,(50,100+(80*difficulty_labels.index(difficulty)), 150, 50), text=difficulty, font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["beep_sounds"][1]))
 
-difficulties = Sticky_menu(difficulties)
 
-pokedex_copy = Pokedex(pokedex.get_pokemons())
-pokedex_copy.filter_pokedex(generations=[2])
+difficulties = Sticky_menu(difficulties, pokedex, pokedex_copy)
 
-pokemon_name, pokemon_images = pokedex.get_random(WINDOW)
+pokemon_name, pokemon_images = pokedex_copy.get_random(WINDOW)
 pokemon_image = pokemon_images[0]
 pokemon_image_dark = pokemon_images[1]
 
@@ -74,10 +74,12 @@ run_flag = True
 
 
 while run_flag == True:
+    # print(len(pokedex_copy.get_pokemons()))
     music.play_random()
     #region Draw Main Menu
     if main_menu:
         window.blit(main_menu_backround, (0,0))
+        difficulties.draw_menu()
         main_menu_quit.draw_button()
         main_menu_continue.draw_button()
     #region Draw Game
@@ -86,7 +88,6 @@ while run_flag == True:
         game_text_box.draw_button()
         game_back.draw_button()
         game_continue.draw_button()
-        difficulties.draw_menu()
         window.blit(pokemon_image_dark,(((WINDOW_WIDTH/2) - (pokemon_image_dark.get_rect().right / 2)),0))
         timer.update()
 
@@ -103,6 +104,7 @@ while run_flag == True:
     #region Events Main Menu 
         if main_menu:
             run_flag = not main_menu_quit.handle_event(event) if run_flag == True else False
+            difficulties.handle_event(event)
             if main_menu_continue.handle_event(event):
                 main_menu = not main_menu
                 game = not game
@@ -110,7 +112,6 @@ while run_flag == True:
     #region Events Game 
         elif game:
             game_text_box.handle_event(event)
-            difficulties.handle_event(event)
             if game_back.handle_event(event):
                 main_menu = not main_menu
                 game = not game

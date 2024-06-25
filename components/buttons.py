@@ -2,6 +2,7 @@ from assets.colours.colours import colours
 import pygame
 from typing import Literal
 from classes.sounds import Sounds
+from classes.class_pokedex import Pokedex
 
 #region Button
 
@@ -155,7 +156,6 @@ class Sticky(Button):
     def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
         super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_active_colour, text_align, sound)
         self.sticky_pressed = False
-
         self.active_background = (180,180,180)
 
     def is_active(self):
@@ -173,12 +173,19 @@ class Sticky(Button):
             self.background_colour, self.active_background = self.active_background, self.background_colour
             self.sticky_pressed = not self.sticky_pressed
 
+    def get_text(self):
+        return self.text
 #endregion
 
 # region Sticky_menu
 class Sticky_menu():
-    def __init__(self, button_list:list[Sticky]):
+    def __init__(self, button_list:list[Sticky], pokedex: Pokedex, copy_pokedex: Pokedex):
         self.buttons = button_list
+        self.pokedex = pokedex
+        self.copy_pokedex = copy_pokedex
+
+        self.difficulty = None
+        self.generation = None
 
     def draw_menu(self):
         for button in self.buttons:
@@ -189,14 +196,37 @@ class Sticky_menu():
         for button in self.buttons:
             if button.handle_event_sticky(event):
                 activated_button = button
+                if button.get_text().isalpha():
+                    self.difficulty = button.get_text()
+                elif button.get_text().isdigit():
+                    self.generation = int(button.get_text())
+                self.filter_pokedex()
         if activated_button:
             for button in self.buttons:
                 if button != activated_button:
                     button.deactivate()
+                if button.get_text().isalpha() and not activated_button.is_active():
+                    self.difficulty = None
+                elif button.get_text().isdigit() and not activated_button.is_active():
+                    self.generation = None
+                self.filter_pokedex()
+            
+    def filter_pokedex(self):
+        new_pokedex = []
+        print(f"dificultad: {self.difficulty}")
+        print(f"generacion: {self.generation}")
+        difficulty = ["easy", "medium","hard"] if self.difficulty == None else [self.difficulty.lower()]
+        generations = [1,2,3,4] if self.generation == None else [self.generation]
 
-    def get_filter(self):
-        for i in range(len(self.buttons)):
-            if self.buttons[i].is_active():
-                return i
+        print(f"dificultad filtrada: {difficulty}")
+        print(f"generacion filtrada: {generations}")
+        for pokemon in self.pokedex.get_pokemons():
+            if pokemon.get_difficulty() in difficulty and pokemon.get_generation() in generations:
+                new_pokedex.append(pokemon)
+        
+        print(f"len pokedex: {len(new_pokedex)}")
+        self.copy_pokedex = new_pokedex
+        
+                
 
 # endregion

@@ -29,16 +29,9 @@ class Pokedex:
                 pokemons.append(pokemon)
         
         return pokemons
-
-    def filter_pokedex(self, difficulty:str = None, generations:list[int] = None) -> list[Pokemon]:
-        new_pokedex = []
-        difficulty = ["easy", "medium","hard"] if difficulty == None else difficulty
-        generations = [1,2,3,4] if generations == None else generations
-        for pokemon in self.pokemons:
-            if pokemon.get_difficulty() in difficulty and pokemon.get_generation() in generations:
-                new_pokedex.append(pokemon)
-        
-        self.pokemons = new_pokedex
+    
+    def set_pokemons(self, new_pokemons: list):
+        self.pokemons = new_pokemons
         
 
     def get_random(self, window:tuple, pokemons:list[Pokemon] = False):
@@ -94,3 +87,4 @@ class Pokedex:
         cropped_image_dark = pygame.transform.scale(cropped_image_dark, (window[0]/3, window[1]/2))
 
         return cropped_image, cropped_image_dark
+    
