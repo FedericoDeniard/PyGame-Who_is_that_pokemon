@@ -71,8 +71,6 @@ game = False
 
 run_flag = True
 
-
-
 while run_flag == True:
     music.play_random()
     #region Draw Main Menu
