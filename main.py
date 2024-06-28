@@ -1,12 +1,11 @@
 from classes.class_pokedex import Pokedex
+from classes.sounds import Sounds, sounds
 import pygame
 import json
-from random import randint
-from classes.sounds import Sounds, sounds
 
-from assets.colours.colours import colours
 from components.buttons import Button, Sticky, Textbox, Sticky_menu
-from components.timer import Timer
+from assets.colours.colours import colours
+from components.timer import Timer, Chronometer
 
 config = 'config.json'
 config_data = {}
@@ -24,6 +23,17 @@ with open(config, 'r') as file:
 pokedex = Pokedex(config_data['pokemons'])
 pokedex_copy = Pokedex(pokedex.get_pokemons())
 # pokedex_copy.filter_pokedex(generations=[2])
+
+records = []
+record_titles = []
+
+with open('records.csv', 'r') as file:
+    for line in file:
+        if type(line[0]) == str:
+            record_titles.append(label for label in line)
+        else:
+            for label in line:
+                records.append(label)
 
 pygame.init()
 pygame.display.set_caption("Who's that pokemon")
@@ -51,8 +61,11 @@ game_back = Button(window,(475,675, 250, 50), text="Atras", font_size=30, border
 game_continue = Button(window,(475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0])
 game_text_box = Textbox(window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
 user_input = ""
-
-
+streak_label = Button(window, (50, 50, 200, 50), text='Racha: 0 / 10', font_size=30, border_colour=colours['BLACK'], border_width=2, border_radius=15)
+times = ['Ultimo', 'Mejor', 'Promedio']
+time_labels = []
+for time in times:
+    time_labels.append(Button(window, (50, 150+(60*times.index(time)), 200, 50), text=f'{time}: ', font_size=30, border_colour=colours['BLACK'], border_width=2, border_radius=15))
 difficulty_labels = ['easy','medium','hard','1','2','3','4']
 difficulties = []
 
@@ -62,11 +75,16 @@ for difficulty in difficulty_labels:
 difficulties = Sticky_menu(difficulties, pokedex, pokedex_copy)
 
 timer = Timer(2000)
+win_timer = Timer(2000)
+guess_time = Chronometer()
+
+guessed_times = []
+
+max_streak = 10
 
 game = False
 
 run_flag = True
-
 
 
 while run_flag == True:
@@ -83,19 +101,48 @@ while run_flag == True:
         game_text_box.draw_button()
         game_back.draw_button()
         game_continue.draw_button()
+        streak_label.draw_button()
+        for time_label in time_labels:
+            time_label: Button
+            time_label.draw_button()
         window.blit(pokemon_image_dark,(((WINDOW_WIDTH/2) - (pokemon_image_dark.get_rect().right / 2)),0))
         timer.update()
+        win_timer.update()
+        guess_time.activate()
 
-        if timer.is_finished() and not timer.active:
+        if streak == max_streak:
+            streak_label.change_text(f'Racha {streak} / 10')
+
+            # print(f"{win_timer.is_finished()},{win_timer.active}")
+            if win_timer.is_finished() and not win_timer.active:
+                main_menu = not main_menu
+                game = not game
+                streak = 0
+                win_timer.reset()
+                guess_time.deactivate()
+        elif timer.is_finished() and not timer.active and streak != 10:
             pokemon_name, pokemon_images = pokedex_copy.get_random(WINDOW)
             pokemon_image = pokemon_images[0]
             pokemon_image_dark = pokemon_images[1]
             timer.reset()
+            guessed_times.append([pokemon_name,guess_time.reset()])
+            print(guessed_times)
             game_text_box.update_text("")
+            streak_label.change_text(f'Racha {streak} / 10')
         
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run_flag = False
+            with open('records.csv', 'w') as file:
+                titles = ''
+                for label in record_titles:
+                    titles += f',{label}'
+                titles.replace(',', '', 1)
+                titles += '\n'
+                record_text = 0
+                for record in records:
+                    pass
+
     #region Events Main Menu 
         if main_menu:
             run_flag = not main_menu_quit.handle_event(event) if run_flag == True else False
@@ -107,7 +154,7 @@ while run_flag == True:
                 pokemon_image_dark = pokemon_images[1]
                 main_menu = not main_menu
                 game = not game
-                strike = 0
+                streak = 0
     #region Events Game 
         elif game:
             game_text_box.handle_event(event)
@@ -132,7 +179,12 @@ while run_flag == True:
                         user_input = ""
                         timer.activate()
                         pokemon_image_dark, pokemon_image = pokemon_image, pokemon_image_dark
-                        strike += 1
+                        streak += 1
+                        streak_label.change_text(f'Racha: {streak} / 10')
+                        # if streak == max_streak:
+                        #     win_timer.activate()
+                        # if streak > records[0]:
+                        #     records[0] = streak
                     else:
                         main_menu = not main_menu
                         game = not game

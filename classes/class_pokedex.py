@@ -32,7 +32,6 @@ class Pokedex:
     
     def set_pokemons(self, new_pokemons: list):
         self.pokemons = new_pokemons
-        
 
     def get_random(self, window:tuple, pokemons:list[Pokemon] = False):
         pokemon_list = pokemons if pokemons else self.pokemons
