@@ -5,7 +5,7 @@ import json
 
 from components.buttons import Button, Sticky, Textbox, Sticky_menu
 from assets.colours.colours import colours
-from components.timer import Timer, Chronometer
+from components.timer import Timer, Chronometer, get_best_time
 
 config = 'config.json'
 config_data = {}
@@ -30,7 +30,7 @@ record_titles = []
 with open('records.csv', 'r') as file:
     for line in file:
         if type(line[0]) == str:
-            record_titles.append(label for label in line)
+            record_titles.append(label for label in line.split(','))
         else:
             for label in line:
                 records.append(label)
@@ -79,13 +79,14 @@ win_timer = Timer(2000)
 guess_time = Chronometer()
 
 guessed_times = []
+best_time = get_best_time(guessed_times)
 
 max_streak = 10
 
 game = False
 
 run_flag = True
-
+quit_button = False
 
 while run_flag == True:
     music.play_random()
@@ -108,7 +109,8 @@ while run_flag == True:
         window.blit(pokemon_image_dark,(((WINDOW_WIDTH/2) - (pokemon_image_dark.get_rect().right / 2)),0))
         timer.update()
         win_timer.update()
-        guess_time.activate()
+        if not guess_time.active:
+            guess_time.activate()
 
         if streak == max_streak:
             streak_label.change_text(f'Racha {streak} / 10')
@@ -119,19 +121,16 @@ while run_flag == True:
                 game = not game
                 streak = 0
                 win_timer.reset()
-                guess_time.deactivate()
         elif timer.is_finished() and not timer.active and streak != 10:
             pokemon_name, pokemon_images = pokedex_copy.get_random(WINDOW)
             pokemon_image = pokemon_images[0]
             pokemon_image_dark = pokemon_images[1]
             timer.reset()
-            guessed_times.append([pokemon_name,guess_time.reset()])
-            print(guessed_times)
             game_text_box.update_text("")
             streak_label.change_text(f'Racha {streak} / 10')
         
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or quit_button:
             run_flag = False
             with open('records.csv', 'w') as file:
                 titles = ''
@@ -139,13 +138,16 @@ while run_flag == True:
                     titles += f',{label}'
                 titles.replace(',', '', 1)
                 titles += '\n'
-                record_text = 0
+                file.write(titles)
+                record_text =''
                 for record in records:
-                    pass
+                    record_text += f',{record}'
+                titles.replace(',', '', 1)
+                file.write(titles)
 
     #region Events Main Menu 
         if main_menu:
-            run_flag = not main_menu_quit.handle_event(event) if run_flag == True else False
+            quit_button = main_menu_quit.handle_event(event) if run_flag == True else False
             difficulties.handle_event(event)
             
             if main_menu_continue.handle_event(event):
@@ -169,6 +171,8 @@ while run_flag == True:
                 game_continue.change_sound(sounds["no_sounds"][0])
             
             if (game_continue.handle_event(event) or (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and game_text_box.texting)):
+
+
                 if (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and game_text_box.texting):
                     game_continue.handle_event(pygame.MOUSEBUTTONDOWN)
                 elif not game_text_box.isplaceholder and not timer.active:
@@ -176,21 +180,31 @@ while run_flag == True:
                     user_input = user_input.capitalize()
 
                     if user_input in pokemon_name.get_names():
+                        last_time = guess_time.reset()
+                        guessed_times.append([pokemon_name.get_names()[0] , last_time])
+                        best_time = get_best_time(guessed_times, last_time, best_time)
+                        print(guessed_times)
+                        print(best_time)
                         user_input = ""
                         timer.activate()
+                        # guessed_times.append([pokemon_name.get_names()[0] , guess_time.reset()])
                         pokemon_image_dark, pokemon_image = pokemon_image, pokemon_image_dark
                         streak += 1
                         streak_label.change_text(f'Racha: {streak} / 10')
-                        # if streak == max_streak:
-                        #     win_timer.activate()
-                        # if streak > records[0]:
-                        #     records[0] = streak
+                        if streak == max_streak:
+                            win_timer.activate()
+                        if streak > records[0]:
+                            records[0] = streak
+                        if 1 == 2: #TODO comprobar mejor tiempo
+                            records[1] = 1 # TODO tiempo
+                            records[2] = pokemon_name.get_names()[0]
                     else:
                         main_menu = not main_menu
                         game = not game
                         pokemon_image = pokemon_images[0]
                         pokemon_image_dark = pokemon_images[1]
                         timer.reset()
+                        guess_time.deactivate()
                         game_text_box.update_text("")
                         pokedex_copy = Pokedex(pokedex.get_pokemons())
 

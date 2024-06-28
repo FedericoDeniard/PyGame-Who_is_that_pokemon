@@ -56,3 +56,12 @@ class Chronometer:
         return duration    
     def is_finished(self):
         return self.finish
+
+def get_best_time(times: list, last_timee: int = 0, best_time: int = 0):
+    if len(times) == 0:
+        best_time = 0
+    else:
+        best_time = best_time
+        if last_timee > best_time:
+            best_time = last_timee
+    return best_time
