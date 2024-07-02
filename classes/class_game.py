@@ -2,8 +2,8 @@ from classes.class_pokedex import Pokedex
 from classes.sounds import Sounds, sounds
 import pygame
 
-from components.buttons import Button, Sticky, Textbox, Sticky_menu
 from components.timer import Timer, Chronometer, get_best_time, get_average_time
+from components.buttons import Button, Sticky, Textbox, Sticky_menu
 from assets.colours.colours import colours
 
 class Game():
@@ -92,6 +92,7 @@ class Game():
 
         # Game Labels
         self.streak_label = Button(self.window, (40, 30, 150, 30), text=f'Racha: 0 / {self.max_streak}', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
+        
         times = ['Ultimo', 'Promedio', 'Mejor', '']
         self.time_labels = []
         for time in times:
@@ -101,6 +102,8 @@ class Game():
                 text = f'{time}:'
                 distance = (40*times.index(time))
             self.time_labels.append(Button(self.window, (40, 75+distance, 150, 30), text=text, font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8))
+        
+        self.idioms_label = Button(self.window, (200, self.WINDOW_WIDTH, 150, 30), text='', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
 
     #region Start
     def start(self):
@@ -177,6 +180,9 @@ class Game():
         for name in self.pokemon_name.get_names():
             if name == self.game_text_box.get_text().title():
                 self.game_continue.change_sound(sounds["beep_sounds"][0])
+                text = str([].append(label for label in self.pokemon_name.get_names() if label != name)).replace('[', '').replace(']', '')
+                self.idioms_label.change_text(text)
+                self.idioms_label.draw_button()
                 break
             else:
                 self.game_continue.change_sound(sounds["no_sounds"][0])
@@ -185,8 +191,6 @@ class Game():
             self.reset_game()
 
         # TODO Se reemplazó el if in por un for each
-        # if self.game_text_box.get_text().title() in self.pokemon_name.get_names(): 
-        #     self.game_continue.change_sound(sounds["beep_sounds"][0])
         
         if (self.game_continue.handle_event(event) or (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.game_text_box.texting)):
 
@@ -214,13 +218,11 @@ class Game():
                         self.time_labels[2].change_text(f'Mejor: {round(self.best_time[0]/1000, 2)}')
                         self.time_labels[3].change_text(f'({self.best_time[1]})')
                         self.streak_label.change_text(f'Racha: {self.streak} / {self.max_streak}')
-                        self.records[1] = str(self.best_time[0])
-                        self.records[2] = self.best_time[1]
+                        self.records[0] = str(self.best_time[0])
+                        self.records[1] = self.best_time[1]
                         if self.streak == self.max_streak:
                             self.win_timer.activate()
                             self.music.play_sound(sounds['achieve_sound'])
-                        if self.streak > int(self.records[0]):
-                            self.records[0] = str(self.streak)
                     else:
                         self.reset_game()
 

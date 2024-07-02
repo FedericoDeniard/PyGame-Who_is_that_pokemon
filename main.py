@@ -14,7 +14,6 @@ with open(config, 'r') as file:
     config_data = json.load(file)
 
 pokedex = Pokedex(config_data['pokemons'])
-pokedex_copy = Pokedex(pokedex.get_pokemons())
 
 game = Game(pokedex, WINDOW)
 
