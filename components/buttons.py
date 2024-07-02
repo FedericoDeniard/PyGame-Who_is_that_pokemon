@@ -77,7 +77,7 @@ class Button:
 
 #region Textbox
 class Textbox(Button):
-    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"]):
+    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"], text_align= 'center'):
         self.placeholder_colour = colours["GRAY"]
         self.background_active_colour = background_active_colour
         self.copy_background_colour = background_colour
@@ -85,12 +85,11 @@ class Textbox(Button):
         self.placeholder = placeholder
         self.isplaceholder = True
 
-        super().__init__(screen, position, background_colour, border_radius, placeholder, font, font_size, border_colour, border_width, self.text_active_colour, text_align='left')
+        super().__init__(screen, position, background_colour, border_radius, placeholder, font, font_size, border_colour, border_width, self.text_active_colour, text_align)
         self.text_colour = text_colour
         self.outside_letters = 0
         self.placeholder = placeholder
         self.texting = False
-        self.draw_line() # TODO This line should be draw on draw_button()
 
     def update_text(self, text):
         self.text = text
@@ -146,7 +145,7 @@ class Textbox(Button):
                     text = self.get_text() + event.unicode
                     self.update_text(text)
         else:
-            self.background_colour = self.copy_background_colour    # TODO Esto estaría bueno cambiarlo por un swap, detectando el cambio de estado
+            self.background_colour = self.copy_background_colour    
 
 # endregion
 
@@ -200,7 +199,7 @@ class Sticky_menu():
                     self.difficulty = button.get_text()
                 elif button.is_active():
                     self.generation.append(int(button.get_text()))
-                    print(self.generation)
+                    # print(self.generation)
 
         if activated_button:
             for button in self.buttons:
@@ -210,26 +209,30 @@ class Sticky_menu():
                     if not activated_button.is_active():
                         self.difficulty = None
                 elif button == activated_button and not activated_button.is_active() and button.get_text().isdigit():
-                    print(button.get_text())
-                    print(self.generation)
+                    # print(button.get_text())
+                    # print(self.generation)
                     self.generation.remove(int(button.get_text()))
 
         self.filter_pokedex()
 
     def filter_pokedex(self):
         new_pokedex = []
-        print(f"dificultad: {self.difficulty}")
-        print(f"generacion: {self.generation}")
-        difficulty = ["easy", "medium","hard"] if self.difficulty == None else [self.difficulty.lower()]
+        # print(f"dificultad: {self.difficulty}")
+        # print(f"generacion: {self.generation}")
+        difficulties = ["easy", "medium","hard"] if self.difficulty == None else [self.difficulty.lower()]
         generations = [1,2,3,4] if self.generation == [] else self.generation
 
-        print(f"dificultad filtrada: {difficulty}")
-        print(f"generacion filtrada: {generations}")
+        # print(f"dificultad filtrada: {difficulty}")
+        # print(f"generacion filtrada: {generations}")
         for pokemon in self.pokedex.get_pokemons():
-            if pokemon.get_difficulty() in difficulty and pokemon.get_generation() in generations:
-                new_pokedex.append(pokemon)
+            for difficulty in difficulties:
+                for generation in generations:
+                    if pokemon.get_difficulty() == difficulty and pokemon.get_generation() == generation:
+                        new_pokedex.append(pokemon)
+            # if pokemon.get_difficulty() in difficulty and pokemon.get_generation() in generations: #TODO
+            #     new_pokedex.append(pokemon)
         
-        print(f"len pokedex: {len(new_pokedex)}")
+        # print(f"len pokedex: {len(new_pokedex)}")
         self.copy_pokedex.set_pokemons(new_pokedex)
 
 # endregion

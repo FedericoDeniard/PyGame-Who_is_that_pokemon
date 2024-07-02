@@ -3,8 +3,8 @@ from classes.sounds import Sounds, sounds
 import pygame
 
 from components.buttons import Button, Sticky, Textbox, Sticky_menu
+from components.timer import Timer, Chronometer, get_best_time, get_average_time
 from assets.colours.colours import colours
-from components.timer import Timer, Chronometer, get_best_time
 
 class Game():
     def __init__(self, pokedex:Pokedex, window:tuple):
@@ -12,9 +12,7 @@ class Game():
         self.WINDOW = window
         self.WINDOW_WIDTH = window[0]
         self.WINDOW_HEIGHT = window[1]
-    
-    #region Initialize
-    def initialize(self):
+
         self.music = Sounds()
 
         self.pokedex_copy = Pokedex(self.pokedex.get_pokemons())
@@ -47,7 +45,7 @@ class Game():
         self.guess_time = Chronometer()
 
         self.guessed_times = []
-        self.best_time = get_best_time(self.guessed_times)
+        self.best_time = [0,'']
 
         self.max_streak = 10
         self.game = False
@@ -80,23 +78,22 @@ class Game():
         self.game_background = pygame.transform.scale(self.game_background, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
 
         # Game Buttons
-        self.game_back = Button(self.window,(325,475, 150, 35), text="Atras", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][1])
-        self.game_continue = Button(self.window,(325,400, 150, 35), text="Enviar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0])
+        self.game_back = Button(self.window,(325,475, 150, 50), text="Atras", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][1])
+        self.game_continue = Button(self.window,(325,400, 150, 50), text="Enviar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0])
 
         # Game Textbox
-        self.game_text_box = Textbox(self.window, (275, 325, 250, 40), background_colour=colours['WHITE'], font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, placeholder="Escriba aqui")
+        self.game_text_box = Textbox(self.window, (300, 325, 200, 50), background_colour=colours['WHITE'], font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, placeholder="Escriba aqui")
 
         # Game Labels
         self.streak_label = Button(self.window, (40, 30, 150, 30), text='Racha: 0 / 10', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
-        times = ['Ultimo', 'Mejor', 'Promedio']
+        times = ['Ultimo', 'Promedio', 'Mejor', '']
         self.time_labels = []
         for time in times:
+            text = f'{time}:' if time != '' else '-'
             self.time_labels.append(Button(self.window, (40, 75+(40*times.index(time)), 150, 30), text=f'{time}: ', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8))
 
     #region Start
     def start(self):
-        self.initialize()
-        
         self.render_main_menu()
 
         self.render_game_menu()
@@ -126,14 +123,15 @@ class Game():
         if self.streak == self.max_streak:
             self.streak_label.change_text(f'Racha {self.streak} / 10')
 
-            # print(f"{win_timer.is_finished()},{win_timer.active}")
-            if self.win_timer.is_finished() and not self.win_timer.active:
+            # print(f"{self.win_timer.finished},{self.win_timer.active}")
+            if self.win_timer.finished and not self.win_timer.active:
                 self.main_menu = not self.main_menu
                 self.game = not self.game
                 self.streak = 0
                 self.win_timer.reset()
-        elif self.timer.is_finished() and not self.timer.active and self.streak != 10:
+        elif self.timer.finished and not self.timer.active and self.streak != 10:
             self.pokemon_name, self.pokemon_images = self.pokedex_copy.get_random(self.WINDOW)
+            self.guess_time.activate()
             self.pokemon_image = self.pokemon_images[0]
             self.pokemon_image_dark = self.pokemon_images[1]
             self.timer.reset()
@@ -158,11 +156,15 @@ class Game():
         self.game_text_box.handle_event(event)
 
         if self.game_back.handle_event(event):
-            self.back()
+            self.reset_game()
         
-        if self.game_text_box.get_text().title() in self.pokemon_name.get_names():
-            self.game_continue.change_sound(sounds["beep_sounds"][0])
-            # TODO al tocar enter no suena nada
+        for name in self.pokemon_name.get_names():
+            if name == self.game_text_box.get_text().title():
+                self.game_continue.change_sound(sounds["beep_sounds"][0])
+
+        # TODO Se reemplazó el if in por un for each
+        # if self.game_text_box.get_text().title() in self.pokemon_name.get_names(): 
+        #     self.game_continue.change_sound(sounds["beep_sounds"][0])
         else:
             self.game_continue.change_sound(sounds["no_sounds"][0])
         
@@ -174,25 +176,32 @@ class Game():
                 user_input = self.game_text_box.get_text()
                 user_input = user_input.capitalize()
 
-                if user_input in self.pokemon_name.get_names():
-                    last_time = self.guess_time.reset()
-                    self.guessed_times.append([self.pokemon_name.get_names()[0] , last_time])
-                    self.best_time = get_best_time(self.guessed_times, last_time, self.best_time)
-                    user_input = ""
-                    self.timer.activate()
-                    # guessed_times.append([self.pokemon_name.get_names()[0] , guess_time.reset()])
-                    self.pokemon_image_dark, self.pokemon_image = self.pokemon_image, self.pokemon_image_dark
-                    self.streak += 1
-                    self.streak_label.change_text(f'Racha: {self.streak} / 10')
-                    if self.streak == self.max_streak:
-                        self.win_timer.activate()
-                    if self.streak > int(self.records[0]):
-                        self.records[0] = str(self.streak)
-                    if 1 == 2: #TODO comprobar mejor tiempo
-                        self.records[1] = '1' # TODO tiempo
-                        self.records[2] = self.pokemon_name.get_names()[0]
-                else:
-                    self.back()
+               # if user_input in self.pokemon_name.get_names(): #TODO
+                for name in self.pokemon_name.get_names():
+                    if name == user_input:
+                        last_time = self.guess_time.reset()
+                        self.guessed_times.append([self.pokemon_name.get_names()[0], last_time])
+                        print(self.guessed_times)
+                        print(f'best time: {self.best_time}')
+                        user_input = ""
+                        self.timer.activate()
+                        # guessed_times.append([self.pokemon_name.get_names()[0] , guess_time.reset()])
+                        self.pokemon_image_dark, self.pokemon_image = self.pokemon_image, self.pokemon_image_dark
+                        self.streak += 1
+                        self.best_time = get_best_time(last_time, self.best_time)
+                        self.time_labels[0].change_text(f'Ultimo: {round(self.guessed_times[-1][1]/1000, 2)}')
+                        self.time_labels[1].change_text(f'Promedio: {round(get_average_time(self.guessed_times)/1000, 2)}')
+                        self.time_labels[2].change_text(f'Mejor: {round(self.best_time[0]/1000, 2)}')
+                        self.time_labels[3].change_text(f'({self.best_time[1]})')
+                        self.streak_label.change_text(f'Racha: {self.streak} / 10')
+                        self.records[1] = str(self.best_time[0])
+                        self.records[2] = self.best_time[1]
+                        if self.streak == self.max_streak:
+                            self.win_timer.activate()
+                        if self.streak > int(self.records[0]):
+                            self.records[0] = str(self.streak)
+                    else:
+                        self.reset_game()
 
     #region Quit
     def exit(self):
@@ -210,12 +219,11 @@ class Game():
             record_text = record_text.replace(',', '', 1)
             file.write(record_text)
 
-    def back(self):
+    #region Reset Game
+    def reset_game(self):
         self.streak = 0
         self.main_menu = not self.main_menu
         self.game = not self.game
-        self.pokemon_image = self.pokemon_images[0]
-        self.pokemon_image_dark = self.pokemon_images[1]
         self.timer.reset()
         self.guess_time.deactivate()
         self.game_text_box.update_text("")
@@ -226,10 +234,10 @@ class Game():
         self.start()
         
         while self.run_flag == True:
-            try:
-                print(len(self.pokedex_copy.get_pokemons()))
-            except:
-                pass
+            # try:
+            #     print(len(self.pokedex_copy.get_pokemons()))
+            # except:
+            #     pass
             self.music.play_random()
 
             if self.main_menu:
@@ -241,10 +249,8 @@ class Game():
                 if event.type == pygame.QUIT or self.quit_button:
                     self.exit()
 
-            #region Events Main Menu 
                 if self.main_menu:
                     self.menu_event(event)
-            #region Events Game 
                 elif self.game:
                     self.game_event(event)
 

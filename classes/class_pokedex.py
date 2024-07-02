@@ -1,4 +1,5 @@
 from classes.class_pokemon import Pokemon
+from Packages.Package_sort.bubblesort import bubble_sort
 from random import randint
 from PIL import Image
 import pygame
@@ -60,7 +61,7 @@ class Pokedex:
             case 4:
                 repeated = [11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 32, 38, 39, 41, 42, 45, 48, 50, 52, 55, 57, 59, 61, 81, 83, 85, 90, 92, 96, 98, 101, 103, 106, 108, 110, 114, 116, 125, 132, 133, 134, 135, 136]
         
-        repeated.sort()
+        bubble_sort(repeated)
         for number in repeated:
             if pokemon_id >= number:
                 pokemon_id += 1
@@ -87,4 +88,3 @@ class Pokedex:
         cropped_image_dark = pygame.transform.scale(cropped_image_dark, (window[0]/3, window[1]/2))
 
         return cropped_image, cropped_image_dark
-    
