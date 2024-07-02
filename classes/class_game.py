@@ -50,7 +50,7 @@ class Game():
         self.guessed_times = []
         self.best_time = [0,'']
 
-        self.max_streak = 3
+        self.max_streak = 10
         self.game = False
         self.main_menu = True
         self.run_flag = True
@@ -114,6 +114,9 @@ class Game():
         self.difficulties.draw_menu()
         self.main_menu_quit.draw_button()
         self.main_menu_continue.draw_button()
+        self.guessed_times = []
+        self.time_labels[0].change_text('Ultimo:')
+        self.time_labels[1].change_text('Promedio:')
     
     def show_game(self):
         self.window.blit(self.game_background, (0,0))
