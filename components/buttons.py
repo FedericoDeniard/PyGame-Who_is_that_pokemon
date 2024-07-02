@@ -1,11 +1,13 @@
 from assets.colours.colours import colours
 import pygame
 from typing import Literal
+from classes.sounds import Sounds
+from classes.class_pokedex import Pokedex
 
 #region Button
 
 class Button:
-    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center'):
+    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
         self.screen = screen
         self.background_colour = background_colour
         self.position = position
@@ -20,6 +22,8 @@ class Button:
         self.text_align = text_align
         self.text_rect = None
         self.show_text = self.text
+        self.sound = sound
+        self.sounds = Sounds()
 
     def draw_button(self):
         if self.border_colour and self.border_width > 0:
@@ -50,18 +54,30 @@ class Button:
         return self.text_rect
     
     def get_hitbox(self):
-         return self.hitbox
+        return self.hitbox
 
     def handle_event(self, event):
         clicked = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.get_hitbox().collidepoint(event.pos):
+        if event == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONDOWN:
+            if event == pygame.MOUSEBUTTONDOWN or self.get_hitbox().collidepoint(event.pos):
                 clicked = True
+                if self.sound is not None:
+                    self.sounds.play_sound(self.sound)
+
         return clicked
     
+    def change_sound(self, sound):
+        self.sound = sound
+    
+    def change_text(self, text):
+        self.show_text = text
+
+    def reproduce_sound(self):
+        self.sounds.play_sound(self.sound)
+
 #region Textbox
 class Textbox(Button):
-    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"]):
+    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"], text_align= 'center'):
         self.placeholder_colour = colours["GRAY"]
         self.background_active_colour = background_active_colour
         self.copy_background_colour = background_colour
@@ -69,12 +85,11 @@ class Textbox(Button):
         self.placeholder = placeholder
         self.isplaceholder = True
 
-        super().__init__(screen, position, background_colour, border_radius, placeholder, font, font_size, border_colour, border_width, self.text_active_colour, text_align='left')
+        super().__init__(screen, position, background_colour, border_radius, placeholder, font, font_size, border_colour, border_width, self.text_active_colour, text_align)
         self.text_colour = text_colour
         self.outside_letters = 0
         self.placeholder = placeholder
         self.texting = False
-        self.draw_line() # TODO This line should be draw on draw_button()
 
     def update_text(self, text):
         self.text = text
@@ -122,7 +137,7 @@ class Textbox(Button):
             if event.type == pygame.KEYDOWN and self.texting:
                 self.isplaceholder = False
                 if event.key == pygame.K_RETURN:
-                    self.update_text('')
+                    pass
                 elif event.key == pygame.K_BACKSPACE:
                     text = self.get_text()
                     self.update_text(text[:-1])
@@ -130,6 +145,94 @@ class Textbox(Button):
                     text = self.get_text() + event.unicode
                     self.update_text(text)
         else:
-            self.background_colour = self.copy_background_colour    # TODO Esto estaría bueno cambiarlo por un swap, detectando el cambio de estado
+            self.background_colour = self.copy_background_colour    
+
+# endregion
+
+#region Sticky
+
+class Sticky(Button):
+    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
+        super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_active_colour, text_align, sound)
+        self.sticky_pressed = False
+        self.active_background = (180,180,180)
+
+    def is_active(self):
+        return self.sticky_pressed
+
+    def handle_event_sticky(self, event):
+        clicked = self.handle_event(event)
+        if clicked:
+            self.background_colour, self.active_background = self.active_background, self.background_colour
+            self.sticky_pressed = not self.sticky_pressed
+        return clicked
+
+    def deactivate(self):
+        if self.is_active():
+            self.background_colour, self.active_background = self.active_background, self.background_colour
+            self.sticky_pressed = not self.sticky_pressed
+
+    def get_text(self):
+        return self.text
+#endregion
+
+# region Sticky_menu
+class Sticky_menu():
+    def __init__(self, button_list:list[Sticky], pokedex: Pokedex, copy_pokedex: Pokedex):
+        self.buttons = button_list
+        self.pokedex = pokedex
+        self.copy_pokedex = copy_pokedex
+
+        self.difficulty = None
+        self.generation = []
+
+    def draw_menu(self):
+        for button in self.buttons:
+            button.draw_button()
+
+    def handle_event(self, event):
+        activated_button = None
+        for button in self.buttons:
+            if button.handle_event_sticky(event):
+                activated_button = button
+                if button.get_text().isalpha():
+                    self.difficulty = button.get_text()
+                elif button.is_active():
+                    self.generation.append(int(button.get_text()))
+                    # print(self.generation)
+
+        if activated_button:
+            for button in self.buttons:
+                if button.get_text().isalpha() and activated_button.get_text().isalpha():
+                    if button != activated_button:
+                        button.deactivate()
+                    if not activated_button.is_active():
+                        self.difficulty = None
+                elif button == activated_button and not activated_button.is_active() and button.get_text().isdigit():
+                    # print(button.get_text())
+                    # print(self.generation)
+                    self.generation.remove(int(button.get_text()))
+
+        self.filter_pokedex()
+
+    def filter_pokedex(self):
+        new_pokedex = []
+        # print(f"dificultad: {self.difficulty}")
+        # print(f"generacion: {self.generation}")
+        difficulties = ["easy", "medium","hard"] if self.difficulty == None else [self.difficulty.lower()]
+        generations = [1,2,3,4] if self.generation == [] else self.generation
+
+        # print(f"dificultad filtrada: {difficulty}")
+        # print(f"generacion filtrada: {generations}")
+        for pokemon in self.pokedex.get_pokemons():
+            for difficulty in difficulties:
+                for generation in generations:
+                    if pokemon.get_difficulty() == difficulty and pokemon.get_generation() == generation:
+                        new_pokedex.append(pokemon)
+            # if pokemon.get_difficulty() in difficulty and pokemon.get_generation() in generations: #TODO
+            #     new_pokedex.append(pokemon)
+        
+        # print(f"len pokedex: {len(new_pokedex)}")
+        self.copy_pokedex.set_pokemons(new_pokedex)
 
 # endregion

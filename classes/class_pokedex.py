@@ -1,4 +1,5 @@
 from classes.class_pokemon import Pokemon
+from Packages.Package_sort.bubblesort import bubble_sort
 from random import randint
 from PIL import Image
 import pygame
@@ -30,7 +31,10 @@ class Pokedex:
         
         return pokemons
     
-    def get_random(self, window: tuple, pokemons:list[Pokemon] = False):
+    def set_pokemons(self, new_pokemons: list):
+        self.pokemons = new_pokemons
+
+    def get_random(self, window:tuple, pokemons:list[Pokemon] = False):
         pokemon_list = pokemons if pokemons else self.pokemons
         rand = randint(0, len(pokemon_list)-1)
         random_pokemon = pokemon_list.pop(rand)
@@ -39,19 +43,25 @@ class Pokedex:
         pokemon_image = self.get_pokemon_image(generation, window, pokemon_id)
         return random_pokemon, pokemon_image
     
-    def get_pokemon_image(self, gen: int, window: tuple, pokemon_id):
+    def get_pokemon_image(self, gen:int, window:tuple, pokemon_id):
         image_path = f"assets/pokemons/pokemons_{gen}.png"
         image = Image.open(image_path)
         match gen:
             case 1:
-                repeated = [4, 14, 22, 23, 25, 26, 32, 34, 35, 37, 39, 49, 51, 55, 57, 60, 62, 68, 70, 72, 74, 86, 88, 98, 100, 102, 111, 113, 117, 119, 128, 135, 138, 145, 147, 164, 166, 171, 178, 180]
+                repeated = [4, 14, 22, 23, 25, 26, 32, 34, 35, 37, 39, 49, 51, 55, 57, 60, 62, 68, 70, 72, 74, 86, 88, 98, 100, 102, 111, 113, 117, 119, 128, 135, 138, 145, 147, 154, 156, 161, 168, 170]
             case 2:
-                repeated = [[4, 16, 18, 39, 41, 46, 51, 53, 57, 89, 91, 96, 98, 103, 106, 108, 111, 116, 120, 126, 130].append(i) for i in range(60, 87)]
+                pokemon_id -= 151
+                repeated = [4, 16, 18, 31, 39, 41, 46, 51, 53, 57, 89, 96, 98, 103, 106, 108, 111, 116, 120, 126, 130]
+                for i in range(60,88):
+                    repeated.append(i)
             case 3:
-                repeated = [[5, 7, 9, 20, 23, 27, 30, 32, 65, 67, 75, 77, 79, 85, 87, 90, 109, 11, 112, 113, 147, 165, 166, 167].append(i) for i in range(76, 84)]
+                repeated = [5, 7, 9, 20, 23, 27, 30, 32, 65, 67, 75, 77, 79, 85, 87, 90, 109, 11, 112, 113, 147, 165, 166, 167]
+                for i in range(77, 84):
+                    repeated.append(i)
             case 4:
-                pass
-
+                repeated = [11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 32, 38, 39, 41, 42, 45, 48, 50, 52, 55, 57, 59, 61, 81, 83, 85, 90, 92, 96, 98, 101, 103, 106, 108, 110, 114, 116, 125, 132, 133, 134, 135, 136]
+        
+        bubble_sort(repeated)
         for number in repeated:
             if pokemon_id >= number:
                 pokemon_id += 1
