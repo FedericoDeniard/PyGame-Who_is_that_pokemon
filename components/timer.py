@@ -62,12 +62,10 @@ class Chronometer:
     def finished(self):
         return self._finish
 
-def get_best_time( last_time: int, best_pokemon: list):
+def get_best_time( last_time: list, best_pokemon: list):
     new_best_pokemon = [best_pokemon[0], best_pokemon[1]]
-    best_time = best_pokemon[0]
-    pokemon_name = best_pokemon[1]
-    if best_time == 0 or last_time < best_time:
-        new_best_pokemon = [last_time, pokemon_name]
+    if best_pokemon[0] == 0 or last_time[1] < best_pokemon[0]:
+        new_best_pokemon = [last_time[1], last_time[0]]
     return new_best_pokemon
 
 def get_average_time( guessed_times: list):

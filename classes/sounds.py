@@ -8,7 +8,8 @@ sounds = {
     "no_sounds": ["assets/sounds/no1.wav", "assets/sounds/no2.wav", "assets/sounds/no3.wav", "assets/sounds/no4.wav"],
     "start_sound": "assets/sounds/start.wav",
     "beep_sounds": ["assets/sounds/beep1.wav", "assets/sounds/beep2.wav", "assets/sounds/beep3.wav", "assets/sounds/beep4.wav"],
-    "achieve_sound": "assets/sounds/achieve1.wav"
+    "achieve_sound": "assets/sounds/achieve1.wav",
+    "won_game" : "assets/sounds/won_game.wav"
 }
 
 
@@ -32,5 +33,5 @@ class Sounds():
     
     def play_sound(self, sound_path):
         sound = pygame.mixer.Sound(sound_path)
-        sound.set_volume(.1)
+        sound.set_volume(.3)
         sound.play()
