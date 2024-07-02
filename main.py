@@ -2,8 +2,8 @@ from classes.class_pokedex import Pokedex
 from classes.class_game import Game
 import json
 
-WINDOW_WIDTH = 1200
-WINDOW_HEIGHT = 800
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
 WINDOW = (WINDOW_WIDTH, WINDOW_HEIGHT)
 
 config = 'config.json'

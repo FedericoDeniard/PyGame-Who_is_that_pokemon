@@ -63,14 +63,14 @@ class Game():
         
         # Menu Buttons
             # Basics
-        self.main_menu_quit = Button(self.window, (475, 500, 250, 50), background_colour=colours['WHITE'],  text="Salir", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][1])
-        self.main_menu_continue = Button(self.window, (475, 425, 250, 50), background_colour=colours['WHITE'],  text="Continuar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][0])
+        self.main_menu_quit = Button(self.window, (325, 300, 150, 50), background_colour=colours['WHITE'],  text="Salir", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound=sounds["beep_sounds"][1])
+        self.main_menu_continue = Button(self.window, (325, 225, 150, 50), background_colour=colours['WHITE'],  text="Continuar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound=sounds["beep_sounds"][0])
 
             # Configuration
         difficulty_labels = ['easy','medium','hard','1','2','3','4']
         difficulties = []
         for difficulty in difficulty_labels:
-            difficulties.append(Sticky(self.window,(50,100+(80*difficulty_labels.index(difficulty)), 150, 50), text=difficulty, font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["beep_sounds"][1]))
+            difficulties.append(Sticky(self.window,(30,50+(60*difficulty_labels.index(difficulty)), 150, 50), text=difficulty.title(), font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1]))
         self.difficulties = Sticky_menu(difficulties, self.pokedex, self.pokedex_copy)
 
     #region Render game
@@ -80,18 +80,18 @@ class Game():
         self.game_background = pygame.transform.scale(self.game_background, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
 
         # Game Buttons
-        self.game_back = Button(self.window,(475,675, 250, 50), text="Atras", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][1])
-        self.game_continue = Button(self.window,(475,600, 250, 50), text="Enviar", font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0])
+        self.game_back = Button(self.window,(325,475, 150, 35), text="Atras", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][1])
+        self.game_continue = Button(self.window,(325,400, 150, 35), text="Enviar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0])
 
         # Game Textbox
-        self.game_text_box = Textbox(self.window, (475, 525, 250, 50), background_colour=colours['WHITE'], font_size=30, border_colour=colours["BLACK"], border_width=2, border_radius=15, placeholder="Escriba aqui")
+        self.game_text_box = Textbox(self.window, (275, 325, 250, 40), background_colour=colours['WHITE'], font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, placeholder="Escriba aqui")
 
         # Game Labels
-        self.streak_label = Button(self.window, (50, 50, 200, 50), text='Racha: 0 / 10', font_size=30, border_colour=colours['BLACK'], border_width=2, border_radius=15)
+        self.streak_label = Button(self.window, (40, 30, 150, 30), text='Racha: 0 / 10', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
         times = ['Ultimo', 'Mejor', 'Promedio']
         self.time_labels = []
         for time in times:
-            self.time_labels.append(Button(self.window, (50, 150+(60*times.index(time)), 200, 50), text=f'{time}: ', font_size=30, border_colour=colours['BLACK'], border_width=2, border_radius=15))
+            self.time_labels.append(Button(self.window, (40, 75+(40*times.index(time)), 150, 30), text=f'{time}: ', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8))
 
     #region Start
     def start(self):
