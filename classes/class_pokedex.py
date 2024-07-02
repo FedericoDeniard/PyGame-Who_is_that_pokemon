@@ -40,8 +40,6 @@ class Pokedex:
         generation = random_pokemon.get_generation()
         pokemon_id = random_pokemon.get_id()
         pokemon_image = self.get_pokemon_image(generation, window, pokemon_id)
-        print(generation)
-        print(random_pokemon.get_names())
         return random_pokemon, pokemon_image
     
     def get_pokemon_image(self, gen:int, window:tuple, pokemon_id):
