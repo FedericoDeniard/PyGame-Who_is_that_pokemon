@@ -82,6 +82,11 @@ class Game():
         self.volume_up = Button(self.window, (self.window.get_width() - 60, 30, 30, 30),self.music, text="+", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
         self.volume_down = Button(self.window, (self.window.get_width() - 100, 30,30, 30), self.music,text="-", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
         self.skip_song = Button(self.window, (self.window.get_width() - 140, 30,30, 30), self.music,text="⇄", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
+        self.stop_icon = "||"
+        self.resume_icon = "▶️"
+        self.stop_resume = Button(self.window, (self.window.get_width() - 180, 30,30, 30), self.music,text=self.stop_icon, font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
+
+    
     #region Render game
     def render_game_menu(self):
         # Game Background
@@ -129,6 +134,7 @@ class Game():
         self.volume_up.draw_button()
         self.volume_down.draw_button()
         self.skip_song.draw_button()
+        self.stop_resume.draw_button()
     
     def show_game(self):
         self.window.blit(self.game_background, (0,0))
@@ -207,6 +213,10 @@ class Game():
                 self.music.change_volume(-0.1)
             elif self.skip_song.handle_event(event):
                 self.music.skip_song()
+            elif self.stop_resume.handle_event(event):
+                self.music.resume_stop_music()
+                self.stop_icon, self.resume_icon = self.resume_icon, self.stop_icon
+                self.stop_resume.change_text(self.stop_icon)
 
     def game_event(self, event):
         self.game_text_box.handle_event(event)
