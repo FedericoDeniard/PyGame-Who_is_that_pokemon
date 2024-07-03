@@ -227,13 +227,18 @@ class Sticky_menu():
 
     def filter_pokedex(self):
         new_pokedex = []
-        # print(f"dificultad: {self.difficulty}")
-        # print(f"generacion: {self.generation}")
         difficulties = ["easy", "medium","hard"] if self.difficulty == None else [self.difficulty.lower()]
         generations = [1,2,3,4] if self.generation == [] else self.generation
 
-        # print(f"dificultad filtrada: {difficulty}")
-        # print(f"generacion filtrada: {generations}")
+        if len(difficulties) == 1:
+            match difficulties[0]:
+                case "facil":
+                    difficulties[0] = "easy"
+                case "medio":
+                    difficulties[0] = "medium"
+                case "dificil":
+                    difficulties[0] = "hard"
+
         for pokemon in self.pokedex.get_pokemons():
             for difficulty in difficulties:
                 for generation in generations:
@@ -242,7 +247,7 @@ class Sticky_menu():
             # if pokemon.get_difficulty() in difficulty and pokemon.get_generation() in generations: #TODO
             #     new_pokedex.append(pokemon)
         
-        # print(f"len pokedex: {len(new_pokedex)}")
+        print(f"len pokedex: {len(new_pokedex)}")
         self.copy_pokedex.set_pokemons(new_pokedex)
 
 # endregion

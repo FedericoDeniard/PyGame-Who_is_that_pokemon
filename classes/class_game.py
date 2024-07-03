@@ -69,7 +69,7 @@ class Game():
         self.main_menu_continue = Button(self.window, (325, 225, 150, 50), self.music,background_colour=colours['WHITE'],  text="Continuar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound=sounds["beep_sounds"][0])
 
             # Configuration
-        difficulty_labels = ['easy','medium','hard','1','2','3','4']
+        difficulty_labels = ['facil','medio','dificil','1','2','3','4']
         # TODO Se reemplazó el if in por un for each
         # if self.game_text_box.get_text().title() in self.pokemon_name.get_names(): 
         #     self.game_continue.change_sound(sounds["beep_sounds"][0])
@@ -82,7 +82,7 @@ class Game():
         self.volume_up = Button(self.window, (self.window.get_width() - 60, 30, 30, 30),self.music, text="+", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
         self.volume_down = Button(self.window, (self.window.get_width() - 100, 30,30, 30), self.music,text="-", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
         self.skip_song = Button(self.window, (self.window.get_width() - 140, 30,30, 30), self.music,text="⇄", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
-        self.stop_icon = "||"
+        self.stop_icon = "II"
         self.resume_icon = "▶️"
         self.stop_resume = Button(self.window, (self.window.get_width() - 180, 30,30, 30), self.music,text=self.stop_icon, font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
 
