@@ -247,7 +247,7 @@ class Sticky_menu():
             # if pokemon.get_difficulty() in difficulty and pokemon.get_generation() in generations: #TODO
             #     new_pokedex.append(pokemon)
         
-        print(f"len pokedex: {len(new_pokedex)}")
+        # print(f"len pokedex: {len(new_pokedex)}")
         self.copy_pokedex.set_pokemons(new_pokedex)
 
 # endregion

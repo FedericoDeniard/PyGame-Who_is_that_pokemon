@@ -66,7 +66,7 @@ class Game():
         # Menu Buttons
             # Basics
         self.main_menu_quit = Button(self.window, (325, 300, 150, 50), self.music, background_colour=colours['WHITE'],  text="Salir", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound=sounds["beep_sounds"][1])
-        self.main_menu_continue = Button(self.window, (325, 225, 150, 50), self.music,background_colour=colours['WHITE'],  text="Continuar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound=sounds["beep_sounds"][0])
+        self.main_menu_continue = Button(self.window, (325, 225, 150, 50), self.music,background_colour=colours['WHITE'],  text="Jugar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound=sounds["beep_sounds"][0])
 
             # Configuration
         difficulty_labels = ['facil','medio','dificil','1','2','3','4']
