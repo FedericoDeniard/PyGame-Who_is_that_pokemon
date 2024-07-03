@@ -284,6 +284,7 @@ class Game():
         self.timer.reset()
         self.guess_time.deactivate()
         self.game_text_box.update_text("")
+        self.loss_timer.deactivate()
         self.loss_timer.reset()
 
 
