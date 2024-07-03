@@ -49,3 +49,12 @@ class Mixer():
         self.volume = new_volume
         pygame.mixer.music.set_volume(self.volume)
         # print(f'volumen nuevo:{self.volume}')
+
+    def skip_song(self):
+        pygame.mixer.music.stop()
+        random_number = randint(0,len(self.soundtrack) - 1)
+        while self.last_music == random_number:
+            random_number = randint(0,len(self.soundtrack) - 1)
+        pygame.mixer.music.load(self.soundtrack[random_number])
+        pygame.mixer.music.play()
+        self.last_music = random_number
