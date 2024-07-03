@@ -13,11 +13,14 @@ sounds = {
 }
 
 
-class Sounds():
-    def __init__(self):
+class Mixer():
+    def __init__(self, volume=.5):
         pygame.mixer.init()
         self.music = None
         self.last_music = None
+        self.volume = volume
+        pygame.mixer.init()
+        pygame.mixer.music.set_volume(self.volume)
 
     def play_random(self):
         self.soundtrack = soundtrack
@@ -25,13 +28,24 @@ class Sounds():
             random_number = randint(0,len(self.soundtrack) - 1)
             while self.last_music == random_number:
                 random_number = randint(0,len(self.soundtrack) - 1)
-            pygame.mixer.init()
             pygame.mixer.music.load(self.soundtrack[random_number])
-            pygame.mixer.music.set_volume(.1)
             pygame.mixer.music.play()
             self.last_music = random_number
     
     def play_sound(self, sound_path):
         sound = pygame.mixer.Sound(sound_path)
-        sound.set_volume(.3)
+        sound.set_volume(self.volume + 0.2)
         sound.play()
+
+
+    def change_volume(self, value):
+        # print(f'volumen anterior:{self.volume}')
+        # print(f'volumen a restar: {value}')
+        new_volume = self.volume + value
+        if new_volume > 0.8:
+            new_volume = 0.8
+        elif new_volume < 0:
+            new_volume = 0
+        self.volume = new_volume
+        pygame.mixer.music.set_volume(self.volume)
+        # print(f'volumen nuevo:{self.volume}')
