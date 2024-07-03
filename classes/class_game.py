@@ -77,6 +77,10 @@ class Game():
             difficulties.append(Sticky(self.window,(30,50+(60*difficulty_labels.index(difficulty)), 150, 50), text=difficulty.title(), font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1]))
         self.difficulties = Sticky_menu(difficulties, self.pokedex, self.pokedex_copy)
 
+        # Sound Bar
+        self.volume_up = Button(self.window, (self.window.get_width() - 100, 30, 30, 30), text="+", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
+        self.volume_down = Button(self.window, (self.window.get_width() - 60, 30,30, 30), text="-", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
+
     #region Render game
     def render_game_menu(self):
         # Game Background
@@ -121,6 +125,8 @@ class Game():
         self.guessed_times = []
         self.time_labels[0].change_text('Ultimo:')
         self.time_labels[1].change_text('Promedio:')
+        self.volume_up.draw_button()
+        self.volume_down.draw_button()
     
     def show_game(self):
         self.window.blit(self.game_background, (0,0))
@@ -184,7 +190,11 @@ class Game():
                 self.main_menu = not self.main_menu
                 self.game = not self.game
                 self.streak = 0
-
+            
+            if self.volume_up.handle_event(event):
+                self.music.change_volume(0.1)
+            if self.volume_down.handle_event(event):
+                self.music.change_volume(-0.1)
     def game_event(self, event):
         self.game_text_box.handle_event(event)
         
