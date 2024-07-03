@@ -103,7 +103,8 @@ class Game():
                 distance = (40*times.index(time))
             self.time_labels.append(Button(self.window, (40, 75+distance, 150, 30), text=text, font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8))
         
-        self.idioms_label = Button(self.window, (200, self.WINDOW_WIDTH, 150, 30), text='', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
+
+        self.idioms_label = Button(self.window, ((self.window.get_width()/2) - 300,(self.window.get_height()/2) - 40, 600, 50) ,text='', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
 
     #region Start
     def start(self):
@@ -155,8 +156,18 @@ class Game():
             self.pokemon_image_dark = self.pokemon_images[1]
             self.timer.reset()
             self.game_text_box.update_text("")
+        elif self.timer.active:
             self.streak_label.change_text(f'Racha {self.streak} / {self.max_streak}')
-    
+            # for name in self.pokemon_name.get_names():
+                # text = str([].append(label for label in self.pokemon_name.get_names() if label != name)).replace('[', '').replace(']', '')
+                # text =
+            names = self.pokemon_name.get_names()
+            names_string = ' '.join(names)
+            print(names_string)
+            self.idioms_label.change_text(f'{names_string}')
+            self.idioms_label.draw_button()
+            
+        
     #region Event
     def menu_event(self, event):
         if self.main_menu:
@@ -180,9 +191,7 @@ class Game():
         for name in self.pokemon_name.get_names():
             if name == self.game_text_box.get_text().title():
                 self.game_continue.change_sound(sounds["beep_sounds"][0])
-                text = str([].append(label for label in self.pokemon_name.get_names() if label != name)).replace('[', '').replace(']', '')
-                self.idioms_label.change_text(text)
-                self.idioms_label.draw_button()
+                
                 break
             else:
                 self.game_continue.change_sound(sounds["no_sounds"][0])
@@ -223,6 +232,10 @@ class Game():
                         if self.streak == self.max_streak:
                             self.win_timer.activate()
                             self.music.play_sound(sounds['achieve_sound'])
+                        # text = "".join([label for label in self.pokemon_name.get_names()])
+                        # self.temp_text = text # TODO Remover esta variable
+                        # # self.idioms_label.change_text(text)
+
                     else:
                         self.reset_game()
 
@@ -262,10 +275,6 @@ class Game():
             #     pass
             self.music.play_random()
 
-            if self.main_menu:
-                self.show_menu()
-            elif self.game:
-                self.show_game()
                 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT or self.quit_button:
@@ -276,4 +285,8 @@ class Game():
                 elif self.game:
                     self.game_event(event)
 
+            if self.main_menu:
+                self.show_menu()
+            elif self.game:
+                self.show_game()
             pygame.display.update()

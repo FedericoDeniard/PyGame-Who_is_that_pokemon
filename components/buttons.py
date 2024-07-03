@@ -71,6 +71,7 @@ class Button:
     
     def change_text(self, text):
         self.show_text = text
+        self.text = text
 
     def reproduce_sound(self):
         self.sounds.play_sound(self.sound)
