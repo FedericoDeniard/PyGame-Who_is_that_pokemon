@@ -57,7 +57,8 @@ class Mixer():
         while self.last_music == random_number:
             random_number = randint(0,len(self.soundtrack) - 1)
         pygame.mixer.music.load(self.soundtrack[random_number])
-        pygame.mixer.music.play()
+        if not self.stopped:
+            pygame.mixer.music.play()
         self.last_music = random_number
 
     def resume_stop_music(self):
