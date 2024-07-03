@@ -78,8 +78,8 @@ class Game():
         self.difficulties = Sticky_menu(difficulties, self.pokedex, self.pokedex_copy)
 
         # Sound Bar
-        self.volume_up = Button(self.window, (self.window.get_width() - 100, 30, 30, 30), text="+", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
-        self.volume_down = Button(self.window, (self.window.get_width() - 60, 30,30, 30), text="-", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
+        self.volume_up = Button(self.window, (self.window.get_width() - 60, 30, 30, 30), text="+", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
+        self.volume_down = Button(self.window, (self.window.get_width() - 100, 30,30, 30), text="-", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
 
     #region Render game
     def render_game_menu(self):
