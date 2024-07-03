@@ -80,7 +80,6 @@ class Game():
         # Sound Bar
         self.volume_up = Button(self.window, (self.window.get_width() - 60, 30, 30, 30), text="+", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
         self.volume_down = Button(self.window, (self.window.get_width() - 100, 30,30, 30), text="-", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
-
     #region Render game
     def render_game_menu(self):
         # Game Background
@@ -194,6 +193,8 @@ class Game():
                 self.main_menu = not self.main_menu
                 self.game = not self.game
                 self.streak = 0
+                self.streak_label.change_text(f'Racha {self.streak} / {self.max_streak}')
+
             
             if self.volume_up.handle_event(event):
                 self.music.change_volume(0.1)
@@ -276,6 +277,7 @@ class Game():
         self.timer.reset()
         self.guess_time.deactivate()
         self.game_text_box.update_text("")
+
 
     #region Run
     def run(self):
