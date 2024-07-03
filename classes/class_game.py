@@ -1,5 +1,5 @@
 from classes.class_pokedex import Pokedex
-from classes.sounds import Sounds, sounds
+from classes.sounds import Mixer, sounds
 import pygame
 
 from components.timer import Timer, Chronometer, get_best_time, get_average_time
@@ -13,7 +13,7 @@ class Game():
         self.WINDOW_WIDTH = window[0]
         self.WINDOW_HEIGHT = window[1]
 
-        self.music = Sounds()
+        self.music = Mixer()
 
         self.pokedex_copy = Pokedex(self.pokedex.get_pokemons())
 

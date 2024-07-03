@@ -13,7 +13,7 @@ sounds = {
 }
 
 
-class Sounds():
+class Mixer():
     def __init__(self, volume=.5):
         pygame.mixer.init()
         self.music = None
@@ -39,8 +39,8 @@ class Sounds():
 
 
     def change_volume(self, value):
-        print(f'volumen anterior:{self.volume}')
-        print(f'volumen a restar: {value}')
+        # print(f'volumen anterior:{self.volume}')
+        # print(f'volumen a restar: {value}')
         new_volume = self.volume + value
         if new_volume > 0.8:
             new_volume = 0.8
@@ -48,4 +48,4 @@ class Sounds():
             new_volume = 0
         self.volume = new_volume
         pygame.mixer.music.set_volume(self.volume)
-        print(f'volumen nuevo:{self.volume}')
+        # print(f'volumen nuevo:{self.volume}')

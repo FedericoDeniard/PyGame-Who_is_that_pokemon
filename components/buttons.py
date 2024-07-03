@@ -1,7 +1,7 @@
 from assets.colours.colours import colours
 import pygame
 from typing import Literal
-from classes.sounds import Sounds
+from classes.sounds import Mixer
 from classes.class_pokedex import Pokedex
 
 #region Button
@@ -23,7 +23,7 @@ class Button:
         self.text_rect = None
         self.show_text = self.text
         self.sound = sound
-        self.sounds = Sounds()
+        self.sounds = Mixer()
 
     def draw_button(self):
         if self.border_colour and self.border_width > 0:
