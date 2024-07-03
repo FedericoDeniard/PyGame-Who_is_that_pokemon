@@ -108,7 +108,7 @@ class Game():
             self.time_labels.append(Button(self.window, (40, 75+distance, 150, 30), text=text, font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8))
         
 
-        self.idioms_label = Button(self.window, ((self.window.get_width()/2) - 300,(self.window.get_height()/2) - 40, 600, 50) ,text='', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
+        self.idioms_label = Button(self.window, ((self.window.get_width()/2) - 300,(self.window.get_height()/2) - 30, 600, 50) ,text='', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
 
     #region Start
     def start(self):
@@ -171,6 +171,10 @@ class Game():
             names_string = ' '.join(names)
             print(names_string)
             self.idioms_label.change_text(f'{names_string}')
+            # input(self.idioms_label.get_text_length())
+            text_length = self.idioms_label.get_text_length() + 10
+            # self.idioms_label.resize((self.window.get_width()/2 - (text_length / 2) , text_length , 50))
+            self.idioms_label.resize((self.window.get_width()/2 - (text_length / 2) ,text_length))
             self.idioms_label.draw_button()
             
         

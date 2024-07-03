@@ -1,6 +1,6 @@
 from assets.colours.colours import colours
 import pygame
-from typing import Literal
+from typing import Literal, Tuple
 from classes.sounds import Mixer
 from classes.class_pokedex import Pokedex
 
@@ -41,20 +41,25 @@ class Button:
 
         if self.text != "":
             myFont = pygame.font.SysFont(self.font, self.font_size)
-            text_surface = myFont.render(self.show_text, True, self.text_active_colour)  # Text, Antialiasing, colour
+            self.text_surface = myFont.render(self.show_text, True, self.text_active_colour)  # Text, Antialiasing, colour
             match self.text_align:
                 case "center":
-                    text_rect = text_surface.get_rect(center=(self.position[0] + self.position[2] // 2, self.position[1] + self.position[3] // 2))
+                    text_rect = self.text_surface.get_rect(center=(self.position[0] + self.position[2] // 2, self.position[1] + self.position[3] // 2))
                 case "left":
-                    text_rect = text_surface.get_rect(topleft=(self.position[0] + self.border_width + 2, self.position[1] + self.border_width + (self.position[3] - text_surface.get_height()) // 2))
+                    text_rect = self.text_surface.get_rect(topleft=(self.position[0] + self.border_width + 2, self.position[1] + self.border_width + (self.position[3] - self.text_surface.get_height()) // 2))
             self.text_rect = text_rect
-            self.screen.blit(text_surface, text_rect)
+            self.screen.blit(self.text_surface, text_rect)
 
     def get_text_surface(self):
         return self.text_rect
     
     def get_hitbox(self):
         return self.hitbox
+    
+    def get_text_length(self):
+        myFont = pygame.font.SysFont(self.font, self.font_size)
+        self.text_surface = myFont.render(self.show_text, True, self.text_active_colour)
+        return self.text_surface.get_width()
 
     def handle_event(self, event):
         clicked = False
@@ -75,6 +80,10 @@ class Button:
 
     def reproduce_sound(self):
         self.sounds.play_sound(self.sound)
+    
+    def resize(self, new_size: Tuple[int, int]):
+        self.position = (new_size[0], self.position[1], new_size[1], self.position[3])
+        self.hitbox = pygame.Rect(self.position)
 
 #region Textbox
 class Textbox(Button):
