@@ -46,6 +46,7 @@ class Game():
         self.timer = Timer(2000)
         self.win_timer = Timer(2000)
         self.guess_time = Chronometer()
+        self.loss_timer = Timer(2000)
 
         self.guessed_times = []
         self.best_time = [0,'']
@@ -138,6 +139,7 @@ class Game():
             time_label.draw_button()
         self.window.blit(self.pokemon_image_dark,(((self.WINDOW_WIDTH/2) - (self.pokemon_image_dark.get_rect().right / 2)),0))
         self.timer.update()
+        self.loss_timer.update()
         self.win_timer.update()
         if not self.guess_time.active:
             self.guess_time.activate()
@@ -161,22 +163,23 @@ class Game():
             self.pokemon_image_dark = self.pokemon_images[1]
             self.timer.reset()
             self.game_text_box.update_text("")
-        elif self.timer.active:
+        elif self.timer.active or self.loss_timer.active:
             self.streak_label.change_text(f'Racha {self.streak} / {self.max_streak}')
             # for name in self.pokemon_name.get_names():
                 # text = str([].append(label for label in self.pokemon_name.get_names() if label != name)).replace('[', '').replace(']', '')
                 # text =
             names = self.pokemon_name.get_names()
             names_string = ' '.join(names)
-            print(names_string)
             self.idioms_label.change_text(f'{names_string}')
             # input(self.idioms_label.get_text_length())
             text_length = self.idioms_label.get_text_length() + 10
             # self.idioms_label.resize((self.window.get_width()/2 - (text_length / 2) , text_length , 50))
             self.idioms_label.resize((self.window.get_width()/2 - (text_length / 2) ,text_length))
             self.idioms_label.draw_button()
-            
-        
+
+        if self.loss_timer.finished and not self.loss_timer.active:
+            self.reset_game()
+
     #region Event
     def menu_event(self, event):
         if self.main_menu:
@@ -225,16 +228,14 @@ class Game():
             user_input = user_input.capitalize()
 
                # if user_input in self.pokemon_name.get_names(): #TODO
+            self.pokemon_image_dark, self.pokemon_image = self.pokemon_image, self.pokemon_image_dark
             for name in self.pokemon_name.get_names():
                 if name == user_input:
                     last_time = self.guess_time.reset()
                     self.guessed_times.append([self.pokemon_name.get_names()[0], last_time])
-                    print(self.guessed_times)
-                    print(f'best time: {self.best_time}')
                     user_input = ""
                     self.timer.activate()
                     # guessed_times.append([self.pokemon_name.get_names()[0] , guess_time.reset()])
-                    self.pokemon_image_dark, self.pokemon_image = self.pokemon_image, self.pokemon_image_dark
                     self.streak += 1
                     self.best_time = get_best_time(self.guessed_times[-1], self.best_time)
                     self.time_labels[0].change_text(f'Ultimo: {round(self.guessed_times[-1][1]/1000, 2)}')
@@ -250,9 +251,10 @@ class Game():
                     # text = "".join([label for label in self.pokemon_name.get_names()])
                     # self.temp_text = text # TODO Remover esta variable
                     # # self.idioms_label.change_text(text)
-
+                    break
                 else:
-                    self.reset_game()
+                    self.loss_timer.activate()
+                    # self.reset_game()
 
     #region Quit
     def exit(self):
@@ -277,6 +279,7 @@ class Game():
         self.timer.reset()
         self.guess_time.deactivate()
         self.game_text_box.update_text("")
+        self.loss_timer.reset()
 
 
     #region Run
