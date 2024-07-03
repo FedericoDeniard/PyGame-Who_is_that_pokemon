@@ -65,8 +65,8 @@ class Game():
         
         # Menu Buttons
             # Basics
-        self.main_menu_quit = Button(self.window, (325, 300, 150, 50), background_colour=colours['WHITE'],  text="Salir", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound=sounds["beep_sounds"][1])
-        self.main_menu_continue = Button(self.window, (325, 225, 150, 50), background_colour=colours['WHITE'],  text="Continuar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound=sounds["beep_sounds"][0])
+        self.main_menu_quit = Button(self.window, (325, 300, 150, 50), self.music, background_colour=colours['WHITE'],  text="Salir", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound=sounds["beep_sounds"][1])
+        self.main_menu_continue = Button(self.window, (325, 225, 150, 50), self.music,background_colour=colours['WHITE'],  text="Continuar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound=sounds["beep_sounds"][0])
 
             # Configuration
         difficulty_labels = ['easy','medium','hard','1','2','3','4']
@@ -75,13 +75,13 @@ class Game():
         #     self.game_continue.change_sound(sounds["beep_sounds"][0])
         difficulties = []
         for difficulty in difficulty_labels:
-            difficulties.append(Sticky(self.window,(30,50+(60*difficulty_labels.index(difficulty)), 150, 50), text=difficulty.title(), font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1]))
+            difficulties.append(Sticky(self.window,(30,50+(60*difficulty_labels.index(difficulty)), 150, 50),self.music, text=difficulty.title(), font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1]))
         self.difficulties = Sticky_menu(difficulties, self.pokedex, self.pokedex_copy)
 
         # Sound Bar
-        self.volume_up = Button(self.window, (self.window.get_width() - 60, 30, 30, 30), text="+", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
-        self.volume_down = Button(self.window, (self.window.get_width() - 100, 30,30, 30), text="-", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
-        self.skip_song = Button(self.window, (self.window.get_width() - 140, 30,30, 30), text="⇄", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
+        self.volume_up = Button(self.window, (self.window.get_width() - 60, 30, 30, 30),self.music, text="+", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
+        self.volume_down = Button(self.window, (self.window.get_width() - 100, 30,30, 30), self.music,text="-", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
+        self.skip_song = Button(self.window, (self.window.get_width() - 140, 30,30, 30), self.music,text="⇄", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1])
     #region Render game
     def render_game_menu(self):
         # Game Background
@@ -89,14 +89,14 @@ class Game():
         self.game_background = pygame.transform.scale(self.game_background, (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
 
         # Game Buttons
-        self.game_back = Button(self.window,(325,475, 150, 50), text="Atras", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][1])
-        self.game_continue = Button(self.window,(325,400, 150, 50), text="Enviar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0])
+        self.game_back = Button(self.window,(325,475, 150, 50), self.music,text="Atras", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound=sounds["beep_sounds"][1])
+        self.game_continue = Button(self.window,(325,400, 150, 50), self.music,text="Enviar", font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=15, sound = sounds["no_sounds"][0])
 
         # Game Textbox
-        self.game_text_box = Textbox(self.window, (300, 325, 200, 50), background_colour=colours['WHITE'], font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, placeholder="Escriba aqui")
+        self.game_text_box = Textbox(self.window, (300, 325, 200, 50), self.music,background_colour=colours['WHITE'], font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, placeholder="Escriba aqui")
 
         # Game Labels
-        self.streak_label = Button(self.window, (40, 30, 150, 30), text=f'Racha: 0 / {self.max_streak}', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
+        self.streak_label = Button(self.window, (40, 30, 150, 30),self.music, text=f'Racha: 0 / {self.max_streak}', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
         
         times = ['Ultimo', 'Promedio', 'Mejor', '']
         self.time_labels = []
@@ -106,10 +106,10 @@ class Game():
             if time != '':
                 text = f'{time}:'
                 distance = (40*times.index(time))
-            self.time_labels.append(Button(self.window, (40, 75+distance, 150, 30), text=text, font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8))
+            self.time_labels.append(Button(self.window, (40, 75+distance, 150, 30),self.music, text=text, font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8))
         
 
-        self.idioms_label = Button(self.window, ((self.window.get_width()/2) - 300,(self.window.get_height()/2) - 30, 600, 50) ,text='', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
+        self.idioms_label = Button(self.window, ((self.window.get_width()/2) - 300,(self.window.get_height()/2) - 30, 600, 50) ,self.music,text='', font_size=20, border_colour=colours['BLACK'], border_width=2, border_radius=8)
 
     #region Start
     def start(self):

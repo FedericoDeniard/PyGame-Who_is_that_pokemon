@@ -7,7 +7,7 @@ from classes.class_pokedex import Pokedex
 #region Button
 
 class Button:
-    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
+    def __init__(self, screen, position: tuple, mixer, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
         self.screen = screen
         self.background_colour = background_colour
         self.position = position
@@ -23,7 +23,7 @@ class Button:
         self.text_rect = None
         self.show_text = self.text
         self.sound = sound
-        self.sounds = Mixer()
+        self.sounds = mixer
 
     def draw_button(self):
         if self.border_colour and self.border_width > 0:
@@ -87,7 +87,7 @@ class Button:
 
 #region Textbox
 class Textbox(Button):
-    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"], text_align= 'center'):
+    def __init__(self, screen, position: tuple, mixer, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"], text_align= 'center'):
         self.placeholder_colour = colours["GRAY"]
         self.background_active_colour = background_active_colour
         self.copy_background_colour = background_colour
@@ -95,7 +95,7 @@ class Textbox(Button):
         self.placeholder = placeholder
         self.isplaceholder = True
 
-        super().__init__(screen, position, background_colour, border_radius, placeholder, font, font_size, border_colour, border_width, self.text_active_colour, text_align)
+        super().__init__(screen, position, mixer, background_colour, border_radius, placeholder, font, font_size, border_colour, border_width, self.text_active_colour, text_align)
         self.text_colour = text_colour
         self.outside_letters = 0
         self.placeholder = placeholder
@@ -162,8 +162,8 @@ class Textbox(Button):
 #region Sticky
 
 class Sticky(Button):
-    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
-        super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_active_colour, text_align, sound)
+    def __init__(self, screen, position: tuple, mixer, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
+        super().__init__(screen, position, mixer, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_active_colour, text_align, sound)
         self.sticky_pressed = False
         self.active_background = (180,180,180)
 
