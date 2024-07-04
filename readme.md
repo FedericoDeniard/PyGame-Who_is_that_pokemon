@@ -12,12 +12,12 @@ Adicionalmente, un menu en la parte superior derecha ofrece la posibilidad de co
 
 <figure>
   <figcaption><sub>Juego iniciado con configuraciones predeterminadas</sub></figcaption>
-  <img src='assets/readme_images/game_start.png' alt='game_start' width='700'>
+  <img src='assets/readme_images/game_start.png' alt='game_start' width='600'>
 </figure>
 
 <figure>
   <figcaption><sub>Dificultad Facil y generaciones 1 y 2 seleccionadas</sub></figcaption>
-  <img src='assets/readme_images/game_start_alternate.png' alt='game_start' width='700'>
+  <img src='assets/readme_images/game_start_alternate.png' alt='game_start' width='600'>
 </figure>
 
 ## Juego Principal
@@ -26,17 +26,17 @@ Al usuario se le presenta la silueta de un pokemon y una caja de texto donde deb
 
 <figure>
   <figcaption><sub>Inicio del juego principal</sub></figcaption>
-  <img src='assets/readme_images/game_guessing.png' alt='game_guessing' width='700'>
+  <img src='assets/readme_images/game_guessing.png' alt='game_guessing' width='600'>
 </figure>
 
 <figure>
   <figcaption><sub>Pokemon adivinado</sub></figcaption>
-  <img src='assets/readme_images/game_guessed.png' alt='game_guessed' width='700'>
+  <img src='assets/readme_images/game_guessed.png' alt='game_guessed' width='600'>
 </figure>
 
 Al ganar aparece una imagen diciendo lo mismo, y se regresa al inicio.
 
 <figure>
   <figcaption><sub>Juego terminado</sub></figcaption>
-  <img src='assets/readme_images/game_won.png' alt='game_won' width='700'>
+  <img src='assets/readme_images/game_won.png' alt='game_won' width='600'>
 </figure>
