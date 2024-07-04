@@ -4706,7 +4706,7 @@
                 "deu": "Panpyro"
             },
             "gen": 4,
-            "difficulty": "easy"
+            "difficulty": "hard"
         },
         {
             "id": 392,
@@ -4742,7 +4742,7 @@
                 "deu": "Pliprin"
             },
             "gen": 4,
-            "difficulty": "easy"
+            "difficulty": "hard"
         },
         {
             "id": 395,
@@ -4802,7 +4802,7 @@
                 "deu": "Bidiza"
             },
             "gen": 4,
-            "difficulty": "easy"
+            "difficulty": "hard"
         },
         {
             "id": 400,
@@ -4838,7 +4838,7 @@
                 "deu": "Zirpeise"
             },
             "gen": 4,
-            "difficulty": "medium"
+            "difficulty": "hard"
         },
         {
             "id": 403,
@@ -5306,7 +5306,7 @@
                 "deu": "Plaudagei"
             },
             "gen": 4,
-            "difficulty": "medium"
+            "difficulty": "hard"
         },
         {
             "id": 442,
@@ -5342,7 +5342,7 @@
                 "deu": "Knarksel"
             },
             "gen": 4,
-            "difficulty": "easy"
+            "difficulty": "hard"
         },
         {
             "id": 445,
@@ -5366,7 +5366,7 @@
                 "deu": "Mampfaxo"
             },
             "gen": 4,
-            "difficulty": "easy"
+            "difficulty": "hard"
         },
         {
             "id": 447,
@@ -5378,7 +5378,7 @@
                 "deu": "Riolu"
             },
             "gen": 4,
-            "difficulty": "easy"
+            "difficulty": "hard"
         },
         {
             "id": 448,
@@ -5655,6 +5655,282 @@
             },
             "gen": 4,
             "difficulty": "medium"
+        },
+        {
+            "id": 471,
+            "names": {
+                "spa": "Glaceon",
+                "eng": "Glaceon",
+                "fr": "Givrali",
+                "it": "Glaceon",
+                "deu": "Glaziola"
+            },
+            "gen": 4,
+            "difficulty": "medium"
+        },
+        {
+            "id": 472,
+            "names": {
+                "spa": "Gliscor",
+                "eng": "Gliscor",
+                "fr": "Scorvol",
+                "it": "Gliscor",
+                "deu": "Skorgro"
+            },
+            "gen": 4,
+            "difficulty": "medium"
+        },
+        {
+            "id": 473,
+            "names": {
+                "spa": "Mamoswine",
+                "eng": "Mamoswine",
+                "fr": "Mammochon",
+                "it": "Mamoswine",
+                "deu": "Mamutel"
+            },
+            "gen": 4,
+            "difficulty": "medium"
+        },
+        {
+            "id": 474,
+            "names": {
+                "spa": "Porygon-Z",
+                "eng": "Porygon-Z",
+                "fr": "Porygon-Z",
+                "it": "Porygon-Z",
+                "deu": "Porygon-Z"
+            },
+            "gen": 4,
+            "difficulty": "medium"
+        },
+        {
+            "id": 475,
+            "names": {
+                "spa": "Gallade",
+                "eng": "Gallade",
+                "fr": "Gallame",
+                "it": "Gallade",
+                "deu": "Galagladi"
+            },
+            "gen": 4,
+            "difficulty": "medium"
+        },
+        {
+            "id": 476,
+            "names": {
+                "spa": "Probopass",
+                "eng": "Probopass",
+                "fr": "Tarinorme",
+                "it": "Probopass",
+                "deu": "Voluminas"
+            },
+            "gen": 4,
+            "difficulty": "medium"
+        },
+        {
+            "id": 477,
+            "names": {
+                "spa": "Dusknoir",
+                "eng": "Dusknoir",
+                "fr": "Noctunoir",
+                "it": "Dusknoir",
+                "deu": "Zwirrfinst"
+            },
+            "gen": 4,
+            "difficulty": "medium"
+        },
+        {
+            "id": 478,
+            "names": {
+                "spa": "Froslass",
+                "eng": "Froslass",
+                "fr": "Momartik",
+                "it": "Froslass",
+                "deu": "Frosdedje"
+            },
+            "gen": 4,
+            "difficulty": "medium"
+        },
+        {
+            "id": 479,
+            "names": {
+                "spa": "Rotom",
+                "eng": "Rotom",
+                "fr": "Motisma",
+                "it": "Rotom",
+                "deu": "Rotom"
+            },
+            "gen": 4,
+            "difficulty": "medium"
+        },
+        {
+            "id": 480,
+            "names": {
+                "spa": "Uxie",
+                "eng": "Uxie",
+                "fr": "Créhelf",
+                "it": "Uxie",
+                "deu": "Selfe"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 481,
+            "names": {
+                "spa": "Mesprit",
+                "eng": "Mesprit",
+                "fr": "Créfollet",
+                "it": "Mesprit",
+                "deu": "Vesprit"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 482,
+            "names": {
+                "spa": "Azelf",
+                "eng": "Azelf",
+                "fr": "Créfadet",
+                "it": "Azelf",
+                "deu": "Tobutz"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 483,
+            "names": {
+                "spa": "Dialga",
+                "eng": "Dialga",
+                "fr": "Dialga",
+                "it": "Dialga",
+                "deu": "Dialga"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 484,
+            "names": {
+                "spa": "Palkia",
+                "eng": "Palkia",
+                "fr": "Palkia",
+                "it": "Palkia",
+                "deu": "Palkia"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 485,
+            "names": {
+                "spa": "Heatran",
+                "eng": "Heatran",
+                "fr": "Heatran",
+                "it": "Heatran",
+                "deu": "Heatran"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 486,
+            "names": {
+                "spa": "Regigigas",
+                "eng": "Regigigas",
+                "fr": "Regigigas",
+                "it": "Regigigas",
+                "deu": "Regigigas"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 487,
+            "names": {
+                "spa": "Giratina",
+                "eng": "Giratina",
+                "fr": "Giratina",
+                "it": "Giratina",
+                "deu": "Giratina"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 488,
+            "names": {
+                "spa": "Cresselia",
+                "eng": "Cresselia",
+                "fr": "Cresselia",
+                "it": "Cresselia",
+                "deu": "Cresselia"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 489,
+            "names": {
+                "spa": "Phione",
+                "eng": "Phione",
+                "fr": "Phione",
+                "it": "Phione",
+                "deu": "Phione"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 490,
+            "names": {
+                "spa": "Manaphy",
+                "eng": "Manaphy",
+                "fr": "Manaphy",
+                "it": "Manaphy",
+                "deu": "Manaphy"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 491,
+            "names": {
+                "spa": "Darkrai",
+                "eng": "Darkrai",
+                "fr": "Darkrai",
+                "it": "Darkrai",
+                "deu": "Darkrai"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 492,
+            "names": {
+                "spa": "Shaymin",
+                "eng": "Shaymin",
+                "fr": "Shaymin",
+                "it": "Shaymin",
+                "deu": "Shaymin"
+            },
+            "gen": 4,
+            "difficulty": "hard"
+        },
+        {
+            "id": 493,
+            "names": {
+                "spa": "Arceus",
+                "eng": "Arceus",
+                "fr": "Arceus",
+                "it": "Arceus",
+                "deu": "Arceus"
+            },
+            "gen": 4,
+            "difficulty": "hard"
         }
     ]
 }
