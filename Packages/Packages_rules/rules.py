@@ -1,1 +1,0 @@
-from classes import class_pokedex, class_pokemon
