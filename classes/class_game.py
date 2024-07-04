@@ -70,9 +70,6 @@ class Game():
 
             # Configuration
         difficulty_labels = ['facil','medio','dificil','1','2','3','4']
-        # TODO Se reemplazó el if in por un for each
-        # if self.game_text_box.get_text().title() in self.pokemon_name.get_names(): 
-        #     self.game_continue.change_sound(sounds["beep_sounds"][0])
         difficulties = []
         for difficulty in difficulty_labels:
             difficulties.append(Sticky(self.window,(30,50+(60*difficulty_labels.index(difficulty)), 150, 50),self.music, text=difficulty.title(), font_size=20, border_colour=colours["BLACK"], border_width=2, border_radius=8, sound = sounds["beep_sounds"][1]))
@@ -155,7 +152,6 @@ class Game():
         if self.streak == self.max_streak:
             self.streak_label.change_text(f'Racha {self.streak} / {self.max_streak}')
 
-            # print(f"{self.win_timer.finished},{self.win_timer.active}")
             if self.win_timer.finished and not self.win_timer.active:
                 self.main_menu = not self.main_menu
                 self.game = not self.game
@@ -173,10 +169,6 @@ class Game():
             self.game_text_box.update_text("")
         elif self.timer.active or self.loss_timer.active:
             self.streak_label.change_text(f'Racha {self.streak} / {self.max_streak}')
-            # for name in self.pokemon_name.get_names():
-                # text = str([].append(label for label in self.pokemon_name.get_names() if label != name)).replace('[', '').replace(']', '')
-                # text =
-
             names = []
             for name in self.pokemon_name.get_names():
                 repeated_flag = False
@@ -188,9 +180,7 @@ class Game():
 
             names_string = ' - '.join(names)
             self.idioms_label.change_text(f'{names_string}')
-            # input(self.idioms_label.get_text_length())
             text_length = self.idioms_label.get_text_length() + 10
-            # self.idioms_label.resize((self.window.get_width()/2 - (text_length / 2) , text_length , 50))
             self.idioms_label.resize((self.window.get_width()/2 - (text_length / 2) ,text_length))
             self.idioms_label.draw_button()
 
@@ -200,9 +190,6 @@ class Game():
     #region Event
     def menu_event(self, event):
         if self.main_menu:
-        # TODO Se reemplazó el if in por un for each
-        # if self.game_text_box.get_text().title() in self.pokemon_name.get_names(): 
-        #     self.game_continue.change_sound(sounds["beep_sounds"][0])
             self.quit_button = self.main_menu_quit.handle_event(event) if self.run_flag == True else False
             self.difficulties.handle_event(event)
             
@@ -240,17 +227,14 @@ class Game():
         if self.game_back.handle_event(event):
             self.reset_game()
 
-        # TODO Se reemplazó el if in por un for each
         
         if (self.game_continue.handle_event(event) or (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.game_text_box.texting)):
 
             if (event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and self.game_text_box.texting):
                 self.game_continue.handle_event(pygame.MOUSEBUTTONDOWN)
-            # elif not self.game_text_box.isplaceholder and not self.timer.active:
             user_input = self.game_text_box.get_text()
             user_input = user_input.capitalize()
 
-               # if user_input in self.pokemon_name.get_names(): #TODO
             self.pokemon_image_dark, self.pokemon_image = self.pokemon_image, self.pokemon_image_dark
             for name in self.pokemon_name.get_names():
                 if name == user_input:
@@ -258,7 +242,6 @@ class Game():
                     self.guessed_times.append([self.pokemon_name.get_names()[0], last_time])
                     user_input = ""
                     self.timer.activate()
-                    # guessed_times.append([self.pokemon_name.get_names()[0] , guess_time.reset()])
                     self.streak += 1
                     self.best_time = get_best_time(self.guessed_times[-1], self.best_time)
                     self.time_labels[0].change_text(f'Ultimo: {round(self.guessed_times[-1][1]/1000, 2)}')
@@ -271,13 +254,9 @@ class Game():
                     if self.streak == self.max_streak:
                         self.win_timer.activate()
                         self.music.play_sound(sounds['achieve_sound'])
-                    # text = "".join([label for label in self.pokemon_name.get_names()])
-                    # self.temp_text = text # TODO Remover esta variable
-                    # # self.idioms_label.change_text(text)
                     break
                 else:
                     self.loss_timer.activate()
-                    # self.reset_game()
 
     #region Quit
     def exit(self):
@@ -312,13 +291,7 @@ class Game():
         self.start()
         
         while self.run_flag == True:
-            # try:
-            #     print(len(self.pokedex_copy.get_pokemons()))
-            # except:
-            #     pass
             self.music.play_random()
-
-                
             for event in pygame.event.get():
                 if event.type == pygame.QUIT or self.quit_button:
                     self.exit()
