@@ -3015,6 +3015,1638 @@
             },
             "gen": 2,
             "difficulty": "hard"
+        },
+        {
+            "id": 252,
+            "names": {
+                "spa": "Treecko",
+                "eng": "Treecko",
+                "fr": "Arcko",
+                "it": "Treecko",
+                "deu": "Geckarbor"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 253,
+            "names": {
+                "spa": "Grovyle",
+                "eng": "Grovyle",
+                "fr": "Massko",
+                "it": "Grovyle",
+                "deu": "Reptain"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 254,
+            "names": {
+                "spa": "Sceptile",
+                "eng": "Sceptile",
+                "fr": "Jungko",
+                "it": "Sceptile",
+                "deu": "Gewaldro"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 255,
+            "names": {
+                "spa": "Torchic",
+                "eng": "Torchic",
+                "fr": "Poussifeu",
+                "it": "Torchic",
+                "deu": "Flemmli"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 256,
+            "names": {
+                "spa": "Combusken",
+                "eng": "Combusken",
+                "fr": "Galifeu",
+                "it": "Combusken",
+                "deu": "Jungglut"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 257,
+            "names": {
+                "spa": "Blaziken",
+                "eng": "Blaziken",
+                "fr": "Brasegali",
+                "it": "Blaziken",
+                "deu": "Lohgock"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 258,
+            "names": {
+                "spa": "Mudkip",
+                "eng": "Mudkip",
+                "fr": "Gobou",
+                "it": "Mudkip",
+                "deu": "Hydropi"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 259,
+            "names": {
+                "spa": "Marshtomp",
+                "eng": "Marshtomp",
+                "fr": "Flobio",
+                "it": "Marshtomp",
+                "deu": "Moorabbel"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 260,
+            "names": {
+                "spa": "Swampert",
+                "eng": "Swampert",
+                "fr": "Laggron",
+                "it": "Swampert",
+                "deu": "Sumpex"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 261,
+            "names": {
+                "spa": "Poochyena",
+                "eng": "Poochyena",
+                "fr": "Medhyena",
+                "it": "Poochyena",
+                "deu": "Fiffyen"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 262,
+            "names": {
+                "spa": "Mightyena",
+                "eng": "Mightyena",
+                "fr": "Grahyena",
+                "it": "Mightyena",
+                "deu": "Magnayen"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 263,
+            "names": {
+                "spa": "Zigzagoon",
+                "eng": "Zigzagoon",
+                "fr": "Zigzaton",
+                "it": "Zigzagoon",
+                "deu": "Zigzachs"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 264,
+            "names": {
+                "spa": "Linoone",
+                "eng": "Linoone",
+                "fr": "Lineon",
+                "it": "Linoone",
+                "deu": "Geradaks"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 265,
+            "names": {
+                "spa": "Wurmple",
+                "eng": "Wurmple",
+                "fr": "Chenipotte",
+                "it": "Wurmple",
+                "deu": "Waumpel"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 266,
+            "names": {
+                "spa": "Silcoon",
+                "eng": "Silcoon",
+                "fr": "Armulys",
+                "it": "Silcoon",
+                "deu": "Schaloko"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 267,
+            "names": {
+                "spa": "Beautifly",
+                "eng": "Beautifly",
+                "fr": "Charmillon",
+                "it": "Beautifly",
+                "deu": "Papinella"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 268,
+            "names": {
+                "spa": "Cascoon",
+                "eng": "Cascoon",
+                "fr": "Blindalys",
+                "it": "Cascoon",
+                "deu": "Panekon"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 269,
+            "names": {
+                "spa": "Dustox",
+                "eng": "Dustox",
+                "fr": "Papinox",
+                "it": "Dustox",
+                "deu": "Pudox"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 270,
+            "names": {
+                "spa": "Lotad",
+                "eng": "Lotad",
+                "fr": "Nénupiot",
+                "it": "Lotad",
+                "deu": "Loturzel"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 271,
+            "names": {
+                "spa": "Lombre",
+                "eng": "Lombre",
+                "fr": "Lombre",
+                "it": "Lombre",
+                "deu": "Lombrero"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 272,
+            "names": {
+                "spa": "Ludicolo",
+                "eng": "Ludicolo",
+                "fr": "Ludicolo",
+                "it": "Ludicolo",
+                "deu": "Kappalores"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 273,
+            "names": {
+                "spa": "Seedot",
+                "eng": "Seedot",
+                "fr": "Grainipiot",
+                "it": "Seedot",
+                "deu": "Samurzel"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 274,
+            "names": {
+                "spa": "Nuzleaf",
+                "eng": "Nuzleaf",
+                "fr": "Pifeuil",
+                "it": "Nuzleaf",
+                "deu": "Blanas"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 275,
+            "names": {
+                "spa": "Shiftry",
+                "eng": "Shiftry",
+                "fr": "Tengalice",
+                "it": "Shiftry",
+                "deu": "Tengulist"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 276,
+            "names": {
+                "spa": "Taillow",
+                "eng": "Taillow",
+                "fr": "Nirondelle",
+                "it": "Taillow",
+                "deu": "Schwalbini"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 277,
+            "names": {
+                "spa": "Swellow",
+                "eng": "Swellow",
+                "fr": "Hélédelle",
+                "it": "Swellow",
+                "deu": "Schwalboss"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 278,
+            "names": {
+                "spa": "Wingull",
+                "eng": "Wingull",
+                "fr": "Goélise",
+                "it": "Wingull",
+                "deu": "Wingull"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 279,
+            "names": {
+                "spa": "Pelipper",
+                "eng": "Pelipper",
+                "fr": "Bekipan",
+                "it": "Pelipper",
+                "deu": "Pelipper"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 280,
+            "names": {
+                "spa": "Ralts",
+                "eng": "Ralts",
+                "fr": "Tarsal",
+                "it": "Ralts",
+                "deu": "Trasla"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 281,
+            "names": {
+                "spa": "Kirlia",
+                "eng": "Kirlia",
+                "fr": "Kirlia",
+                "it": "Kirlia",
+                "deu": "Kirlia"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 282,
+            "names": {
+                "spa": "Gardevoir",
+                "eng": "Gardevoir",
+                "fr": "Gardevoir",
+                "it": "Gardevoir",
+                "deu": "Guardevoir"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 283,
+            "names": {
+                "spa": "Surskit",
+                "eng": "Surskit",
+                "fr": "Arakdo",
+                "it": "Surskit",
+                "deu": "Gehweiher"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 284,
+            "names": {
+                "spa": "Masquerain",
+                "eng": "Masquerain",
+                "fr": "Maskadra",
+                "it": "Masquerain",
+                "deu": "Maskeregen"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 285,
+            "names": {
+                "spa": "Shroomish",
+                "eng": "Shroomish",
+                "fr": "Balignon",
+                "it": "Shroomish",
+                "deu": "Knilz"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 286,
+            "names": {
+                "spa": "Breloom",
+                "eng": "Breloom",
+                "fr": "Chapignon",
+                "it": "Breloom",
+                "deu": "Kapilz"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 287,
+            "names": {
+                "spa": "Slakoth",
+                "eng": "Slakoth",
+                "fr": "Parecool",
+                "it": "Slakoth",
+                "deu": "Bummelz"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 288,
+            "names": {
+                "spa": "Vigoroth",
+                "eng": "Vigoroth",
+                "fr": "Vigoroth",
+                "it": "Vigoroth",
+                "deu": "Muntier"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 289,
+            "names": {
+                "spa": "Slaking",
+                "eng": "Slaking",
+                "fr": "Monaflèmit",
+                "it": "Slaking",
+                "deu": "Letarking"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 290,
+            "names": {
+                "spa": "Nincada",
+                "eng": "Nincada",
+                "fr": "Ningale",
+                "it": "Nincada",
+                "deu": "Nincada"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 291,
+            "names": {
+                "spa": "Ninjask",
+                "eng": "Ninjask",
+                "fr": "Ninjask",
+                "it": "Ninjask",
+                "deu": "Ninjask"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 292,
+            "names": {
+                "spa": "Shedinja",
+                "eng": "Shedinja",
+                "fr": "Munja",
+                "it": "Shedinja",
+                "deu": "Ninjatom"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 293,
+            "names": {
+                "spa": "Whismur",
+                "eng": "Whismur",
+                "fr": "Chuchmur",
+                "it": "Whismur",
+                "deu": "Flurmel"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 294,
+            "names": {
+                "spa": "Loudred",
+                "eng": "Loudred",
+                "fr": "Ramboum",
+                "it": "Loudred",
+                "deu": "Krakeelo"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 295,
+            "names": {
+                "spa": "Exploud",
+                "eng": "Exploud",
+                "fr": "Brouhabam",
+                "it": "Exploud",
+                "deu": "Krawumms"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 296,
+            "names": {
+                "spa": "Makuhita",
+                "eng": "Makuhita",
+                "fr": "Makuhita",
+                "it": "Makuhita",
+                "deu": "Makuhita"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 297,
+            "names": {
+                "spa": "Hariyama",
+                "eng": "Hariyama",
+                "fr": "Hariyama",
+                "it": "Hariyama",
+                "deu": "Hariyama"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 298,
+            "names": {
+                "spa": "Azurill",
+                "eng": "Azurill",
+                "fr": "Azurill",
+                "it": "Azurill",
+                "deu": "Azurill"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 299,
+            "names": {
+                "spa": "Nosepass",
+                "eng": "Nosepass",
+                "fr": "Tarinor",
+                "it": "Nosepass",
+                "deu": "Nasgnet"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 300,
+            "names": {
+                "spa": "Skitty",
+                "eng": "Skitty",
+                "fr": "Skitty",
+                "it": "Skitty",
+                "deu": "Eneco"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 301,
+            "names": {
+                "spa": "Delcatty",
+                "eng": "Delcatty",
+                "fr": "Delcatty",
+                "it": "Delcatty",
+                "deu": "Enekoro"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 302,
+            "names": {
+                "spa": "Sableye",
+                "eng": "Sableye",
+                "fr": "Ténéfix",
+                "it": "Sableye",
+                "deu": "Zobiris"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 303,
+            "names": {
+                "spa": "Mawile",
+                "eng": "Mawile",
+                "fr": "Mysdibule",
+                "it": "Mawile",
+                "deu": "Flunkifer"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 304,
+            "names": {
+                "spa": "Aron",
+                "eng": "Aron",
+                "fr": "Galekid",
+                "it": "Aron",
+                "deu": "Stollunior"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 305,
+            "names": {
+                "spa": "Lairon",
+                "eng": "Lairon",
+                "fr": "Galegon",
+                "it": "Lairon",
+                "deu": "Stollrak"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 306,
+            "names": {
+                "spa": "Aggron",
+                "eng": "Aggron",
+                "fr": "Galeking",
+                "it": "Aggron",
+                "deu": "Stolloss"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 307,
+            "names": {
+                "spa": "Meditite",
+                "eng": "Meditite",
+                "fr": "Méditikka",
+                "it": "Meditite",
+                "deu": "Meditie"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 308,
+            "names": {
+                "spa": "Medicham",
+                "eng": "Medicham",
+                "fr": "Charmina",
+                "it": "Medicham",
+                "deu": "Meditalis"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 309,
+            "names": {
+                "spa": "Electrike",
+                "eng": "Electrike",
+                "fr": "Dynavolt",
+                "it": "Electrike",
+                "deu": "Frizelbliz"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 310,
+            "names": {
+                "spa": "Manectric",
+                "eng": "Manectric",
+                "fr": "Élecsprint",
+                "it": "Manectric",
+                "deu": "Voltenso"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 311,
+            "names": {
+                "spa": "Plusle",
+                "eng": "Plusle",
+                "fr": "Posipi",
+                "it": "Plusle",
+                "deu": "Plusle"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 312,
+            "names": {
+                "spa": "Minun",
+                "eng": "Minun",
+                "fr": "Négapi",
+                "it": "Minun",
+                "deu": "Minun"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 313,
+            "names": {
+                "spa": "Volbeat",
+                "eng": "Volbeat",
+                "fr": "Muciole",
+                "it": "Volbeat",
+                "deu": "Volbeat"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 314,
+            "names": {
+                "spa": "Illumise",
+                "eng": "Illumise",
+                "fr": "Lumivole",
+                "it": "Illumise",
+                "deu": "Illumise"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 315,
+            "names": {
+                "spa": "Roselia",
+                "eng": "Roselia",
+                "fr": "Rosélia",
+                "it": "Roselia",
+                "deu": "Roselia"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 316,
+            "names": {
+                "spa": "Gulpin",
+                "eng": "Gulpin",
+                "fr": "Gloupti",
+                "it": "Gulpin",
+                "deu": "Schluppuck"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 317,
+            "names": {
+                "spa": "Swalot",
+                "eng": "Swalot",
+                "fr": "Avaltout",
+                "it": "Swalot",
+                "deu": "Schlukwech"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 318,
+            "names": {
+                "spa": "Carvanha",
+                "eng": "Carvanha",
+                "fr": "Carvanha",
+                "it": "Carvanha",
+                "deu": "Kanivanha"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 319,
+            "names": {
+                "spa": "Sharpedo",
+                "eng": "Sharpedo",
+                "fr": "Sharpedo",
+                "it": "Sharpedo",
+                "deu": "Tohaido"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 320,
+            "names": {
+                "spa": "Wailmer",
+                "eng": "Wailmer",
+                "fr": "Wailmer",
+                "it": "Wailmer",
+                "deu": "Wailmer"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 321,
+            "names": {
+                "spa": "Wailord",
+                "eng": "Wailord",
+                "fr": "Wailord",
+                "it": "Wailord",
+                "deu": "Wailord"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 322,
+            "names": {
+                "spa": "Numel",
+                "eng": "Numel",
+                "fr": "Chamallot",
+                "it": "Numel",
+                "deu": "Camaub"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 323,
+            "names": {
+                "spa": "Camerupt",
+                "eng": "Camerupt",
+                "fr": "Camérupt",
+                "it": "Camerupt",
+                "deu": "Camerupt"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 324,
+            "names": {
+                "spa": "Torkoal",
+                "eng": "Torkoal",
+                "fr": "Chartor",
+                "it": "Torkoal",
+                "deu": "Qurtel"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 325,
+            "names": {
+                "spa": "Spoink",
+                "eng": "Spoink",
+                "fr": "Spoink",
+                "it": "Spoink",
+                "deu": "Spoink"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 326,
+            "names": {
+                "spa": "Grumpig",
+                "eng": "Grumpig",
+                "fr": "Groret",
+                "it": "Grumpig",
+                "deu": "Groink"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 327,
+            "names": {
+                "spa": "Spinda",
+                "eng": "Spinda",
+                "fr": "Spinda",
+                "it": "Spinda",
+                "deu": "Pandir"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 328,
+            "names": {
+                "spa": "Trapinch",
+                "eng": "Trapinch",
+                "fr": "Kraknoix",
+                "it": "Trapinch",
+                "deu": "Knacklion"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 329,
+            "names": {
+                "spa": "Vibrava",
+                "eng": "Vibrava",
+                "fr": "Vibraninf",
+                "it": "Vibrava",
+                "deu": "Vibrava"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 330,
+            "names": {
+                "spa": "Flygon",
+                "eng": "Flygon",
+                "fr": "Libégon",
+                "it": "Flygon",
+                "deu": "Libelldra"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 331,
+            "names": {
+                "spa": "Cacnea",
+                "eng": "Cacnea",
+                "fr": "Cacnea",
+                "it": "Cacnea",
+                "deu": "Tuska"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 332,
+            "names": {
+                "spa": "Cacturne",
+                "eng": "Cacturne",
+                "fr": "Cacturne",
+                "it": "Cacturne",
+                "deu": "Noktuska"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 333,
+            "names": {
+                "spa": "Swablu",
+                "eng": "Swablu",
+                "fr": "Tylton",
+                "it": "Swablu",
+                "deu": "Wablu"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 334,
+            "names": {
+                "spa": "Altaria",
+                "eng": "Altaria",
+                "fr": "Altaria",
+                "it": "Altaria",
+                "deu": "Altaria"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 335,
+            "names": {
+                "spa": "Zangoose",
+                "eng": "Zangoose",
+                "fr": "Mangriff",
+                "it": "Zangoose",
+                "deu": "Sengo"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 336,
+            "names": {
+                "spa": "Seviper",
+                "eng": "Seviper",
+                "fr": "Séviper",
+                "it": "Seviper",
+                "deu": "Vipitis"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 337,
+            "names": {
+                "spa": "Lunatone",
+                "eng": "Lunatone",
+                "fr": "Séléroc",
+                "it": "Lunatone",
+                "deu": "Lunastein"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 338,
+            "names": {
+                "spa": "Solrock",
+                "eng": "Solrock",
+                "fr": "Solaroc",
+                "it": "Solrock",
+                "deu": "Sonnfel"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 339,
+            "names": {
+                "spa": "Barboach",
+                "eng": "Barboach",
+                "fr": "Barloche",
+                "it": "Barboach",
+                "deu": "Schmerbe"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 340,
+            "names": {
+                "spa": "Whiscash",
+                "eng": "Whiscash",
+                "fr": "Barbicha",
+                "it": "Whiscash",
+                "deu": "Welsar"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 341,
+            "names": {
+                "spa": "Corphish",
+                "eng": "Corphish",
+                "fr": "Écrapince",
+                "it": "Corphish",
+                "deu": "Krebscorps"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 342,
+            "names": {
+                "spa": "Crawdaunt",
+                "eng": "Crawdaunt",
+                "fr": "Colhomard",
+                "it": "Crawdaunt",
+                "deu": "Krebutack"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 343,
+            "names": {
+                "spa": "Baltoy",
+                "eng": "Baltoy",
+                "fr": "Balbuto",
+                "it": "Baltoy",
+                "deu": "Puppance"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 344,
+            "names": {
+                "spa": "Claydol",
+                "eng": "Claydol",
+                "fr": "Kaorine",
+                "it": "Claydol",
+                "deu": "Lepumentas"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 345,
+            "names": {
+                "spa": "Lileep",
+                "eng": "Lileep",
+                "fr": "Lilia",
+                "it": "Lileep",
+                "deu": "Liliep"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 346,
+            "names": {
+                "spa": "Cradily",
+                "eng": "Cradily",
+                "fr": "Vacilys",
+                "it": "Cradily",
+                "deu": "Wielie"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 347,
+            "names": {
+                "spa": "Anorith",
+                "eng": "Anorith",
+                "fr": "Anorith",
+                "it": "Anorith",
+                "deu": "Anorith"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 348,
+            "names": {
+                "spa": "Armaldo",
+                "eng": "Armaldo",
+                "fr": "Armaldo",
+                "it": "Armaldo",
+                "deu": "Armaldo"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 349,
+            "names": {
+                "spa": "Feebas",
+                "eng": "Feebas",
+                "fr": "Barpau",
+                "it": "Feebas",
+                "deu": "Barschwa"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 350,
+            "names": {
+                "spa": "Milotic",
+                "eng": "Milotic",
+                "fr": "Milobellus",
+                "it": "Milotic",
+                "deu": "Milotic"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 351,
+            "names": {
+                "spa": "Castform",
+                "eng": "Castform",
+                "fr": "Morphéo",
+                "it": "Castform",
+                "deu": "Formeo"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 352,
+            "names": {
+                "spa": "Kecleon",
+                "eng": "Kecleon",
+                "fr": "Kecleon",
+                "it": "Kecleon",
+                "deu": "Kecleon"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 353,
+            "names": {
+                "spa": "Shuppet",
+                "eng": "Shuppet",
+                "fr": "Polichombr",
+                "it": "Shuppet",
+                "deu": "Shuppet"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 354,
+            "names": {
+                "spa": "Banette",
+                "eng": "Banette",
+                "fr": "Branette",
+                "it": "Banette",
+                "deu": "Banette"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 355,
+            "names": {
+                "spa": "Duskull",
+                "eng": "Duskull",
+                "fr": "Skelénox",
+                "it": "Duskull",
+                "deu": "Zwirrlicht"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 356,
+            "names": {
+                "spa": "Dusclops",
+                "eng": "Dusclops",
+                "fr": "Téraclope",
+                "it": "Dusclops",
+                "deu": "Zwirrklop"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 357,
+            "names": {
+                "spa": "Tropius",
+                "eng": "Tropius",
+                "fr": "Tropius",
+                "it": "Tropius",
+                "deu": "Tropius"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 358,
+            "names": {
+                "spa": "Chimecho",
+                "eng": "Chimecho",
+                "fr": "Éoko",
+                "it": "Chimecho",
+                "deu": "Palimpalim"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 359,
+            "names": {
+                "spa": "Absol",
+                "eng": "Absol",
+                "fr": "Absol",
+                "it": "Absol",
+                "deu": "Absol"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 360,
+            "names": {
+                "spa": "Wynaut",
+                "eng": "Wynaut",
+                "fr": "Okeoke",
+                "it": "Wynaut",
+                "deu": "Isso"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 361,
+            "names": {
+                "spa": "Snorunt",
+                "eng": "Snorunt",
+                "fr": "Stalgamin",
+                "it": "Snorunt",
+                "deu": "Schneppke"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 362,
+            "names": {
+                "spa": "Glalie",
+                "eng": "Glalie",
+                "fr": "Oniglali",
+                "it": "Glalie",
+                "deu": "Firnontor"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 363,
+            "names": {
+                "spa": "Spheal",
+                "eng": "Spheal",
+                "fr": "Obalie",
+                "it": "Spheal",
+                "deu": "Seemops"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 364,
+            "names": {
+                "spa": "Sealeo",
+                "eng": "Sealeo",
+                "fr": "Phogleur",
+                "it": "Sealeo",
+                "deu": "Seejong"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 365,
+            "names": {
+                "spa": "Walrein",
+                "eng": "Walrein",
+                "fr": "Kaimorse",
+                "it": "Walrein",
+                "deu": "Walraisa"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 366,
+            "names": {
+                "spa": "Clamperl",
+                "eng": "Clamperl",
+                "fr": "Coquiperl",
+                "it": "Clamperl",
+                "deu": "Perlu"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 367,
+            "names": {
+                "spa": "Huntail",
+                "eng": "Huntail",
+                "fr": "Serpang",
+                "it": "Huntail",
+                "deu": "Aalabyss"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 368,
+            "names": {
+                "spa": "Gorebyss",
+                "eng": "Gorebyss",
+                "fr": "Rosabyss",
+                "it": "Gorebyss",
+                "deu": "Saganabyss"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 369,
+            "names": {
+                "spa": "Relicanth",
+                "eng": "Relicanth",
+                "fr": "Relicanth",
+                "it": "Relicanth",
+                "deu": "Relicanth"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 370,
+            "names": {
+                "spa": "Luvdisc",
+                "eng": "Luvdisc",
+                "fr": "Lovdisc",
+                "it": "Luvdisc",
+                "deu": "Liebiskus"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 371,
+            "names": {
+                "spa": "Bagon",
+                "eng": "Bagon",
+                "fr": "Draby",
+                "it": "Bagon",
+                "deu": "Kindwurm"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 372,
+            "names": {
+                "spa": "Shelgon",
+                "eng": "Shelgon",
+                "fr": "Drackhaus",
+                "it": "Shelgon",
+                "deu": "Draschel"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 373,
+            "names": {
+                "spa": "Salamence",
+                "eng": "Salamence",
+                "fr": "Drattak",
+                "it": "Salamence",
+                "deu": "Brutalanda"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 374,
+            "names": {
+                "spa": "Beldum",
+                "eng": "Beldum",
+                "fr": "Terhal",
+                "it": "Beldum",
+                "deu": "Tanhel"
+            },
+            "gen": 3,
+            "difficulty": "easy"
+        },
+        {
+            "id": 375,
+            "names": {
+                "spa": "Metang",
+                "eng": "Metang",
+                "fr": "Métang",
+                "it": "Metang",
+                "deu": "Metang"
+            },
+            "gen": 3,
+            "difficulty": "medium"
+        },
+        {
+            "id": 376,
+            "names": {
+                "spa": "Metagross",
+                "eng": "Metagross",
+                "fr": "Métalosse",
+                "it": "Metagross",
+                "deu": "Metagross"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 377,
+            "names": {
+                "spa": "Regirock",
+                "eng": "Regirock",
+                "fr": "Regirock",
+                "it": "Regirock",
+                "deu": "Regirock"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 378,
+            "names": {
+                "spa": "Regice",
+                "eng": "Regice",
+                "fr": "Regice",
+                "it": "Regice",
+                "deu": "Regice"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 379,
+            "names": {
+                "spa": "Registeel",
+                "eng": "Registeel",
+                "fr": "Registeel",
+                "it": "Registeel",
+                "deu": "Registeel"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 380,
+            "names": {
+                "spa": "Latias",
+                "eng": "Latias",
+                "fr": "Latias",
+                "it": "Latias",
+                "deu": "Latias"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 381,
+            "names": {
+                "spa": "Latios",
+                "eng": "Latios",
+                "fr": "Latios",
+                "it": "Latios",
+                "deu": "Latios"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+            "id": 382,
+            "names": {
+                "spa": "Kyogre",
+                "eng": "Kyogre",
+                "fr": "Kyogre",
+                "it": "Kyogre",
+                "deu": "Kyogre"
+            },
+            "gen": 3,
+            "difficulty": "hard"
+        },
+        {
+        "id": 382,
+        "names": {
+            "spa": "Kyogre",
+            "eng": "Kyogre",
+            "fr": "Kyogre",
+            "it": "Kyogre",
+            "deu": "Kyogre"
+        },
+        "gen": 3,
+        "difficulty": "hard"
+        },
+        {
+        "id": 383,
+        "names": {
+            "spa": "Groudon",
+            "eng": "Groudon",
+            "fr": "Groudon",
+            "it": "Groudon",
+            "deu": "Groudon"
+        },
+        "gen": 3,
+        "difficulty": "hard"
+        },
+        {
+        "id": 384,
+        "names": {
+            "spa": "Rayquaza",
+            "eng": "Rayquaza",
+            "fr": "Rayquaza",
+            "it": "Rayquaza",
+            "deu": "Rayquaza"
+        },
+        "gen": 3,
+        "difficulty": "hard"
+        },
+        {
+        "id": 385,
+        "names": {
+            "spa": "Jirachi",
+            "eng": "Jirachi",
+            "fr": "Jirachi",
+            "it": "Jirachi",
+            "deu": "Jirachi"
+        },
+        "gen": 3,
+        "difficulty": "hard"
+        },
+        {
+        "id": 386,
+        "names": {
+            "spa": "Deoxys",
+            "eng": "Deoxys",
+            "fr": "Deoxys",
+            "it": "Deoxys",
+            "deu": "Deoxys"
+        },
+        "gen": 3,
+        "difficulty": "hard"
         }
     ]
 }
