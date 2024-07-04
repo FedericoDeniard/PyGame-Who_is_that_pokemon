@@ -40,3 +40,6 @@ Al ganar aparece una imagen diciendo lo mismo, y se regresa al inicio.
   <figcaption><sub>Juego terminado</sub></figcaption>
   <img src='assets/readme_images/game_won.png' alt='game_won' width='600'>
 </figure>
+
+### Video del Juego
+- https://youtu.be/QlWORAMBiMY
