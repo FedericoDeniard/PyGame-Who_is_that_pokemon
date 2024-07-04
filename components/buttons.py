@@ -1,13 +1,13 @@
 from assets.colours.colours import colours
 import pygame
-from typing import Literal
+from typing import Literal, Tuple
 from classes.sounds import Mixer
 from classes.class_pokedex import Pokedex
 
 #region Button
 
 class Button:
-    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
+    def __init__(self, screen, position: tuple, mixer, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
         self.screen = screen
         self.background_colour = background_colour
         self.position = position
@@ -23,7 +23,7 @@ class Button:
         self.text_rect = None
         self.show_text = self.text
         self.sound = sound
-        self.sounds = Mixer()
+        self.sounds = mixer
 
     def draw_button(self):
         if self.border_colour and self.border_width > 0:
@@ -41,20 +41,25 @@ class Button:
 
         if self.text != "":
             myFont = pygame.font.SysFont(self.font, self.font_size)
-            text_surface = myFont.render(self.show_text, True, self.text_active_colour)  # Text, Antialiasing, colour
+            self.text_surface = myFont.render(self.show_text, True, self.text_active_colour)  # Text, Antialiasing, colour
             match self.text_align:
                 case "center":
-                    text_rect = text_surface.get_rect(center=(self.position[0] + self.position[2] // 2, self.position[1] + self.position[3] // 2))
+                    text_rect = self.text_surface.get_rect(center=(self.position[0] + self.position[2] // 2, self.position[1] + self.position[3] // 2))
                 case "left":
-                    text_rect = text_surface.get_rect(topleft=(self.position[0] + self.border_width + 2, self.position[1] + self.border_width + (self.position[3] - text_surface.get_height()) // 2))
+                    text_rect = self.text_surface.get_rect(topleft=(self.position[0] + self.border_width + 2, self.position[1] + self.border_width + (self.position[3] - self.text_surface.get_height()) // 2))
             self.text_rect = text_rect
-            self.screen.blit(text_surface, text_rect)
+            self.screen.blit(self.text_surface, text_rect)
 
     def get_text_surface(self):
         return self.text_rect
     
     def get_hitbox(self):
         return self.hitbox
+    
+    def get_text_length(self):
+        myFont = pygame.font.SysFont(self.font, self.font_size)
+        self.text_surface = myFont.render(self.show_text, True, self.text_active_colour)
+        return self.text_surface.get_width()
 
     def handle_event(self, event):
         clicked = False
@@ -75,10 +80,14 @@ class Button:
 
     def reproduce_sound(self):
         self.sounds.play_sound(self.sound)
+    
+    def resize(self, new_size: Tuple[int, int]):
+        self.position = (new_size[0], self.position[1], new_size[1], self.position[3])
+        self.hitbox = pygame.Rect(self.position)
 
 #region Textbox
 class Textbox(Button):
-    def __init__(self, screen, position: tuple, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"], text_align= 'center'):
+    def __init__(self, screen, position: tuple, mixer, background_colour=(255,255,255), border_radius=0, font='Calibri', font_size=40, border_colour=None, border_width=0, text_colour=(0,0,0), placeholder='Escriba aquí', background_active_colour = colours["LIGHT_GRAY"], text_align= 'center'):
         self.placeholder_colour = colours["GRAY"]
         self.background_active_colour = background_active_colour
         self.copy_background_colour = background_colour
@@ -86,7 +95,7 @@ class Textbox(Button):
         self.placeholder = placeholder
         self.isplaceholder = True
 
-        super().__init__(screen, position, background_colour, border_radius, placeholder, font, font_size, border_colour, border_width, self.text_active_colour, text_align)
+        super().__init__(screen, position, mixer, background_colour, border_radius, placeholder, font, font_size, border_colour, border_width, self.text_active_colour, text_align)
         self.text_colour = text_colour
         self.outside_letters = 0
         self.placeholder = placeholder
@@ -153,8 +162,8 @@ class Textbox(Button):
 #region Sticky
 
 class Sticky(Button):
-    def __init__(self, screen, position: tuple, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
-        super().__init__(screen, position, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_active_colour, text_align, sound)
+    def __init__(self, screen, position: tuple, mixer, background_colour = (255,255,255), border_radius=0, text="", font='Calibri', font_size=40, border_colour = None, border_width = 0, text_active_colour = (0,0,0), text_align:Literal['left','center'] = 'center', sound = None):
+        super().__init__(screen, position, mixer, background_colour, border_radius, text, font, font_size, border_colour, border_width, text_active_colour, text_align, sound)
         self.sticky_pressed = False
         self.active_background = (180,180,180)
 
@@ -218,13 +227,18 @@ class Sticky_menu():
 
     def filter_pokedex(self):
         new_pokedex = []
-        # print(f"dificultad: {self.difficulty}")
-        # print(f"generacion: {self.generation}")
         difficulties = ["easy", "medium","hard"] if self.difficulty == None else [self.difficulty.lower()]
         generations = [1,2,3,4] if self.generation == [] else self.generation
 
-        # print(f"dificultad filtrada: {difficulty}")
-        # print(f"generacion filtrada: {generations}")
+        if len(difficulties) == 1:
+            match difficulties[0]:
+                case "facil":
+                    difficulties[0] = "easy"
+                case "medio":
+                    difficulties[0] = "medium"
+                case "dificil":
+                    difficulties[0] = "hard"
+
         for pokemon in self.pokedex.get_pokemons():
             for difficulty in difficulties:
                 for generation in generations:

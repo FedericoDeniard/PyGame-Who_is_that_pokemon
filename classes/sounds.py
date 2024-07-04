@@ -18,13 +18,14 @@ class Mixer():
         pygame.mixer.init()
         self.music = None
         self.last_music = None
+        self.stopped = False
         self.volume = volume
         pygame.mixer.init()
         pygame.mixer.music.set_volume(self.volume)
 
     def play_random(self):
         self.soundtrack = soundtrack
-        if not pygame.mixer.music.get_busy():
+        if not pygame.mixer.music.get_busy() and not self.stopped:
             random_number = randint(0,len(self.soundtrack) - 1)
             while self.last_music == random_number:
                 random_number = randint(0,len(self.soundtrack) - 1)
@@ -49,3 +50,22 @@ class Mixer():
         self.volume = new_volume
         pygame.mixer.music.set_volume(self.volume)
         # print(f'volumen nuevo:{self.volume}')
+
+    def skip_song(self):
+        pygame.mixer.music.stop()
+        random_number = randint(0,len(self.soundtrack) - 1)
+        while self.last_music == random_number:
+            random_number = randint(0,len(self.soundtrack) - 1)
+        pygame.mixer.music.load(self.soundtrack[random_number])
+        if not self.stopped:
+            pygame.mixer.music.play()
+        self.last_music = random_number
+
+    def resume_stop_music(self):
+        print(pygame.mixer.music.get_busy())
+        if pygame.mixer.music.get_busy():
+            pygame.mixer.music.pause()
+            self.stopped = True
+        else:
+            pygame.mixer.music.unpause()
+            self.stopped = False
