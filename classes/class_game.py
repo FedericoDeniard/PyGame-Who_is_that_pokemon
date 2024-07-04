@@ -312,10 +312,6 @@ class Game():
         self.start()
         
         while self.run_flag == True:
-            # try:
-            #     print(len(self.pokedex_copy.get_pokemons()))
-            # except:
-            #     pass
             self.music.play_random()
 
                 
