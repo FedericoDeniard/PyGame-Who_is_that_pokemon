@@ -176,8 +176,17 @@ class Game():
             # for name in self.pokemon_name.get_names():
                 # text = str([].append(label for label in self.pokemon_name.get_names() if label != name)).replace('[', '').replace(']', '')
                 # text =
-            names = self.pokemon_name.get_names()
-            names_string = ' '.join(names)
+
+            names = []
+            for name in self.pokemon_name.get_names():
+                repeated_flag = False
+                for inside_name in names:
+                    if name == inside_name:
+                        repeated_flag = True
+                if not repeated_flag:
+                    names.append(name)
+
+            names_string = ' - '.join(names)
             self.idioms_label.change_text(f'{names_string}')
             # input(self.idioms_label.get_text_length())
             text_length = self.idioms_label.get_text_length() + 10
@@ -224,7 +233,6 @@ class Game():
         for name in self.pokemon_name.get_names():
             if name == self.game_text_box.get_text().title():
                 self.game_continue.change_sound(sounds["beep_sounds"][0])
-                
                 break
             else:
                 self.game_continue.change_sound(sounds["no_sounds"][0])
