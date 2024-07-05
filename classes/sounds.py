@@ -40,8 +40,6 @@ class Mixer():
 
 
     def change_volume(self, value):
-        # print(f'volumen anterior:{self.volume}')
-        # print(f'volumen a restar: {value}')
         new_volume = self.volume + value
         if new_volume > 0.8:
             new_volume = 0.8
@@ -49,7 +47,6 @@ class Mixer():
             new_volume = 0
         self.volume = new_volume
         pygame.mixer.music.set_volume(self.volume)
-        # print(f'volumen nuevo:{self.volume}')
 
     def skip_song(self):
         pygame.mixer.music.stop()

@@ -209,7 +209,6 @@ class Sticky_menu():
                     self.difficulty = button.get_text()
                 elif button.is_active():
                     self.generation.append(int(button.get_text()))
-                    # print(self.generation)
 
         if activated_button:
             for button in self.buttons:
@@ -219,8 +218,6 @@ class Sticky_menu():
                     if not activated_button.is_active():
                         self.difficulty = None
                 elif button == activated_button and not activated_button.is_active() and button.get_text().isdigit():
-                    # print(button.get_text())
-                    # print(self.generation)
                     self.generation.remove(int(button.get_text()))
 
         self.filter_pokedex()
@@ -244,10 +241,6 @@ class Sticky_menu():
                 for generation in generations:
                     if pokemon.get_difficulty() == difficulty and pokemon.get_generation() == generation:
                         new_pokedex.append(pokemon)
-            # if pokemon.get_difficulty() in difficulty and pokemon.get_generation() in generations: #TODO
-            #     new_pokedex.append(pokemon)
-        
-        # print(f"len pokedex: {len(new_pokedex)}")
         self.copy_pokedex.set_pokemons(new_pokedex)
 
 # endregion
